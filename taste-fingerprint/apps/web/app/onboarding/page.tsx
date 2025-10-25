@@ -1,0 +1,207 @@
+'use client';
+
+import Image from 'next/image';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { v4 as uuid } from 'uuid';
+
+import { fetchArtworks, postTasteUpdate, Artwork } from '../../lib/api';
+import styles from './styles.module.css';
+
+interface ChoicePair {
+  a: Artwork;
+  b: Artwork;
+}
+
+interface TasteState {
+  vector: number[] | null;
+  comparisons: number;
+  loading: boolean;
+  error: string | null;
+  history: Array<{ win: string; lose: string }>;
+}
+
+const TARGET_COMPARISONS = 12;
+
+function pickRandomPairs(artworks: Artwork[]): ChoicePair[] {
+  const shuffled = [...artworks].sort(() => Math.random() - 0.5);
+  const pairs: ChoicePair[] = [];
+  for (let i = 0; i < shuffled.length - 1; i += 2) {
+    pairs.push({ a: shuffled[i], b: shuffled[i + 1] });
+  }
+  return pairs;
+}
+
+function isRecentDuplicate(history: Array<{ win: string; lose: string }>, a: Artwork, b: Artwork): boolean {
+  const last = history[history.length - 1];
+  if (!last) return false;
+  const pairIds = [a.id, b.id];
+  const lastIds = [last.win, last.lose];
+  return (
+    (pairIds[0] === lastIds[0] && pairIds[1] === lastIds[1]) ||
+    (pairIds[0] === lastIds[1] && pairIds[1] === lastIds[0])
+  );
+}
+
+export default function OnboardingPage() {
+  const [userId] = useState(() => uuid());
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
+  const [pairs, setPairs] = useState<ChoicePair[]>([]);
+  const [taste, setTaste] = useState<TasteState>({
+    vector: null,
+    comparisons: 0,
+    loading: false,
+    error: null,
+    history: [],
+  });
+
+  const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
+  const progress = useMemo(() => taste.comparisons / TARGET_COMPARISONS, [taste.comparisons]);
+  const completed = taste.comparisons >= TARGET_COMPARISONS;
+
+  useEffect(() => {
+    fetchArtworks()
+      .then((items) => {
+        setArtworks(items);
+        setPairs(pickRandomPairs(items));
+      })
+      .catch((err) => {
+        console.error(err);
+        setTaste((prev) => ({ ...prev, error: 'Failed to load artworks. Please retry.' }));
+      });
+  }, []);
+
+  const replenishPairs = useCallback(() => {
+    setPairs((prevPairs) => {
+      const next = pickRandomPairs(artworks);
+      return [...prevPairs, ...next];
+    });
+  }, [artworks]);
+
+  const handleChoice = useCallback(
+    async (win: Artwork, lose: Artwork) => {
+      if (taste.loading || completed) {
+        return;
+      }
+      setTaste((prev) => ({ ...prev, loading: true, error: null }));
+      try {
+        const response = await postTasteUpdate({
+          user_id: userId,
+          win_id: win.id,
+          lose_id: lose.id,
+        });
+
+        setTaste((prev) => {
+          const nextComparisons = prev.comparisons + 1;
+          const updatedHistory = [...prev.history, { win: win.id, lose: lose.id }];
+          return {
+            vector: response.vector,
+            comparisons: nextComparisons,
+            loading: false,
+            error: null,
+            history: updatedHistory,
+          };
+        });
+      } catch (err) {
+        console.error(err);
+        setTaste((prev) => ({ ...prev, loading: false, error: 'Could not record your choice. Try again.' }));
+      }
+    },
+    [completed, taste.loading, userId],
+  );
+
+  useEffect(() => {
+    if (!currentPair && !completed && artworks.length >= 2) {
+      replenishPairs();
+    }
+  }, [currentPair, completed, artworks.length, replenishPairs]);
+
+  const restart = useCallback(() => {
+    setPairs(pickRandomPairs(artworks));
+    setTaste({ vector: null, comparisons: 0, loading: false, error: null, history: [] });
+  }, [artworks]);
+
+  const pairForRender = useMemo(() => {
+    if (!currentPair) return null;
+    if (isRecentDuplicate(taste.history, currentPair.a, currentPair.b)) {
+      replenishPairs();
+      return null;
+    }
+    return currentPair;
+  }, [currentPair, replenishPairs, taste.history]);
+
+  return (
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <div>
+          <h1>Pick the artwork you vibe with the most</h1>
+          <p>We will build your taste fingerprint in just {TARGET_COMPARISONS} quick choices.</p>
+        </div>
+        <div className={styles.progressWrap}>
+          <div className={styles.progressLabel}>
+            {taste.comparisons}/{TARGET_COMPARISONS}
+          </div>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: `${Math.min(progress, 1) * 100}%` }} />
+          </div>
+        </div>
+      </header>
+
+      {taste.error && <p className={styles.error}>{taste.error}</p>}
+
+      {completed ? (
+        <section className={styles.summary}>
+          <h2>Fingerprint Ready</h2>
+          <p>Your vector is ready for furnishing recommendations.</p>
+          <pre className={styles.vectorPreview}>
+            {JSON.stringify(taste.vector?.slice(0, 12), null, 2)}
+            {taste.vector && taste.vector.length > 12 ? '\n…' : ''}
+          </pre>
+          <button className={styles.primaryButton} onClick={restart}>
+            Restart picks
+          </button>
+        </section>
+      ) : pairForRender ? (
+        <section className={styles.choices}>
+          <ArtworkCard
+            artwork={pairForRender.a}
+            disabled={taste.loading}
+            onSelect={() => handleChoice(pairForRender.a, pairForRender.b)}
+          />
+          <ArtworkCard
+            artwork={pairForRender.b}
+            disabled={taste.loading}
+            onSelect={() => handleChoice(pairForRender.b, pairForRender.a)}
+          />
+        </section>
+      ) : (
+        <section className={styles.loading}>Preparing artworks…</section>
+      )}
+    </main>
+  );
+}
+
+interface ArtworkCardProps {
+  artwork: Artwork;
+  onSelect: () => void;
+  disabled?: boolean;
+}
+
+function ArtworkCard({ artwork, onSelect, disabled }: ArtworkCardProps) {
+  return (
+    <button className={styles.card} onClick={onSelect} disabled={disabled}>
+      <div className={styles.imageWrapper}>
+        <Image
+          src={artwork.image_url}
+          alt={`${artwork.title} by ${artwork.artist}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 45vw"
+        />
+      </div>
+      <div className={styles.cardMeta}>
+        <h3>{artwork.title}</h3>
+        <p>{artwork.artist}</p>
+        <span>{artwork.museum}</span>
+      </div>
+    </button>
+  );
+}

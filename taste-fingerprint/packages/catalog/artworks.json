@@ -1,0 +1,163 @@
+[
+  {
+    "id": "art_botticelli_john",
+    "title": "Saint John the Baptist in the Wilderness",
+    "artist": "Sandro Botticelli",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_botticelli_john.jpg"
+  },
+  {
+    "id": "art_bruegel_harvesters",
+    "title": "The Harvesters",
+    "artist": "Pieter Bruegel the Elder",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_bruegel_harvesters.jpg"
+  },
+  {
+    "id": "art_caravaggio_denial",
+    "title": "The Denial of Saint Peter",
+    "artist": "Caravaggio",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_caravaggio_denial.jpg"
+  },
+  {
+    "id": "art_cezanne_sainte",
+    "title": "Mont Sainte-Victoire and the Viaduct of the Arc Valley",
+    "artist": "Paul Cézanne",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_cezanne_sainte.jpg"
+  },
+  {
+    "id": "art_degas_ballet",
+    "title": "The Dancing Class",
+    "artist": "Edgar Degas",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_degas_ballet.jpg"
+  },
+  {
+    "id": "art_goya_bullfight",
+    "title": "Bullfight: Suerte de Varas",
+    "artist": "Francisco de Goya",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_goya_bullfight.jpg"
+  },
+  {
+    "id": "art_hiroshige_plum",
+    "title": "Plum Estate, Kameido",
+    "artist": "Utagawa Hiroshige",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_hiroshige_plum.jpg"
+  },
+  {
+    "id": "art_hokusai_wave",
+    "title": "The Great Wave off Kanagawa",
+    "artist": "Katsushika Hokusai",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_hokusai_wave.jpg"
+  },
+  {
+    "id": "art_homer_gulfstream",
+    "title": "The Gulf Stream",
+    "artist": "Winslow Homer",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_homer_gulfstream.jpg"
+  },
+  {
+    "id": "art_klimt_mada",
+    "title": "Mada Primavesi",
+    "artist": "Gustav Klimt",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_klimt_mada.jpg"
+  },
+  {
+    "id": "art_leutze_washington",
+    "title": "Washington Crossing the Delaware",
+    "artist": "Emanuel Leutze",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_leutze_washington.jpg"
+  },
+  {
+    "id": "art_matisse_goldfish",
+    "title": "Goldfish",
+    "artist": "Henri Matisse",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_matisse_goldfish.jpg"
+  },
+  {
+    "id": "art_monet_pondb",
+    "title": "Bridge over a Pond of Water Lilies",
+    "artist": "Claude Monet",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_monet_pondb.jpg"
+  },
+  {
+    "id": "art_okeeffe_cowskull",
+    "title": "Cow's Skull: Red, White, and Blue",
+    "artist": "Georgia O'Keeffe",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_okeeffe_cowskull.jpg"
+  },
+  {
+    "id": "art_rembrandt_self",
+    "title": "Self-Portrait",
+    "artist": "Rembrandt",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_rembrandt_self.jpg"
+  },
+  {
+    "id": "art_rousseau_dream",
+    "title": "The Dream",
+    "artist": "Henri Rousseau",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_rousseau_dream.jpg"
+  },
+  {
+    "id": "art_seurat_circus",
+    "title": "Circus Sideshow",
+    "artist": "Georges Seurat",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_seurat_circus.jpg"
+  },
+  {
+    "id": "art_titian_venus",
+    "title": "Venus and Adonis",
+    "artist": "Titian",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_titian_venus.jpg"
+  },
+  {
+    "id": "art_turner_whalers",
+    "title": "Whalers",
+    "artist": "Joseph Mallord William Turner",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_turner_whalers.jpg"
+  },
+  {
+    "id": "art_vaneyck_crucifixion",
+    "title": "The Crucifixion; The Last Judgment",
+    "artist": "Jan van Eyck",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_vaneyck_crucifixion.jpg"
+  },
+  {
+    "id": "art_vangogh_cypresses",
+    "title": "Wheat Field with Cypresses",
+    "artist": "Vincent van Gogh",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_vangogh_cypresses.jpg"
+  },
+  {
+    "id": "art_velazquez_pareja",
+    "title": "Juan de Pareja",
+    "artist": "Diego Velázquez",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_velazquez_pareja.jpg"
+  },
+  {
+    "id": "art_vermeer_pitcher",
+    "title": "Young Woman with a Water Pitcher",
+    "artist": "Johannes Vermeer",
+    "museum": "The Metropolitan Museum of Art",
+    "image_url": "/artworks/art_vermeer_pitcher.jpg"
+  }
+]

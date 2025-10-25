@@ -1,0 +1,174 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 24px;
+  padding: 2.5rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(6px);
+}
+
+.header h1 {
+  font-size: 2.25rem;
+  margin: 0;
+}
+
+.header p {
+  color: #475569;
+  margin: 0.4rem 0 0;
+}
+
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressLabel {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.progressBar {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.25);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(135deg, #6366f1, #22d3ee);
+  transition: width 0.35s ease;
+}
+
+.error {
+  color: #dc2626;
+  background: rgba(254, 226, 226, 0.7);
+  border: 1px solid rgba(248, 113, 113, 0.6);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.card {
+  border: none;
+  padding: 0;
+  text-align: left;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.card:hover:not(:disabled) {
+  transform: translateY(-10px);
+  box-shadow: 0 28px 56px rgba(15, 23, 42, 0.3);
+}
+
+.imageWrapper {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+
+.cardMeta {
+  padding: 1.5rem 1.8rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cardMeta h3 {
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.cardMeta p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cardMeta span {
+  font-size: 0.85rem;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.summary {
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  padding: 3rem;
+  display: grid;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.vectorPreview {
+  text-align: left;
+  padding: 1.5rem;
+  background: rgba(30, 41, 59, 0.85);
+  border-radius: 16px;
+  overflow: auto;
+  max-height: 240px;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.primaryButton {
+  justify-self: center;
+  padding: 0.9rem 1.8rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(99, 102, 241, 0.35);
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #1e293b;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 2rem;
+  }
+
+  .choices {
+    gap: 1.5rem;
+  }
+}

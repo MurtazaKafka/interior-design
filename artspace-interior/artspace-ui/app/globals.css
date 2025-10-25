@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07080c;
-  --surface: #0d1017;
-  --surface-muted: #141821;
-  --surface-soft: #1c2030;
-  --surface-glass: rgba(20, 24, 33, 0.86);
-  --foreground: #f4f6fb;
-  --foreground-subtle: #c8ccd8;
-  --border: #1f2332;
-  --border-strong: #292f41;
-  --muted: #111521;
-  --muted-strong: #191f2f;
-  --accent: #f4f6fb;
-  --accent-soft: #cdd1de;
-  --highlight: #8e9aff;
-  --chat-bubble-user: linear-gradient(135deg, rgba(142, 154, 255, 0.22), rgba(142, 154, 255, 0.05));
-  --chat-bubble-assistant: linear-gradient(135deg, rgba(20, 24, 33, 0.72), rgba(20, 24, 33, 0.48));
+  --background: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f8f8f8;
+  --surface-soft: #f4f4f4;
+  --surface-glass: rgba(255, 255, 255, 0.95);
+  --foreground: #000000;
+  --foreground-subtle: #666666;
+  --border: #e5e5e5;
+  --border-strong: #d1d1d1;
+  --muted: #fafafa;
+  --muted-strong: #f0f0f0;
+  --accent: #ff3b30;
+  --accent-soft: #ffebe9;
+  --highlight: #ff3b30;
+  --chat-bubble-user: linear-gradient(135deg, rgba(255, 59, 48, 0.08), rgba(255, 59, 48, 0.03));
+  --chat-bubble-assistant: linear-gradient(135deg, rgba(248, 248, 248, 0.8), rgba(244, 244, 244, 0.6));
 }
 
 * {
@@ -35,53 +35,62 @@ body {
 
 .page-shell {
   background: var(--surface);
-  border-radius: 28px;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .pillar-heading {
-  font-size: 0.625rem;
-  letter-spacing: 0.15em;
+  font-size: 14px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-weight: 500;
-  color: var(--foreground-subtle);
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .supporting-copy {
   color: var(--foreground-subtle);
-  line-height: 1.65;
-  font-size: 0.875rem;
+  line-height: 1.7;
+  font-size: 16px;
+  max-width: 65ch;
 }
 
 .section-card {
   border: 1px solid var(--border);
-  background: var(--surface-muted);
-  padding: 1.25rem;
-  border-radius: 18px;
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .attachment-input {
-  border: 1px dashed var(--border);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 12px;
   cursor: text;
+  transition: all 0.2s ease;
+}
+
+.attachment-input:hover {
+  border-color: var(--border-strong);
 }
 
 .attachment-tag {
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  padding: 0.25rem 0.65rem;
-  font-size: 0.55rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--foreground-subtle);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--foreground);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 8px;
+  background: var(--surface-muted);
 }
 
 .attachment-tag button {
@@ -94,19 +103,21 @@ body {
 }
 
 .chat-bubble {
-  border-radius: 16px;
-  padding: 1rem 1.15rem;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .chat-bubble--assistant {
-  background: var(--chat-bubble-assistant);
+  background: var(--surface-muted);
+  border-color: var(--border-strong);
 }
 
 .chat-bubble--user {
-  background: var(--chat-bubble-user);
+  background: var(--accent-soft);
+  border-color: transparent;
 }
 
 .chat-timestamp {
@@ -117,39 +128,47 @@ body {
 }
 
 .geometric-button {
-  border: 1.5px solid var(--accent);
-  background: var(--accent);
-  color: #05060a;
-  font-weight: 600;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--foreground);
+  font-weight: 500;
   transition: all 0.2s ease;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
 .geometric-button:hover:not(:disabled) {
-  background: transparent;
-  color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  background: var(--accent);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.15);
 }
 
 .geometric-button:disabled {
-  opacity: 0.3;
+  opacity: 0.4;
   cursor: not-allowed;
+  border-color: var(--border-strong);
 }
 
 .upload-zone {
-  border: 1.5px dashed var(--border);
-  background: var(--muted);
+  border: 2px dashed var(--border);
+  background: var(--surface);
   transition: all 0.2s ease;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
 }
 
 .upload-zone:hover {
-  border-color: var(--highlight);
-  background: var(--muted-strong);
+  border-color: var(--accent);
+  background: var(--surface-muted);
 }
 
 .upload-zone.active {
-  border-color: var(--highlight);
-  background: var(--muted-strong);
+  border-color: var(--accent);
+  background: var(--surface-muted);
+  border-style: solid;
 }
 
 .layout-divider {

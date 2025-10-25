@@ -7,29 +7,15 @@ import { PageBanner } from './components/PageBanner'
 import { SectionCard } from './components/SectionCard'
 import { StepHeader } from './components/StepHeader'
 import { FloorplanUploader } from './components/FloorplanUploader'
-import { InspirationUploader } from './components/InspirationUploader'
-import { CurationForm } from './components/CurationForm'
-import { StudioHeader } from './components/StudioHeader'
-import { StudioChatPanel } from './components/StudioChatPanel'
-import { ConceptPreviewCard } from './components/ConceptPreviewCard'
-import { StudioStatusBar } from './components/StudioStatusBar'
-import { ChatMessage } from './types/chat'
+import { StyleQuiz } from './components/StyleQuiz'
+import { ThreeDViewer } from './components/3DViewer'
+import { PageTransition } from './components/PageTransition'
 
 export default function HomePage() {
+  const [currentStep, setCurrentStep] = useState(0)
   const [floorplan, setFloorplan] = useState<File | null>(null)
   const [floorplanPreview, setFloorplanPreview] = useState('')
-  const [inspiration, setInspiration] = useState<File[]>([])
-  const [inspirationPreviews, setInspirationPreviews] = useState<string[]>([])
-  const [artistInput, setArtistInput] = useState('')
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
-  const [chatPrompt, setChatPrompt] = useState('')
-  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
-    {
-      role: 'assistant',
-      message: 'Describe how you want to feel when you enter this room.'
-    }
-  ])
-  const [isListening, setIsListening] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [result, setResult] = useState('')
 
@@ -57,195 +43,91 @@ export default function HomePage() {
     reader.readAsDataURL(file)
   }
 
-  const handleInspirationUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || [])
-    if (!files.length) return
-
-    setInspiration(prev => [...prev, ...files])
-    files.forEach(file => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setInspirationPreviews(prev => [...prev, reader.result as string])
-      }
-      reader.readAsDataURL(file)
-    })
+  const handleFloorplanComplete = () => {
+    setCurrentStep(1)
   }
 
-  const handleInspirationDrop = (files: FileList) => {
-    const batch = Array.from(files)
-    if (!batch.length) return
-
-    setInspiration(prev => [...prev, ...batch])
-    batch.forEach(file => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setInspirationPreviews(prev => [...prev, reader.result as string])
-      }
-      reader.readAsDataURL(file)
-    })
+  const handleStylesComplete = (styles: string[]) => {
+    setSelectedStyles(styles)
+    setCurrentStep(2)
   }
 
-  const toggleStyle = (style: string) => {
-    setSelectedStyles(prev =>
-      prev.includes(style) ? prev.filter(item => item !== style) : [...prev, style]
-    )
-  }
-
-  const handleSendPrompt = () => {
-    const trimmed = chatPrompt.trim()
-    if (!trimmed) return
-
-    setChatHistory(prev => [
-      ...prev,
-      { role: 'user', message: trimmed },
-      {
-        role: 'assistant',
-        message: "Noted. I'll weave that into the palette and spatial proportions."
-      }
-    ])
-    setChatPrompt('')
-  }
-
-  const handleGenerate = () => {
-    if (!floorplan) return
-
-    setIsProcessing(true)
-    setTimeout(() => {
-      const influenceSummary =
-        selectedStyles.length > 0
-          ? selectedStyles.join(' · ')
-          : artistInput
-          ? artistInput
-          : 'Custom curation'
-
-      setResult(floorplanPreview || '/window.svg')
-      setChatHistory(prev => [
-        ...prev,
-        {
-          role: 'assistant',
-          message: `Concept locked. Rendering with ${influenceSummary.toLowerCase()}.`
-        }
-      ])
-      setIsProcessing(false)
-    }, 1400)
-  }
-
-  const resetAll = () => {
+  const handleReset = () => {
+    setCurrentStep(0)
     setFloorplan(null)
     setFloorplanPreview('')
-    setInspiration([])
-    setInspirationPreviews([])
-    setArtistInput('')
     setSelectedStyles([])
-    setChatPrompt('')
-    setChatHistory([
-      {
-        role: 'assistant',
-        message: 'Describe how you want to feel when you enter this room.'
-      }
-    ])
-    setIsListening(false)
     setResult('')
   }
 
-  const canGenerate =
-    !!floorplan &&
-    (inspiration.length > 0 || selectedStyles.length > 0 || artistInput.trim().length > 0)
-
-  const hasBrief =
-    !!floorplan || inspiration.length > 0 || selectedStyles.length > 0 || artistInput.trim().length > 0
-
-  const conceptStatus = result
-    ? 'Preview ready — adjust inputs to iterate again.'
-    : canGenerate
-    ? 'Brief locked. Ready when you are.'
-    : 'Upload a plan and curation to unlock rendering.'
-
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[var(--background)] px-6 py-8 text-[var(--foreground)] md:px-10 md:py-10">
-      <div className="page-shell flex w-full max-w-[1180px] flex-col gap-8 px-9 py-9">
-        <PageBanner />
+    <main className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <div className="flex-1 px-6 py-8 md:px-10 md:py-10">
+        <div className="page-shell mx-auto flex h-full w-full max-w-[1180px] flex-col gap-8 px-9 py-9">
+          <PageBanner />
 
-        <div className="grid flex-1 gap-6 xl:grid-cols-[1.2fr_0.9fr]">
-          <SectionCard className="gap-5">
-            <StudioHeader isListening={isListening} onToggleListening={() => setIsListening(prev => !prev)} />
+          <div className="flex flex-1 flex-col">
+            <PageTransition isVisible={currentStep === 0}>
+              <div className="mx-auto flex h-full w-full max-w-2xl flex-col">
+                <SectionCard className="flex flex-1 flex-col gap-6">
+                  <StepHeader
+                    step="Step 1"
+                    title="Upload Your Floorplan"
+                    description="Start by uploading your room's floorplan. We'll use this to create your 3D visualization."
+                  />
+                  <div className="flex-1">
+                    <FloorplanUploader
+                      floorplanPreview={floorplanPreview}
+                      onUpload={handleFloorplanUpload}
+                      onDrop={handleFloorplanDrop}
+                    />
+                  </div>
+                  <button
+                    onClick={handleFloorplanComplete}
+                    disabled={!floorplan}
+                    className="geometric-button w-full"
+                  >
+                    Continue to Style Selection
+                  </button>
+                </SectionCard>
+              </div>
+            </PageTransition>
 
-            <div className="grid flex-1 gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
-              <StudioChatPanel
-                history={chatHistory}
-                composer={{
-                  value: chatPrompt,
-                  placeholder: 'Describe adjustments—e.g. add a charcoal sofa with walnut legs.',
-                  onChange: setChatPrompt,
-                  onSubmit: handleSendPrompt
-                }}
-              />
+            <PageTransition isVisible={currentStep === 1}>
+              <div className="flex-1">
+                <StyleQuiz onComplete={handleStylesComplete} />
+              </div>
+            </PageTransition>
 
-              <ConceptPreviewCard
-                result={result}
-                fallback="/window.svg"
-                floorplanPreview={floorplanPreview}
-                influences={selectedStyles}
-                artistInput={artistInput}
-                inspirationPreviews={inspirationPreviews}
-              />
-            </div>
-
-            <StudioStatusBar
-              status={conceptStatus}
-              onGenerate={handleGenerate}
-              onReset={resetAll}
-              canGenerate={canGenerate}
-              isProcessing={isProcessing}
-              showReset={hasBrief}
-            />
-          </SectionCard>
-
-          <div className="flex flex-col gap-5">
-              <SectionCard className="gap-3">
-              <StepHeader
-                step="Step 01"
-                title="Floorplan canvas"
-                description="Drop a scaled plan or browse from your files. Accepted: PDF, PNG, JPG."
-                meta={
-                  floorplan ? (
-                    <span className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--accent)]">Ready</span>
-                  ) : null
-                }
-              />
-
-              <FloorplanUploader
-                floorplanPreview={floorplanPreview}
-                onUpload={handleFloorplanUpload}
-                onDrop={handleFloorplanDrop}
-              />
-            </SectionCard>
-
-            <SectionCard className="gap-4">
-              <StepHeader
-                step="Step 02"
-                title="Curate the narrative"
-                description="Layer references, artists, and material language to steer the concept."
-                meta={
-                  inspiration.length > 0 || selectedStyles.length > 0 || artistInput.trim().length > 0 ? (
-                    <span className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--accent)]">Enriched</span>
-                  ) : null
-                }
-              />
-
-              <InspirationUploader
-                previews={inspirationPreviews}
-                onUpload={handleInspirationUpload}
-                onDrop={handleInspirationDrop}
-              />
-
-              <CurationForm
-                artistInput={artistInput}
-                onArtistChange={setArtistInput}
-                selectedStyles={selectedStyles}
-                onToggleStyle={toggleStyle}
-              />
-            </SectionCard>
+            <PageTransition isVisible={currentStep === 2}>
+              <div className="mx-auto flex h-full w-full max-w-4xl flex-col">
+                <SectionCard className="flex flex-1 flex-col gap-6">
+                  <StepHeader
+                    step="Final Step"
+                    title="Your 3D Room Visualization"
+                    description="Here's your room transformed according to your style preferences."
+                  />
+                  <div className="flex-1">
+                    <ThreeDViewer
+                      floorplanImage={floorplanPreview}
+                      selectedStyles={selectedStyles}
+                    />
+                  </div>
+                  <div className="flex gap-4">
+                    <button onClick={handleReset} className="geometric-button">
+                      Start Over
+                    </button>
+                    <button
+                      onClick={() => setIsProcessing(true)}
+                      disabled={isProcessing}
+                      className="geometric-button flex-1"
+                    >
+                      {isProcessing ? 'Processing...' : 'Generate New Variation'}
+                    </button>
+                  </div>
+                </SectionCard>
+              </div>
+            </PageTransition>
           </div>
         </div>
       </div>

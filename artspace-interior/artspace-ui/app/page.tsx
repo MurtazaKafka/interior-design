@@ -1,7 +1,7 @@
 'use client'
 
 import NextImage from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Mic,
   MicOff,
@@ -9,6 +9,103 @@ import {
   Sparkles,
   Upload
 } from 'lucide-react'
+import {
+  uploadImages,
+  startTraining,
+  getTrainingStatus,
+  type TrainingStatus
+} from '@/lib/nerf-api'
+import MeshPreview from './components/MeshPreview'
+import { getMeshDownloadUrl } from '@/lib/nerf-api'
+
+// Component to display rendered frames from 3D reconstruction
+function RenderFramesViewer({ sessionId }: { sessionId: string }) {
+  const [frames, setFrames] = useState<string[]>([])
+  const [currentFrame, setCurrentFrame] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [playing, setPlaying] = useState(false)
+  
+  const apiUrl = process.env.NEXT_PUBLIC_NERF_API_URL
+  
+  useEffect(() => {
+    async function fetchFrames() {
+      try {
+        const response = await fetch(`${apiUrl}/api/renders/${sessionId}`)
+        const data = await response.json()
+        if (data.frames && data.frames.length > 0) {
+          setFrames(data.frames)
+        }
+      } catch (error) {
+        console.error('Error fetching renders:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchFrames()
+  }, [sessionId, apiUrl])
+  
+  useEffect(() => {
+    if (playing && frames.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentFrame((prev) => (prev + 1) % frames.length)
+      }, 100) // 10 FPS
+      return () => clearInterval(interval)
+    }
+  }, [playing, frames.length])
+  
+  if (loading) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-[var(--foreground-subtle)]">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" />
+        Loading renders...
+      </div>
+    )
+  }
+  
+  if (frames.length === 0) {
+    return (
+      <p className="text-sm text-[var(--foreground-subtle)]">
+        No preview frames available yet
+      </p>
+    )
+  }
+  
+  return (
+    <div className="space-y-3">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[var(--surface)]">
+        <img
+          src={`${apiUrl}/api/render/${sessionId}/${frames[currentFrame]}`}
+          alt={`Frame ${currentFrame + 1}`}
+          className="h-full w-full object-contain"
+        />
+      </div>
+      
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => setPlaying(!playing)}
+          className="rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-xs uppercase tracking-wider transition-colors hover:bg-[var(--surface)]"
+        >
+          {playing ? 'Pause' : 'Play'}
+        </button>
+        
+        <div className="flex-1">
+          <input
+            type="range"
+            min="0"
+            max={frames.length - 1}
+            value={currentFrame}
+            onChange={(e) => setCurrentFrame(parseInt(e.target.value))}
+            className="w-full"
+          />
+        </div>
+        
+        <span className="text-xs text-[var(--foreground-subtle)]">
+          {currentFrame + 1} / {frames.length}
+        </span>
+      </div>
+    </div>
+  )
+}
 
 const STYLE_PRESETS = [
   'Bauhaus Geometry',
@@ -41,6 +138,53 @@ export default function HomePage() {
   const [isListening, setIsListening] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [result, setResult] = useState<string>('')
+
+  // NeRF integration state
+  const [nerfSessionId, setNerfSessionId] = useState<string>('')
+  const [nerfJobId, setNerfJobId] = useState<string>('')
+  const [nerfStatus, setNerfStatus] = useState<TrainingStatus | null>(null)
+  const [nerfError, setNerfError] = useState<string>('')
+  const [isUploadingToNerf, setIsUploadingToNerf] = useState(false)
+
+  // Poll for training status
+  useEffect(() => {
+    if (!nerfJobId) return
+
+    const pollInterval = setInterval(async () => {
+      try {
+        const status = await getTrainingStatus(nerfJobId)
+        setNerfStatus(status)
+
+        if (status.status === 'completed' || status.status === 'failed') {
+          clearInterval(pollInterval)
+          setIsProcessing(false)
+
+          if (status.status === 'completed') {
+            setChatHistory(prev => [
+              ...prev,
+              {
+                role: 'assistant',
+                message: 'NeRF training completed! Your 3D scene is ready.'
+              }
+            ])
+          } else if (status.status === 'failed') {
+            setNerfError(status.error || 'Training failed')
+            setChatHistory(prev => [
+              ...prev,
+              {
+                role: 'assistant',
+                message: `Training failed: ${status.error || 'Unknown error'}`
+              }
+            ])
+          }
+        }
+      } catch (error) {
+        console.error('Error polling training status:', error)
+      }
+    }, 5000) // Poll every 5 seconds
+
+    return () => clearInterval(pollInterval)
+  }, [nerfJobId])
 
   const handleFloorplanUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -90,26 +234,139 @@ export default function HomePage() {
   }
 
   const handleGenerate = async () => {
-    if (!floorplan) return
+    console.log('🎨 handleGenerate called')
+    console.log('Floorplan:', floorplan)
+    console.log('Inspiration count:', inspiration.length)
+    console.log('Selected styles:', selectedStyles)
+    console.log('Artist input:', artistInput)
+    
+    if (!floorplan) {
+      console.warn('⚠️ No floorplan uploaded')
+      return
+    }
 
     setIsProcessing(true)
-    setTimeout(() => {
-      const influenceSummary =
-        selectedStyles.length > 0
-          ? selectedStyles.join(' · ')
-          : artistInput
-          ? artistInput
-          : 'Custom curation'
-      setResult(floorplanPreview || '/window.svg')
+    setNerfError('')
+    console.log('✅ Processing started')
+
+    try {
+      // If we have inspiration images (room photos), use NeRF
+      if (inspiration.length >= 10) {
+        console.log('🚀 Starting NeRF workflow with', inspiration.length, 'images')
+        setChatHistory(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            message: `Uploading ${inspiration.length} images to NeRF for 3D reconstruction...`
+          }
+        ])
+
+        setIsUploadingToNerf(true)
+
+        // Upload images to NeRF
+        console.log('📤 Uploading images to:', process.env.NEXT_PUBLIC_NERF_API_URL || 'http://localhost:5000')
+        const uploadResponse = await uploadImages(inspiration)
+        console.log('✅ Upload response:', uploadResponse)
+        setNerfSessionId(uploadResponse.session_id)
+
+        setChatHistory(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            message: `Successfully uploaded ${uploadResponse.uploaded_count} images. Starting NeRF training...`
+          }
+        ])
+
+        // Start training
+        console.log('🎓 Starting training for session:', uploadResponse.session_id)
+        const trainingResponse = await startTraining(uploadResponse.session_id)
+        console.log('✅ Training started:', trainingResponse)
+        setNerfJobId(trainingResponse.job_id)
+        setIsUploadingToNerf(false)
+
+        setChatHistory(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            message: 'NeRF training started. This will take several hours. You can monitor progress below.'
+          }
+        ])
+      } else if (inspiration.length > 0 && inspiration.length < 10) {
+        // Not enough images for NeRF
+        console.log('⚠️ Not enough images for Instant-NGP:', inspiration.length, '(need 10+)')
+        setChatHistory(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            message: `You need at least 10 room photos for Instant-NGP 3D reconstruction. You have ${inspiration.length}. For now, generating a preview concept...`
+          }
+        ])
+
+        // Use mock generation for preview
+        setTimeout(() => {
+          const influenceSummary =
+            selectedStyles.length > 0
+              ? selectedStyles.join(' · ')
+              : artistInput || 'Custom curation'
+          setResult(floorplanPreview || '/window.svg')
+          setChatHistory(prev => [
+            ...prev,
+            {
+              role: 'assistant',
+              message: `Concept locked. Rendering with ${influenceSummary.toLowerCase()}.`
+            }
+          ])
+          setIsProcessing(false)
+        }, 1600)
+      } else {
+        // No images, use style-based generation (mock for now)
+        console.log('🎨 Style-based generation (no images)')
+        console.log('📊 Current state:', {
+          inspirationCount: inspiration.length,
+          selectedStyles,
+          artistInput,
+          hasFloorplan: !!floorplan
+        })
+        
+        setChatHistory(prev => [
+          ...prev,
+          {
+            role: 'assistant',
+            message: '⚠️ Note: This is a preview mode. For full 3D NeRF reconstruction, please upload at least 10 room photos in Step 02.'
+          }
+        ])
+        
+        setTimeout(() => {
+          const influenceSummary =
+            selectedStyles.length > 0
+              ? selectedStyles.join(' · ')
+              : artistInput || 'Custom curation'
+          setResult(floorplanPreview || '/window.svg')
+          console.log('✅ Result set to:', floorplanPreview || '/window.svg')
+          setChatHistory(prev => [
+            ...prev,
+            {
+              role: 'assistant',
+              message: `Concept locked. Rendering with ${influenceSummary.toLowerCase()}. (Preview mode - upload 10+ photos for 3D reconstruction)`
+            }
+          ])
+          setIsProcessing(false)
+        }, 1600)
+      }
+    } catch (error) {
+      console.error('❌ Error in handleGenerate:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+      setNerfError(errorMessage)
       setChatHistory(prev => [
         ...prev,
         {
           role: 'assistant',
-          message: `Concept locked. Rendering with ${influenceSummary.toLowerCase()}.`
+          message: `Error: ${errorMessage}`
         }
       ])
       setIsProcessing(false)
-    }, 1600)
+      setIsUploadingToNerf(false)
+    }
   }
 
   const resetAll = () => {
@@ -128,6 +385,12 @@ export default function HomePage() {
     ])
     setIsListening(false)
     setResult('')
+    // Reset NeRF state
+    setNerfSessionId('')
+    setNerfJobId('')
+    setNerfStatus(null)
+    setNerfError('')
+    setIsUploadingToNerf(false)
   }
 
   const canGenerate =
@@ -154,6 +417,39 @@ export default function HomePage() {
             <span>03 Render</span>
           </div>
         </header>
+
+        {/* Instant-NGP Info Banner */}
+        {inspiration.length > 0 && inspiration.length < 10 && (
+          <div className="rounded-[16px] border border-yellow-500/30 bg-yellow-500/10 px-6 py-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">⚠️</span>
+              <div className="flex-1 space-y-1">
+                <p className="font-semibold text-yellow-300">
+                  Need {10 - inspiration.length} more {10 - inspiration.length === 1 ? 'photo' : 'photos'} for Instant-NGP 3D Reconstruction
+                </p>
+                <p className="text-sm text-yellow-200/80">
+                  You have {inspiration.length} room {inspiration.length === 1 ? 'photo' : 'photos'}. Upload at least 10 photos from different angles to enable full 3D scene reconstruction with Instant-NGP (fast NeRF training in 5-10 minutes).
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {inspiration.length >= 10 && (
+          <div className="rounded-[16px] border border-green-500/30 bg-green-500/10 px-6 py-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">✅</span>
+              <div className="flex-1 space-y-1">
+                <p className="font-semibold text-green-300">
+                  Ready for Instant-NGP 3D Reconstruction!
+                </p>
+                <p className="text-sm text-green-200/80">
+                  {inspiration.length} photos uploaded. Click "Render Concept" to start training with Instant-NGP (NVIDIA's fast NeRF). This will create a full 3D reconstruction of your space. Training takes 5-10 minutes.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="grid gap-12 lg:grid-cols-[1.45fr_1fr]">
           <section className="flex flex-col gap-10">
@@ -373,9 +669,125 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Instant-NGP Training Status */}
+            {(nerfSessionId || nerfStatus || nerfError) && (
+              <div className="section-card">
+                <div className="mb-4 space-y-2">
+                  <p className="pillar-heading">Instant-NGP 3D Reconstruction</p>
+                  <h3 className="text-xl font-semibold tracking-tight">Training Status</h3>
+                </div>
+
+                <div className="space-y-4">
+                  {nerfError && (
+                    <div className="rounded-[12px] border border-red-500/30 bg-red-500/10 px-4 py-3">
+                      <p className="text-sm text-red-400">{nerfError}</p>
+                    </div>
+                  )}
+
+                  {nerfSessionId && (
+                    <div className="space-y-2">
+                      <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--foreground-subtle)]">
+                        Session ID
+                      </p>
+                      <p className="font-mono text-xs text-[var(--accent)]">{nerfSessionId}</p>
+                    </div>
+                  )}
+
+                  {nerfStatus && (
+                    <>
+                      <div className="space-y-2">
+                        <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--foreground-subtle)]">
+                          Status
+                        </p>
+                        <div className="flex items-center gap-2">
+                          {nerfStatus.status === 'running' && (
+                            <span className="h-2 w-2 animate-pulse rounded-full bg-blue-500" />
+                          )}
+                          {nerfStatus.status === 'completed' && (
+                            <span className="h-2 w-2 rounded-full bg-green-500" />
+                          )}
+                          {nerfStatus.status === 'failed' && (
+                            <span className="h-2 w-2 rounded-full bg-red-500" />
+                          )}
+                          <span className="text-sm capitalize text-[var(--foreground)]">
+                            {nerfStatus.status}
+                          </span>
+                        </div>
+                      </div>
+
+                      {nerfStatus.progress > 0 && (
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--foreground-subtle)]">
+                              Progress
+                            </p>
+                            <p className="text-sm text-[var(--accent)]">{nerfStatus.progress}%</p>
+                          </div>
+                          <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--surface)]">
+                            <div
+                              className="h-full bg-[var(--highlight)] transition-all duration-500"
+                              style={{ width: `${nerfStatus.progress}%` }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {nerfStatus.start_time && (
+                        <div className="space-y-1">
+                          <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--foreground-subtle)]">
+                            Started
+                          </p>
+                          <p className="text-xs text-[var(--foreground)]">
+                            {new Date(nerfStatus.start_time * 1000).toLocaleString()}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* Show rendered frames when completed */}
+                      {nerfStatus.status === 'completed' && nerfSessionId && (
+                        <div className="space-y-3 pt-4 border-t border-[var(--border)]">
+                          <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[var(--foreground-subtle)]">
+                            3D Reconstruction Preview
+                          </p>
+                          <div className="grid gap-4 md:grid-cols-2">
+                            <div>
+                              <RenderFramesViewer sessionId={nerfSessionId} />
+                            </div>
+                            <div>
+                              <MeshPreview sessionId={nerfSessionId} />
+                              <div className="mt-3 flex items-center gap-3">
+                                <a
+                                  href={getMeshDownloadUrl(nerfSessionId)}
+                                  className="inline-flex items-center gap-2 rounded-md bg-[var(--accent)] px-3 py-2 text-sm text-white hover:opacity-90"
+                                >
+                                  📥 Download 3D Model (.obj)
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {isUploadingToNerf && (
+                    <div className="flex items-center gap-3 rounded-[12px] border border-[var(--border)] bg-[var(--surface)] px-4 py-3">
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-[var(--accent)] border-t-transparent" />
+                      <span className="text-sm text-[var(--foreground-subtle)]">
+                        Uploading images to NeRF server...
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="flex flex-wrap items-center gap-4">
               <button
-                onClick={handleGenerate}
+                onClick={() => {
+                  console.log('🖱️ Button clicked!', { canGenerate, isProcessing })
+                  handleGenerate()
+                }}
                 disabled={!canGenerate || isProcessing}
                 className="geometric-button flex items-center gap-3 rounded-full px-7 py-3 text-[0.65rem] uppercase tracking-[0.35em]"
               >

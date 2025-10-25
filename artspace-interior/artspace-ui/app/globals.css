@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --border: #e5e5e5;
-  --muted: #f5f5f5;
-  --accent: #000000;
+  --background: #07080c;
+  --surface: #0d1017;
+  --surface-muted: #141821;
+  --surface-soft: #1c2030;
+  --foreground: #f4f6fb;
+  --foreground-subtle: #c8ccd8;
+  --border: #1f2332;
+  --border-strong: #292f41;
+  --muted: #111521;
+  --muted-strong: #191f2f;
+  --accent: #f4f6fb;
+  --accent-soft: #cdd1de;
+  --highlight: #8e9aff;
 }
 
 * {
@@ -18,38 +26,138 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  antialiasing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.geometric-border {
-  border: 2px solid var(--border);
+.page-shell {
+  background: var(--surface);
+  border-radius: 28px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+}
+
+.pillar-heading {
+  font-size: 0.625rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--foreground-subtle);
+}
+
+.supporting-copy {
+  color: var(--foreground-subtle);
+  line-height: 1.65;
+  font-size: 0.875rem;
+}
+
+.section-card {
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  padding: 1.75rem;
+  border-radius: 20px;
 }
 
 .geometric-button {
-  border: 2px solid var(--accent);
-  background: transparent;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid var(--accent);
+  background: var(--accent);
+  color: #05060a;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-.geometric-button:hover {
-  background: var(--accent);
-  color: var(--background);
+.geometric-button:hover:not(:disabled) {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.geometric-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .upload-zone {
-  border: 2px dashed var(--border);
+  border: 1.5px dashed var(--border);
   background: var(--muted);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .upload-zone:hover {
-  border-color: var(--accent);
-  background: #fafafa;
+  border-color: var(--highlight);
+  background: var(--muted-strong);
 }
 
 .upload-zone.active {
-  border-color: var(--accent);
-  background: #f0f0f0;
+  border-color: var(--highlight);
+  background: var(--muted-strong);
+}
+
+.layout-divider {
+  border-top: 1px solid var(--border-strong);
+  margin: 1.5rem 0;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--highlight);
+}
+
+/* Focus states */
+input,
+textarea {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--foreground-subtle);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--highlight) !important;
+  box-shadow: 0 0 0 3px rgba(142, 154, 255, 0.12);
+}
+
+/* Smooth transitions for interactive elements */
+button,
+input,
+textarea,
+a {
+  transition: all 0.2s ease;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Animation for loading state */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }

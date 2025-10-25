@@ -1,0 +1,7 @@
+{
+  "name": "taste-fingerprint",
+  "private": true,
+  "scripts": {
+    "embed:artworks": "python apps/serve/scripts/embed_artworks.py"
+  }
+}

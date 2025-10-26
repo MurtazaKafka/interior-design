@@ -36,7 +36,6 @@ export const CompleteRoomGenerator = ({ onRoomGenerated }: CompleteRoomGenerator
   const generatedRootRef = useRef<THREE.Group | null>(null)
 
   const [imageData, setImageData] = useState<string | null>(null)
-  const [description, setDescription] = useState<string>(FALLBACK_DESCRIPTION)
   const [generatedCode, setGeneratedCode] = useState<string>('')
   const [status, setStatus] = useState<GenerationStatus>('idle')
   const [message, setMessage] = useState<string>('Upload a room reference image to begin.')
@@ -285,7 +284,7 @@ export const CompleteRoomGenerator = ({ onRoomGenerated }: CompleteRoomGenerator
     reader.onloadend = () => {
       setImageData(reader.result as string)
       setStatus('idle')
-      setMessage('Image ready. Describe the vibe and hit Generate.')
+  setMessage('Image ready. Hit Generate whenever you\'re ready.')
     }
     reader.readAsDataURL(file)
 
@@ -330,7 +329,7 @@ export const CompleteRoomGenerator = ({ onRoomGenerated }: CompleteRoomGenerator
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           image_data: imageData,
-          description: description || FALLBACK_DESCRIPTION,
+          description: FALLBACK_DESCRIPTION,
           existing_code: generatedCode || null,
           max_tokens: 8000
         })
@@ -361,7 +360,7 @@ export const CompleteRoomGenerator = ({ onRoomGenerated }: CompleteRoomGenerator
       setStatus('error')
       setMessage(`Generation failed: ${(error as Error).message}`)
     }
-  }, [description, generatedCode, imageData, injectGeneratedScene, onRoomGenerated])
+  }, [generatedCode, imageData, injectGeneratedScene, onRoomGenerated])
 
   return (
     <div className="flex flex-col gap-6">
@@ -415,15 +414,15 @@ export const CompleteRoomGenerator = ({ onRoomGenerated }: CompleteRoomGenerator
               />
             </label>
 
+            {/*
             <label className="block">
               <span className="text-xs font-medium uppercase tracking-wide text-slate-500">Style prompt</span>
               <textarea
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
                 placeholder="Bright contemporary bedroom with walnut furniture, brushed brass lighting, and abstract wall art."
                 className="mt-2 h-28 w-full resize-none rounded-xl border border-slate-300 bg-white p-3 text-sm text-slate-800 shadow-inner focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-200"
               />
             </label>
+            */}
 
             <div className="flex flex-wrap gap-3">
               <button

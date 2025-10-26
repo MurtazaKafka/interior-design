@@ -7,7 +7,6 @@ services:
     rootDir: taste-fingerprint
     buildCommand: pip install --upgrade pip && pip install -r apps/serve/requirements.txt
     startCommand: PYTHONPATH=. uvicorn apps.serve.main:app --host 0.0.0.0 --port 8000
-    pythonVersion: 3.12
     envVars:
       - key: CHROMA_API_KEY
         sync: false

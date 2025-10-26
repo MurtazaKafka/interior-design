@@ -39,10 +39,13 @@ Render blueprint: [`render.yaml`](./render.yaml)
 
 1. Log into [Render](https://dashboard.render.com) and add a **Blueprint** from your GitHub repo.
 2. Select the `render.yaml` file in the root when prompted.
-3. Confirm the service `taste-fingerprint-api` is detected with:
+3. Confirm the service `taste-fingerprint-api` is detected with **Environment = Python** and **Root Directory = `taste-fingerprint`** (Render will otherwise default to Node and try to run `yarn start`).
+4. Verify the following commands are populated before deploying (Render currently ignores the optional `pythonVersion` key in blueprints—set the Python version in the dashboard after the service is created if you need something other than the default):
    - Python runtime 3.12
    - Build command: `pip install --upgrade pip && pip install -r apps/serve/requirements.txt`
    - Start command: `PYTHONPATH=. uvicorn apps.serve.main:app --host 0.0.0.0 --port 8000`
+
+If a service was already created without the blueprint and Render is attempting `yarn start`, either delete the service and recreate it using the steps above, or edit the **Settings → Build & Deploy** tab to switch the environment to Python, set the root directory to `taste-fingerprint`, and enter the build/start commands manually.
 
 ### 2.2 Configure environment variables
 

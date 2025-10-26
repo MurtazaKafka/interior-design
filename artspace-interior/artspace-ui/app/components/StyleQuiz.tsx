@@ -101,7 +101,6 @@ export const StyleQuiz = ({ onComplete }: StyleQuizProps) => {
     <div className="flex h-full w-full flex-col">
       <div className="shadow-museum mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 rounded-lg bg-[var(--surface)] p-10">
         <div className="border-b border-[var(--border)] pb-6 text-center">
-          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-[var(--accent)]">Act II</p>
           <h2 className="serif mb-4 text-4xl leading-tight tracking-[-0.01em]">Direct Your Vision</h2>
           <p className="text-lg leading-relaxed text-[var(--foreground-subtle)]">
             Select visual references that orchestrate light, surface, and composition ({currentSet + 1} of {styleOptions.length})
@@ -109,7 +108,7 @@ export const StyleQuiz = ({ onComplete }: StyleQuizProps) => {
         </div>
 
         <div className={`grid flex-1 grid-cols-3 gap-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-          {styleOptions[currentSet].map(style => (
+          {styleOptions[currentSet]?.map(style => (
             <button
               key={style.id}
               onClick={() => handleStyleSelect(style.id)}

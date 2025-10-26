@@ -190,7 +190,7 @@ export default function StudioPage() {
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
                 <StepHeader
-                  step="Act III"
+                  step=""
                   title="Inhabit Your Space"
                   description="Navigate the rendered space in real-time. Iterate with minimal gestures until atmosphere aligns with intent."
                 />

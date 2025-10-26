@@ -70,8 +70,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1.4 }}
           >
-            Compose spaces through{' '}
-            <span className="italic text-[var(--accent)]">intention</span>
+            Design spaces from{' '}
+            <span className="italic text-[var(--accent)]">art</span>
           </motion.h1>
           
           <motion.p 
@@ -80,8 +80,8 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 1.2 }}
           >
-            Upload a plan. Define the atmosphere. Walk through rendered reality — 
-            where precision meets artistic vision.
+            Select artwork that inspires you. We'll analyze the colors, mood, and style 
+            to generate a 3D room layout with furniture that captures the same artistic essence.
           </motion.p>
           
           <motion.p 
@@ -121,9 +121,6 @@ export default function Home() {
             <div className="max-w-[600px] space-y-6 px-8 text-center">
               <div className="bg-[rgba(0,0,0,0.3)] backdrop-blur-md px-10 py-8 rounded-2xl shadow-2xl">
                 <div className="space-y-4">
-                  <p className="text-xs tracking-[0.35em] uppercase text-[#c7a564] font-semibold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
-                    Act I
-                  </p>
                   <div className="serif text-[5rem] leading-none text-[#c7a564]/50" style={{ textShadow: '0 4px 12px rgba(199,165,100,0.3)' }}>
                     I
                   </div>
@@ -132,8 +129,8 @@ export default function Home() {
                   </h2>
                 </div>
                 <p className="mt-6 text-lg leading-relaxed text-[#f5f0e6]/95" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>
-                  Upload scaled architectural plans. Every dimension honored. 
-                  Floorplans become spatial truth, translated with architectural fidelity.
+                  Upload scaled architectural plans. Import floorplan files to begin the design process. 
+                  Every dimension will be honored with architectural fidelity.
                 </p>
               </div>
             </div>
@@ -147,19 +144,16 @@ export default function Home() {
             <div className="max-w-[600px] space-y-6 px-8 text-center">
               <div className="bg-[rgba(0,0,0,0.3)] backdrop-blur-md px-10 py-8 rounded-2xl shadow-2xl">
                 <div className="space-y-4">
-                  <p className="text-xs tracking-[0.35em] uppercase text-[#c7a564] font-semibold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
-                    Act II
-                  </p>
                   <div className="serif text-[5rem] leading-none text-[#c7a564]/50" style={{ textShadow: '0 4px 12px rgba(199,165,100,0.3)' }}>
                     II
                   </div>
                   <h2 className="serif text-4xl md:text-5xl text-[#f7f3eb] font-semibold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
-                    Direct
+                    Choose
                   </h2>
                 </div>
                 <p className="mt-6 text-lg leading-relaxed text-[#f5f0e6]/95" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>
-                  Select visual references. Your selections orchestrate light, surface, 
-                  and composition. The system interprets material and compositional language.
+                  Choose styles that resonate with your selected artwork. The system analyzes 
+                  colors, mood, and artistic essence to refine the design direction.
                 </p>
               </div>
             </div>
@@ -173,19 +167,16 @@ export default function Home() {
             <div className="max-w-[600px] space-y-6 px-8 text-center">
               <div className="bg-[rgba(0,0,0,0.3)] backdrop-blur-md px-10 py-8 rounded-2xl shadow-2xl">
                 <div className="space-y-4">
-                  <p className="text-xs tracking-[0.35em] uppercase text-[#c7a564] font-semibold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
-                    Act III
-                  </p>
                   <div className="serif text-[5rem] leading-none text-[#c7a564]/50" style={{ textShadow: '0 4px 12px rgba(199,165,100,0.3)' }}>
                     III
                   </div>
                   <h2 className="serif text-4xl md:text-5xl text-[#f7f3eb] font-semibold" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.4)' }}>
-                    Inhabit
+                    Generate
                   </h2>
                 </div>
                 <p className="mt-6 text-lg leading-relaxed text-[#f5f0e6]/95" style={{ textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>
-                  Navigate the rendered space in real-time. Iterate with minimal gestures 
-                  until atmosphere aligns with intent. Your spatial narrative comes alive.
+                  Explore your personalized 3D room layout. Furniture and decor are carefully 
+                  selected to match the artistic essence of your chosen paintings.
                 </p>
               </div>
             </div>

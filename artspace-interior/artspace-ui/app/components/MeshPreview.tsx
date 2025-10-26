@@ -17,8 +17,8 @@ export default function MeshPreview({ sessionId }: Props) {
 
     async function init() {
       const THREE = await import('three')
-      const { OBJLoader } = await import('three/examples/jsm/loaders/OBJLoader')
-      const { OrbitControls } = await import('three/examples/jsm/controls/OrbitControls')
+      const { OBJLoader } = await import('three/addons/loaders/OBJLoader.js')
+      const { OrbitControls } = await import('three/addons/controls/OrbitControls.js')
 
       if (!mounted || !containerRef.current) return
 

@@ -25,15 +25,15 @@ from pydantic import BaseModel
 
 from openai import OpenAI
 
-from apps.serve.services.claude import (
+from services.claude import (
     ClaudeSettingsError,
     summarize_taste,
     recommend_products,
     craft_room_edit_prompt,
 )
-from apps.serve.services.claude_3d_generator import Claude3DGenerator
-from apps.serve.services.complete_room_generator import CompleteRoomGenerator
-from apps.serve.services.furniture import (
+from services.claude_3d_generator import Claude3DGenerator
+from services.complete_room_generator import CompleteRoomGenerator
+from services.furniture import (
     FurnitureSearchService,
     search_furniture_semantically,
 )

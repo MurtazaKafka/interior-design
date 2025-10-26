@@ -139,14 +139,20 @@ export const TasteFingerprint = ({ onComplete, userId, artworks }: TasteFingerpr
     }
   }, [currentPair, completed, artworks.length, replenishPairs])
 
+  useEffect(() => {
+    if (!currentPair) return
+    if (isRecentDuplicate(taste.history, currentPair.a, currentPair.b)) {
+      replenishPairs()
+    }
+  }, [currentPair, taste.history, replenishPairs])
+
   const pairForRender = useMemo(() => {
     if (!currentPair) return null
     if (isRecentDuplicate(taste.history, currentPair.a, currentPair.b)) {
-      replenishPairs()
       return null
     }
     return currentPair
-  }, [currentPair, replenishPairs, taste.history])
+  }, [currentPair, taste.history])
 
   return (
     <div className="flex h-full w-full flex-col">

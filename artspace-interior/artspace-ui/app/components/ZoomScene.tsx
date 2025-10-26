@@ -1,6 +1,6 @@
 'use client'
 
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, RootState } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
@@ -193,15 +193,20 @@ export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
         height: '100%',
         background: 'transparent'
       }}
-      onCreated={({ scene, camera }: { scene: THREE.Scene; camera: THREE.PerspectiveCamera }) => {
+      onCreated={(state: RootState) => {
+        const { scene, camera } = state
+        const perspectiveCamera = camera instanceof THREE.PerspectiveCamera ? camera : null
+
         // Successfully created WebGL context
         console.log('✅ WebGL Canvas created successfully')
-        console.log('Camera position:', camera.position)
+        if (perspectiveCamera) {
+          console.log('Camera position:', perspectiveCamera.position)
+        }
         console.log('Scene children:', scene.children.length)
       }}
-      onError={(error: Error) => {
+      onError={(event) => {
         // Handle Canvas creation errors
-        console.error('❌ Canvas creation error:', error)
+        console.error('❌ Canvas creation error:', event)
         setRuntimeError('Failed to initialize 3D graphics')
       }}
     >

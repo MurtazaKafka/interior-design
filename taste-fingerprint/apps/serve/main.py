@@ -367,16 +367,28 @@ def taste_update(payload: TasteUpdate) -> Dict[str, Any]:
     except chromadb.errors.InvalidCollectionException:
         current = {"ids": [], "embeddings": []}
 
-    embeddings_raw = current.get("embeddings") or []
-    embeddings = [np.array(e, dtype="float32") for e in embeddings_raw]
+    embeddings_raw = current.get("embeddings")
+    embeddings_seq = _ensure_sequence(embeddings_raw)
+    embeddings: list[np.ndarray] = []
+    for entry in embeddings_seq:
+        try:
+            embeddings.append(np.array(entry, dtype="float32"))
+        except Exception:
+            continue
+
     user_vec: np.ndarray | None = embeddings[0] if embeddings else None
 
     mood_res = artworks.get(
         ids=[payload.win_id] + ([payload.lose_id] if payload.lose_id else []),
         include=["embeddings"],
     )
-    mood_embeddings_raw = mood_res.get("embeddings") or []
-    mood_embeddings = [np.array(e, dtype="float32") for e in mood_embeddings_raw]
+    mood_embeddings_raw = mood_res.get("embeddings")
+    mood_embeddings_seq = _ensure_sequence(mood_embeddings_raw)
+    mood_embeddings = [
+        np.array(e, dtype="float32")
+        for e in mood_embeddings_seq
+        if e is not None
+    ]
     if not mood_embeddings:
         raise HTTPException(status_code=404, detail="Artwork embeddings not found")
 

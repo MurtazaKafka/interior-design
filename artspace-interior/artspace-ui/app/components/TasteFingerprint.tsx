@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import NextImage from 'next/image'
 import { SectionCard } from './SectionCard'
+import { postTasteUpdate } from '../../lib/taste-api'
 
 export interface Artwork {
   id: string
@@ -97,21 +98,11 @@ export const TasteFingerprint = ({ onComplete, userId, artworks }: TasteFingerpr
       setTaste((prev) => ({ ...prev, loading: true, error: null }))
 
       try {
-        const response = await fetch('http://localhost:8000/taste/update', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            user_id: userId,
-            win_id: win.id,
-            lose_id: lose.id,
-          }),
+        const data = await postTasteUpdate({
+          user_id: userId,
+          win_id: win.id,
+          lose_id: lose.id,
         })
-
-        if (!response.ok) {
-          throw new Error(`Taste update failed: ${response.status}`)
-        }
-
-        const data = await response.json()
 
         setTaste((prev) => {
           const nextComparisons = prev.comparisons + 1

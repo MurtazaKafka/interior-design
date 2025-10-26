@@ -1,15 +1,19 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { ChangeEvent } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
+  API_BASE,
   fetchArtworks,
   postTasteUpdate,
   postTasteSummary,
+  postRoomRender,
   Artwork,
   TasteSummaryResponse,
+  RoomRenderResponse,
   coerceTasteSummary,
 } from '../../lib/api';
 import styles from './styles.module.css';
@@ -28,6 +32,12 @@ interface TasteState {
   summary: TasteSummaryResponse | null;
   summaryLoading: boolean;
   summaryError: string | null;
+}
+
+interface RenderState {
+  status: 'idle' | 'rendering' | 'complete' | 'error';
+  error: string | null;
+  result: RoomRenderResponse | null;
 }
 
 const TARGET_COMPARISONS = 12;
@@ -66,6 +76,10 @@ export default function OnboardingPage() {
     summaryLoading: false,
     summaryError: null,
   });
+  const [roomFile, setRoomFile] = useState<File | null>(null);
+  const [render, setRender] = useState<RenderState>({ status: 'idle', error: null, result: null });
+  const renderInputRef = useRef<HTMLInputElement | null>(null);
+  const summaryRequested = useRef(false);
 
   const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
   const progress = useMemo(() => taste.comparisons / TARGET_COMPARISONS, [taste.comparisons]);
@@ -84,38 +98,63 @@ export default function OnboardingPage() {
   }, []);
 
   useEffect(() => {
-    if (!completed || !taste.vector || taste.summary || taste.summaryLoading) {
-      return;
+    if (process.env.NODE_ENV !== 'development') return;
+    console.log('Render state', render);
+  }, [render]);
+
+useEffect(() => {
+  if (!completed || !taste.vector || summaryRequested.current) {
+    return;
+  }
+
+  summaryRequested.current = true;
+
+  let cancelled = false;
+
+  const run = async () => {
+    setRender({ status: 'idle', error: null, result: null });
+    setTaste((prev) => ({
+      ...prev,
+      summaryLoading: true,
+      summaryError: null,
+    }));
+
+    try {
+      const summaryRes = await postTasteSummary({ user_id: userId, top_k: 6, vector_preview: 12 });
+      if (cancelled) return;
+      const summaryPayload =
+        summaryRes.summary || coerceTasteSummary(summaryRes.raw_summary) || undefined;
+      setTaste((prev) => ({
+        ...prev,
+        summary: summaryPayload ? { ...summaryRes, summary: summaryPayload } : summaryRes,
+        summaryLoading: false,
+        summaryError: summaryPayload ? null : 'We could not parse your style brief yet.',
+      }));
+    } catch (err) {
+      console.error(err);
+      if (cancelled) return;
+      summaryRequested.current = false;
+      setTaste((prev) => ({
+        ...prev,
+        summaryLoading: false,
+        summaryError: 'Could not summarize your taste yet.',
+      }));
     }
-    let cancelled = false;
-    setTaste((prev) => ({ ...prev, summaryLoading: true, summaryError: null }));
-    postTasteSummary({ user_id: userId, top_k: 6, vector_preview: 12 })
-      .then((response) => {
-        if (cancelled) return;
-        const summary =
-          response.summary || coerceTasteSummary(response.raw_summary) || undefined;
-        setTaste((prev) => ({
-          ...prev,
-          summary: summary ? { ...response, summary } : response,
-          summaryLoading: false,
-          summaryError: summary ? null : 'We could not parse your style brief yet.',
-        }));
-      })
-      .catch((error) => {
-        console.error(error);
-        if (cancelled) return;
-        setTaste((prev) => ({ ...prev, summaryLoading: false, summaryError: 'Could not summarize your taste yet.' }));
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [completed, taste.vector, taste.summary, userId]);
+  };
+
+  run();
+
+  return () => {
+    cancelled = true;
+  };
+}, [completed, taste.vector, userId]);
 
   const replenishPairs = useCallback(() => {
     setPairs((prevPairs) => {
       const next = pickRandomPairs(artworks);
       return [...prevPairs, ...next];
     });
+    console.log('Replenished pairs');
   }, [artworks]);
 
   const handleChoice = useCallback(
@@ -171,6 +210,9 @@ export default function OnboardingPage() {
       summaryLoading: false,
       summaryError: null,
     });
+    setRoomFile(null);
+    setRender({ status: 'idle', error: null, result: null });
+    summaryRequested.current = false;
   }, [artworks]);
 
   const pairForRender = useMemo(() => {
@@ -184,15 +226,67 @@ export default function OnboardingPage() {
 
   const parsedSummary = useMemo(() => {
     if (!taste.summary) return null;
-    if (taste.summary.summary && Object.keys(taste.summary.summary).length > 0) {
-      return taste.summary.summary;
+
+    const summary = taste.summary.summary && Object.keys(taste.summary.summary).length > 0
+      ? taste.summary.summary
+      : coerceTasteSummary(taste.summary.raw_summary);
+
+    if (!summary || Object.keys(summary).length === 0) {
+      return null;
     }
-    const coerced = coerceTasteSummary(taste.summary.raw_summary);
-    if (coerced && Object.keys(coerced).length > 0) {
-      return coerced;
-    }
-    return null;
+
+    const name = String(summary.name ?? taste.summary.user_id ?? 'Inspiration').trim();
+    const imageUrl = String(summary.image_url ?? summary.hero_image ?? '').trim();
+    const palette = Array.isArray(summary.palette_colors)
+      ? summary.palette_colors
+      : Array.isArray(summary.palette)
+      ? summary.palette
+      : null;
+
+    return {
+      ...summary,
+      _display: {
+        name: name.length > 0 ? name : null,
+        imageUrl: imageUrl.length > 0 ? imageUrl : null,
+        palette,
+      },
+    } as Record<string, any>;
   }, [taste.summary]);
+
+  const handleRoomFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+    setRoomFile(file);
+    setRender((prev) => ({ status: 'idle', error: null, result: prev.result }));
+  }, []);
+
+  const handleRenderRoom = useCallback(async () => {
+    if (!roomFile) {
+      setRender((prev) => ({ status: 'error', error: 'Please upload a room photo first.', result: prev.result }));
+      return;
+    }
+
+    if (!taste.summary || taste.summaryLoading) {
+      setRender((prev) => ({ status: 'error', error: 'Your style brief is still loading. Try again in a moment.', result: prev.result }));
+      return;
+    }
+
+    setRender((prev) => ({ status: 'rendering', error: null, result: prev.result }));
+
+    try {
+      const response = await postRoomRender(
+        userId,
+        roomFile,
+        taste.summary?.summary ?? coerceTasteSummary(taste.summary?.raw_summary),
+        taste.summary?.raw_summary ?? null,
+      );
+      console.log('Room render response', response);
+      setRender({ status: 'complete', error: null, result: response });
+      setRecommendations(null);
+    } catch (err) {
+      console.error('Room render failed', err);
+      setRender((prev) => ({ status: 'error', error: 'We could not stage your room yet. Please retry.', result: prev.result }));
+    }
+  }, [roomFile, taste.summary, taste.summaryLoading, userId]);
 
   return (
     <main className={styles.container}>
@@ -256,6 +350,46 @@ export default function OnboardingPage() {
               <p className={styles.summaryStatus}>Your brief is queued—hang tight.</p>
             )
           )}
+          <section className={styles.renderSection}>
+            <h3>Stage Your Room</h3>
+            {taste.summaryLoading ? (
+              <p className={styles.summaryStatus}>Your brief is nearly ready—hang tight.</p>
+            ) : !parsedSummary ? (
+              <p className={styles.summaryStatus}>We’re still assembling your room brief. Try again soon.</p>
+            ) : (
+              <>
+                <p>Upload a photo of your space and we’ll furnish it with your personalized picks.</p>
+                <div className={styles.renderControls}>
+                  <input
+                    ref={renderInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleRoomFileChange}
+                  />
+                  <button
+                    className={styles.primaryButton}
+                    onClick={handleRenderRoom}
+                    disabled={render.status === 'rendering'}
+                  >
+                    {render.status === 'rendering' ? 'Staging room…' : 'Generate render'}
+                  </button>
+                </div>
+                {render.error && <p className={styles.summaryError}>{render.error}</p>}
+                {render.status === 'rendering' && !render.error && (
+                  <p className={styles.summaryStatus}>Composing your furnished room…</p>
+                )}
+                {render.result && (
+                  <div className={styles.renderOutput}>
+                    <img
+                      src={`${API_BASE}${render.result.image_url}`}
+                      alt="Rendered furnished room"
+                      className={styles.renderedImage}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </section>
           <button className={styles.primaryButton} onClick={restart}>
             Restart picks
           </button>
@@ -295,6 +429,8 @@ function ArtworkCard({ artwork, onSelect, disabled }: ArtworkCardProps) {
           alt={`${artwork.title} by ${artwork.artist}`}
           fill
           sizes="(max-width: 768px) 100vw, 45vw"
+          className={styles.artworkImage}
+          unoptimized
         />
       </div>
       <div className={styles.cardMeta}>

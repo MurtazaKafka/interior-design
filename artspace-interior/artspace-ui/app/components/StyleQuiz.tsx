@@ -1,7 +1,8 @@
+'use client'
+
 import { useState } from 'react'
 import { ChevronRight } from 'lucide-react'
 import NextImage from 'next/image'
-import { SectionCard } from './SectionCard'
 
 type StyleOption = {
   id: string
@@ -120,6 +121,7 @@ export const StyleQuiz = ({ onComplete }: StyleQuizProps) => {
                   src={style.image}
                   alt={style.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>

@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from collections import Counter
+import logging
+import json
 import os
-from typing import Any
+from typing import Any, Dict, List
 
 import chromadb
 import numpy as np
@@ -10,11 +13,17 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from apps.serve.services.claude import ClaudeSettingsError, summarize_taste
+
+
+logger = logging.getLogger(__name__)
+
 load_dotenv()
 
 CHROMA_API_KEY = os.getenv("CHROMA_API_KEY")
 CHROMA_TENANT = os.getenv("CHROMA_TENANT")
 CHROMA_DATABASE = os.getenv("CHROMA_DATABASE")
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
 
 if not all([CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE]):
     raise RuntimeError("Missing Chroma Cloud configuration: set CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE")
@@ -46,12 +55,74 @@ class Artwork(BaseModel):
     artist: str
     museum: str
     image_url: str
+    style_tags: list[str] | None = None
+    palette_keywords: list[str] | None = None
+    material_inspirations: list[str] | None = None
+    mood_keywords: list[str] | None = None
 
 
 class TasteUpdate(BaseModel):
     user_id: str
     win_id: str
     lose_id: str | None = None
+
+
+class TasteSummaryRequest(BaseModel):
+    user_id: str
+    top_k: int = 6
+    vector_preview: int = 12
+
+
+def _parse_metadata(meta: Dict[str, Any]) -> Dict[str, Any]:
+    array_fields = {
+        "style_tags",
+        "palette_keywords",
+        "material_inspirations",
+        "mood_keywords",
+    }
+    parsed: Dict[str, Any] = {}
+    for key, value in meta.items():
+        if key in array_fields:
+            if isinstance(value, list):
+                parsed[key] = value
+            elif isinstance(value, str):
+                try:
+                    loaded = json.loads(value)
+                    parsed[key] = loaded if isinstance(loaded, list) else value
+                except json.JSONDecodeError:
+                    parsed[key] = value
+            else:
+                parsed[key] = value
+        else:
+            parsed[key] = value
+    return parsed
+
+
+def _ensure_sequence(value: Any) -> list[Any]:
+    if value is None:
+        return []
+    if hasattr(value, "tolist"):
+        try:
+            return value.tolist()
+        except TypeError:
+            pass
+    if isinstance(value, (list, tuple)):
+        return list(value)
+    return [value]
+
+
+def _first_list(value: Any) -> list[Any]:
+    seq = _ensure_sequence(value)
+    if len(seq) == 1:
+        first = seq[0]
+        if isinstance(first, (list, tuple)):
+            return list(first)
+        if hasattr(first, "tolist"):
+            try:
+                return first.tolist()
+            except TypeError:
+                pass
+    return seq
 
 
 @app.get("/artworks/list")
@@ -65,20 +136,15 @@ def list_artworks() -> dict[str, Any]:
         ids = peek.get("ids", [])
         metas = peek.get("metadatas", [])
 
-    def _ensure_list(value):
-        if hasattr(value, "tolist"):
-            return value.tolist()
-        return value
-
-    ids = _ensure_list(ids)
-    metas = [_ensure_list(meta) for meta in metas]
+    ids = _first_list(ids)
+    metas = [_parse_metadata(meta) if isinstance(meta, dict) else meta for meta in _first_list(metas)]
 
     items = []
     for idx, meta in zip(ids, metas):
         if meta is None:
             continue
         item = {"id": idx}
-        item.update(meta)
+        item.update(meta if isinstance(meta, dict) else {})
         items.append(item)
     return {"items": items}
 
@@ -129,3 +195,119 @@ def taste_update(payload: TasteUpdate) -> dict[str, Any]:
         metadatas=[{"updated_at": __import__("time").time()}],
     )
     return {"ok": True, "vector": user_vec.tolist()}
+
+
+def _collect_keywords(items: List[Dict[str, Any]], key: str, *, limit: int = 6) -> List[str]:
+    counter: Counter[str] = Counter()
+    for entry in items:
+        values = entry.get("metadata", {}).get(key)
+        if isinstance(values, list):
+            counter.update([v for v in values if isinstance(v, str)])
+    return [kw for kw, _ in counter.most_common(limit)]
+
+
+def _build_prompt(context: Dict[str, Any]) -> str:
+    instructions = (
+        "You are an interior design stylist translating a user's 512-D taste vector into language. "
+        "Return a JSON object with keys: concise, poetic, planner_brief, palette_summary, "
+        "style_summary, material_summary, mood_summary. Each value should be a short string. "
+        "Do not include additional keys. Reference the artworks, tags, and palette clues from the context."
+    )
+    return f"{instructions}\n\nContext:\n{json.dumps(context, indent=2)}"
+
+
+@app.post("/taste/summarize")
+def taste_summarize(payload: TasteSummaryRequest) -> dict[str, Any]:
+    top_k = max(1, min(payload.top_k, 24))
+    try:
+        user_res = users.get(ids=[payload.user_id], include=["embeddings", "metadatas"])
+    except chromadb.errors.InvalidCollectionException as exc:
+        raise HTTPException(status_code=404, detail="User collection not initialized") from exc
+
+    embeddings_raw = _ensure_sequence(user_res.get("embeddings"))
+    if len(embeddings_raw) == 0:
+        raise HTTPException(status_code=404, detail="User taste vector not found")
+
+    user_vec = np.array(embeddings_raw[0], dtype="float32")
+    vector_preview = user_vec[: max(0, payload.vector_preview)].tolist()
+
+    query = artworks.query(
+        query_embeddings=[user_vec.tolist()],
+        n_results=max(top_k, 6),
+        include=["metadatas", "distances"],
+    )
+
+    ids_list = _first_list(query.get("ids"))
+    metas_list = _first_list(query.get("metadatas"))
+    distances = _first_list(query.get("distances"))
+
+    top_items: List[Dict[str, Any]] = []
+    for idx, meta, dist in zip(ids_list, metas_list, distances):
+        if not meta:
+            continue
+        parsed_meta = _parse_metadata(meta) if isinstance(meta, dict) else {}
+        top_items.append(
+            {
+                "id": idx,
+                "similarity": float(1 - dist) if dist is not None else None,
+                "metadata": {
+                    k: parsed_meta.get(k)
+                    for k in [
+                        "title",
+                        "artist",
+                        "museum",
+                        "image_url",
+                        "style_tags",
+                        "palette_keywords",
+                        "material_inspirations",
+                        "mood_keywords",
+                    ]
+                },
+            }
+        )
+        if len(top_items) >= top_k:
+            break
+
+    if not top_items:
+        raise HTTPException(status_code=404, detail="No artwork matches found")
+
+    aggregates = {
+        "style_keywords": _collect_keywords(top_items, "style_tags"),
+        "palette_keywords": _collect_keywords(top_items, "palette_keywords"),
+        "material_keywords": _collect_keywords(top_items, "material_inspirations"),
+        "mood_keywords": _collect_keywords(top_items, "mood_keywords"),
+    }
+
+    context = {
+        "user_id": payload.user_id,
+        "vector_preview": vector_preview,
+        "top_artworks": top_items,
+        "aggregates": aggregates,
+    }
+
+    prompt = _build_prompt(context)
+
+    try:
+        claude_response = summarize_taste(prompt, model=ANTHROPIC_MODEL)
+    except ClaudeSettingsError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    except Exception as exc:  # pragma: no cover
+        logger.exception("Claude summarization failed for user %s", payload.user_id)
+        raise HTTPException(status_code=502, detail="Claude summarization failed") from exc
+
+    summary = claude_response.get("parsed") or {}
+    raw_summary = claude_response.get("raw_text")
+
+    return {
+        "user_id": payload.user_id,
+        "model": ANTHROPIC_MODEL,
+        "vector_preview": vector_preview,
+        "top_artworks": top_items,
+        "aggregates": aggregates,
+        "summary": summary,
+        "raw_summary": raw_summary,
+        "claude_metadata": {
+            "response_id": claude_response.get("id"),
+            "usage": claude_response.get("usage"),
+        },
+    }

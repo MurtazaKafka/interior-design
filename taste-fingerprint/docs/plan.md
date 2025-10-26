@@ -164,6 +164,26 @@ Use these as generator prompts or stock search keywords.
 
 > Duplicate numeric width/height at top level (`w`, `d`, `h`) — makes Chroma metadata filtering easy.
 
+### 3.4 Artwork metadata snippets (`packages/catalog/artworks.json`)
+
+Each artwork entry now supports additional lean fields for taste summaries and Claude prompts:
+
+```json
+{
+  "id": "...",
+  "title": "...",
+  "artist": "...",
+  "museum": "...",
+  "image_url": "...",
+  "style_tags": ["renaissance_classic", "figurative"],
+  "palette_keywords": ["warm_earth", "olive_green"],
+  "material_inspirations": ["carved_oak", "linen_drapery"],
+  "mood_keywords": ["serene", "contemplative"]
+}
+```
+
+All lists are short (3–5 items) so Claude can verbalize the vector without manual pruning. After editing this file, run `python apps/serve/scripts/embed_artworks.py` to sync embeddings + metadata into Chroma Cloud.
+
 ---
 
 ## 4) Backend — FastAPI + Chroma + CLIP
@@ -181,9 +201,36 @@ torch
 transformers
 scikit-learn
 python-dotenv
+anthropic
 ```
 
 ### 4.2 App bootstrap (`apps/serve/main.py`)
+# Claude summarization endpoint
+
+```python
+@app.post("/taste/summarize")
+def taste_summarize(payload: TasteSummaryRequest):
+    # fetch user vector + top artworks, aggregate metadata
+    # call Claude via apps.serve.services.claude.summarize_taste
+    # return multi-tone JSON (concise, poetic, planner_brief, plus palette/style summaries)
+```
+
+Environment variables:
+
+```
+ANTHROPIC_API_KEY=...
+# optional override
+ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
+```
+
+Example request:
+
+```bash
+curl -X POST http://localhost:8000/taste/summarize \
+  -H 'Content-Type: application/json' \
+  -d '{"user_id":"demo-user","top_k":6,"vector_preview":12}'
+```
+
 
 ```python
 from fastapi import FastAPI

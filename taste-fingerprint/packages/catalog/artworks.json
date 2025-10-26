@@ -4,160 +4,620 @@
     "title": "Saint John the Baptist in the Wilderness",
     "artist": "Sandro Botticelli",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_botticelli_john.jpg"
+    "image_url": "/artworks/art_botticelli_john.jpg",
+    "style_tags": [
+      "renaissance_classic",
+      "sacred",
+      "figurative"
+    ],
+    "palette_keywords": [
+      "warm_earth",
+      "olive_green",
+      "muted_gold"
+    ],
+    "material_inspirations": [
+      "carved_oak",
+      "linen_drapery",
+      "antique_gilt"
+    ],
+    "mood_keywords": [
+      "contemplative",
+      "reverent",
+      "serene"
+    ]
   },
   {
     "id": "art_bruegel_harvesters",
     "title": "The Harvesters",
     "artist": "Pieter Bruegel the Elder",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_bruegel_harvesters.jpg"
+    "image_url": "/artworks/art_bruegel_harvesters.jpg",
+    "style_tags": [
+      "northern_renaissance",
+      "pastoral",
+      "genre_scene"
+    ],
+    "palette_keywords": [
+      "wheat_gold",
+      "sage_green",
+      "sky_blue"
+    ],
+    "material_inspirations": [
+      "weathered_oak",
+      "woven_straw",
+      "earthenware"
+    ],
+    "mood_keywords": [
+      "grounded",
+      "communal",
+      "sunlit"
+    ]
   },
   {
     "id": "art_caravaggio_denial",
     "title": "The Denial of Saint Peter",
     "artist": "Caravaggio",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_caravaggio_denial.jpg"
+    "image_url": "/artworks/art_caravaggio_denial.jpg",
+    "style_tags": [
+      "baroque",
+      "dramatic_chiaroscuro",
+      "figurative"
+    ],
+    "palette_keywords": [
+      "deep_umber",
+      "warm_candlelight",
+      "midnight_black"
+    ],
+    "material_inspirations": [
+      "dark_walnut",
+      "aged_leather",
+      "burnished_bronze"
+    ],
+    "mood_keywords": [
+      "intense",
+      "dramatic",
+      "intimate"
+    ]
   },
   {
     "id": "art_cezanne_sainte",
     "title": "Mont Sainte-Victoire and the Viaduct of the Arc Valley",
     "artist": "Paul Cézanne",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_cezanne_sainte.jpg"
+    "image_url": "/artworks/art_cezanne_sainte.jpg",
+    "style_tags": [
+      "post_impressionist",
+      "structural_landscape",
+      "provencal"
+    ],
+    "palette_keywords": [
+      "sage_green",
+      "dusty_blue",
+      "sunlit_ochre"
+    ],
+    "material_inspirations": [
+      "limestone",
+      "terracotta",
+      "raw_linen"
+    ],
+    "mood_keywords": [
+      "contemplative",
+      "grounded",
+      "calm"
+    ]
   },
   {
     "id": "art_degas_ballet",
     "title": "The Dancing Class",
     "artist": "Edgar Degas",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_degas_ballet.jpg"
+    "image_url": "/artworks/art_degas_ballet.jpg",
+    "style_tags": [
+      "impressionist",
+      "parisian",
+      "ballet"
+    ],
+    "palette_keywords": [
+      "soft_blush",
+      "warm_ivory",
+      "antique_green"
+    ],
+    "material_inspirations": [
+      "light_oak",
+      "gauzy_tulle",
+      "aged_brass"
+    ],
+    "mood_keywords": [
+      "graceful",
+      "intimate",
+      "poised"
+    ]
   },
   {
     "id": "art_goya_bullfight",
     "title": "Bullfight: Suerte de Varas",
     "artist": "Francisco de Goya",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_goya_bullfight.jpg"
+    "image_url": "/artworks/art_goya_bullfight.jpg",
+    "style_tags": [
+      "romantic",
+      "dramatic_narrative",
+      "spanish"
+    ],
+    "palette_keywords": [
+      "burnt_ochre",
+      "deep_crimson",
+      "charcoal_black"
+    ],
+    "material_inspirations": [
+      "dark_leather",
+      "wrought_iron",
+      "weathered_wood"
+    ],
+    "mood_keywords": [
+      "energetic",
+      "dramatic",
+      "bold"
+    ]
   },
   {
     "id": "art_hiroshige_plum",
     "title": "Plum Estate, Kameido",
     "artist": "Utagawa Hiroshige",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_hiroshige_plum.jpg"
+    "image_url": "/artworks/art_hiroshige_plum.jpg",
+    "style_tags": [
+      "ukiyo_e",
+      "minimalist_nature",
+      "edo_period"
+    ],
+    "palette_keywords": [
+      "plum_blossom",
+      "teal_blue",
+      "soft_ivory"
+    ],
+    "material_inspirations": [
+      "shoji_paper",
+      "lacquered_wood",
+      "indigo_textile"
+    ],
+    "mood_keywords": [
+      "tranquil",
+      "poetic",
+      "balanced"
+    ]
   },
   {
     "id": "art_hokusai_wave",
     "title": "The Great Wave off Kanagawa",
     "artist": "Katsushika Hokusai",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_hokusai_wave.jpg"
+    "image_url": "/artworks/art_hokusai_wave.jpg",
+    "style_tags": [
+      "ukiyo_e",
+      "dynamic_ocean",
+      "edo_period"
+    ],
+    "palette_keywords": [
+      "indigo",
+      "sea_foam",
+      "warm_cream"
+    ],
+    "material_inspirations": [
+      "weathered_driftwood",
+      "matte_porcelain",
+      "navy_canvas"
+    ],
+    "mood_keywords": [
+      "energized",
+      "dramatic",
+      "bold"
+    ]
   },
   {
     "id": "art_homer_gulfstream",
     "title": "The Gulf Stream",
     "artist": "Winslow Homer",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_homer_gulfstream.jpg"
+    "image_url": "/artworks/art_homer_gulfstream.jpg",
+    "style_tags": [
+      "american_realism",
+      "maritime",
+      "adventure"
+    ],
+    "palette_keywords": [
+      "storm_teal",
+      "slate_gray",
+      "rusty_coral"
+    ],
+    "material_inspirations": [
+      "sun_bleached_wood",
+      "sisal_rope",
+      "oxidized_metal"
+    ],
+    "mood_keywords": [
+      "dramatic",
+      "adventurous",
+      "tense"
+    ]
   },
   {
     "id": "art_klimt_mada",
     "title": "Mada Primavesi",
     "artist": "Gustav Klimt",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_klimt_mada.jpg"
+    "image_url": "/artworks/art_klimt_mada.jpg",
+    "style_tags": [
+      "vienna_secession",
+      "decorative",
+      "art_nouveau"
+    ],
+    "palette_keywords": [
+      "antique_gold",
+      "powder_pastel",
+      "soft_lilac"
+    ],
+    "material_inspirations": [
+      "gilded_brass",
+      "patterned_silk",
+      "lacquer_panel"
+    ],
+    "mood_keywords": [
+      "opulent",
+      "whimsical",
+      "ornate"
+    ]
   },
   {
     "id": "art_leutze_washington",
     "title": "Washington Crossing the Delaware",
     "artist": "Emanuel Leutze",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_leutze_washington.jpg"
+    "image_url": "/artworks/art_leutze_washington.jpg",
+    "style_tags": [
+      "romantic",
+      "historic",
+      "heroic"
+    ],
+    "palette_keywords": [
+      "icy_blue",
+      "muted_taupe",
+      "crimson_accent"
+    ],
+    "material_inspirations": [
+      "weathered_plank",
+      "wool_fabric",
+      "antique_bronze"
+    ],
+    "mood_keywords": [
+      "heroic",
+      "resolute",
+      "bracing"
+    ]
   },
   {
     "id": "art_matisse_goldfish",
     "title": "Goldfish",
     "artist": "Henri Matisse",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_matisse_goldfish.jpg"
+    "image_url": "/artworks/art_matisse_goldfish.jpg",
+    "style_tags": [
+      "fauvist",
+      "studio_scene",
+      "vibrant_garden"
+    ],
+    "palette_keywords": [
+      "coral",
+      "leafy_green",
+      "sunlit_yellow"
+    ],
+    "material_inspirations": [
+      "glazed_ceramic",
+      "patterned_textile",
+      "painted_rattan"
+    ],
+    "mood_keywords": [
+      "playful",
+      "relaxed",
+      "vivid"
+    ]
   },
   {
     "id": "art_monet_pondb",
     "title": "Bridge over a Pond of Water Lilies",
     "artist": "Claude Monet",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_monet_pondb.jpg"
+    "image_url": "/artworks/art_monet_pondb.jpg",
+    "style_tags": [
+      "impressionist",
+      "water_garden",
+      "plein_air"
+    ],
+    "palette_keywords": [
+      "soft_sage",
+      "lilac_mist",
+      "water_blue"
+    ],
+    "material_inspirations": [
+      "aged_stone",
+      "gauzy_linen",
+      "weathered_bridge"
+    ],
+    "mood_keywords": [
+      "serene",
+      "dreamy",
+      "lush"
+    ]
   },
   {
     "id": "art_okeeffe_cowskull",
     "title": "Cow's Skull: Red, White, and Blue",
     "artist": "Georgia O'Keeffe",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_okeeffe_cowskull.jpg"
+    "image_url": "/artworks/art_okeeffe_cowskull.jpg",
+    "style_tags": [
+      "modernist",
+      "southwest",
+      "minimalist"
+    ],
+    "palette_keywords": [
+      "bone_white",
+      "sunset_terracotta",
+      "navy_shadow"
+    ],
+    "material_inspirations": [
+      "sun_bleached_wood",
+      "rawhide",
+      "adobe_clay"
+    ],
+    "mood_keywords": [
+      "contemplative",
+      "austere",
+      "expansive"
+    ]
   },
   {
     "id": "art_rembrandt_self",
     "title": "Self-Portrait",
     "artist": "Rembrandt",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_rembrandt_self.jpg"
+    "image_url": "/artworks/art_rembrandt_self.jpg",
+    "style_tags": [
+      "baroque",
+      "portraiture",
+      "dutch_golden_age"
+    ],
+    "palette_keywords": [
+      "deep_umber",
+      "amber_glow",
+      "soft_black"
+    ],
+    "material_inspirations": [
+      "dark_walnut",
+      "aged_leather",
+      "oxidized_bronze"
+    ],
+    "mood_keywords": [
+      "introspective",
+      "moody",
+      "intimate"
+    ]
   },
   {
     "id": "art_rousseau_dream",
     "title": "The Dream",
     "artist": "Henri Rousseau",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_rousseau_dream.jpg"
+    "image_url": "/artworks/art_rousseau_dream.jpg",
+    "style_tags": [
+      "naive",
+      "jungle_fantasy",
+      "symbolist"
+    ],
+    "palette_keywords": [
+      "jungle_green",
+      "night_teal",
+      "sunset_coral"
+    ],
+    "material_inspirations": [
+      "rattan",
+      "tropical_wood",
+      "lush_textile"
+    ],
+    "mood_keywords": [
+      "surreal",
+      "lush",
+      "whimsical"
+    ]
   },
   {
     "id": "art_seurat_circus",
     "title": "Circus Sideshow",
     "artist": "Georges Seurat",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_seurat_circus.jpg"
+    "image_url": "/artworks/art_seurat_circus.jpg",
+    "style_tags": [
+      "pointillist",
+      "parisian_nocturne",
+      "post_impressionist"
+    ],
+    "palette_keywords": [
+      "midnight_navy",
+      "amber_light",
+      "mauve_mist"
+    ],
+    "material_inspirations": [
+      "patterned_upholstery",
+      "painted_wood",
+      "brushed_brass"
+    ],
+    "mood_keywords": [
+      "rhythmic",
+      "elegant",
+      "whimsical"
+    ]
   },
   {
     "id": "art_titian_venus",
     "title": "Venus and Adonis",
     "artist": "Titian",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_titian_venus.jpg"
+    "image_url": "/artworks/art_titian_venus.jpg",
+    "style_tags": [
+      "renaissance",
+      "mythic",
+      "venetian"
+    ],
+    "palette_keywords": [
+      "warm_crimson",
+      "olive_green",
+      "golden_flesh"
+    ],
+    "material_inspirations": [
+      "crimson_velvet",
+      "carved_walnut",
+      "gilded_frame"
+    ],
+    "mood_keywords": [
+      "romantic",
+      "sensual",
+      "dramatic"
+    ]
   },
   {
     "id": "art_turner_whalers",
     "title": "Whalers",
     "artist": "Joseph Mallord William Turner",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_turner_whalers.jpg"
+    "image_url": "/artworks/art_turner_whalers.jpg",
+    "style_tags": [
+      "romantic",
+      "atmospheric",
+      "maritime"
+    ],
+    "palette_keywords": [
+      "golden_mist",
+      "storm_blue",
+      "charcoal_grey"
+    ],
+    "material_inspirations": [
+      "weathered_oak",
+      "smoked_glass",
+      "patina_brass"
+    ],
+    "mood_keywords": [
+      "atmospheric",
+      "dramatic",
+      "restless"
+    ]
   },
   {
     "id": "art_vaneyck_crucifixion",
     "title": "The Crucifixion; The Last Judgment",
     "artist": "Jan van Eyck",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_vaneyck_crucifixion.jpg"
+    "image_url": "/artworks/art_vaneyck_crucifixion.jpg",
+    "style_tags": [
+      "northern_renaissance",
+      "devotional",
+      "detailed"
+    ],
+    "palette_keywords": [
+      "jewel_green",
+      "deep_blue",
+      "antique_gold"
+    ],
+    "material_inspirations": [
+      "carved_oak",
+      "embroidered_brocade",
+      "stained_glass"
+    ],
+    "mood_keywords": [
+      "reverent",
+      "intricate",
+      "solemn"
+    ]
   },
   {
     "id": "art_vangogh_cypresses",
     "title": "Wheat Field with Cypresses",
     "artist": "Vincent van Gogh",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_vangogh_cypresses.jpg"
+    "image_url": "/artworks/art_vangogh_cypresses.jpg",
+    "style_tags": [
+      "post_impressionist",
+      "expressive_landscape",
+      "provencal"
+    ],
+    "palette_keywords": [
+      "cypress_green",
+      "cobalt_blue",
+      "sunflower_yellow"
+    ],
+    "material_inspirations": [
+      "textured_plaster",
+      "hand_glazed_tile",
+      "rustic_pine"
+    ],
+    "mood_keywords": [
+      "expressive",
+      "uplifting",
+      "alive"
+    ]
   },
   {
     "id": "art_velazquez_pareja",
     "title": "Juan de Pareja",
     "artist": "Diego Velázquez",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_velazquez_pareja.jpg"
+    "image_url": "/artworks/art_velazquez_pareja.jpg",
+    "style_tags": [
+      "baroque",
+      "portraiture",
+      "spanish"
+    ],
+    "palette_keywords": [
+      "sienna_brown",
+      "bronze_glow",
+      "deep_charcoal"
+    ],
+    "material_inspirations": [
+      "dark_oak",
+      "burnished_bronze",
+      "rich_linen"
+    ],
+    "mood_keywords": [
+      "dignified",
+      "intimate",
+      "quiet"
+    ]
   },
   {
     "id": "art_vermeer_pitcher",
     "title": "Young Woman with a Water Pitcher",
     "artist": "Johannes Vermeer",
     "museum": "The Metropolitan Museum of Art",
-    "image_url": "/artworks/art_vermeer_pitcher.jpg"
+    "image_url": "/artworks/art_vermeer_pitcher.jpg",
+    "style_tags": [
+      "dutch_golden_age",
+      "domestic_interior",
+      "light_play"
+    ],
+    "palette_keywords": [
+      "powder_blue",
+      "soft_cream",
+      "warm_oak"
+    ],
+    "material_inspirations": [
+      "delft_ceramic",
+      "linen",
+      "light_oak"
+    ],
+    "mood_keywords": [
+      "serene",
+      "orderly",
+      "luminous"
+    ]
   }
 ]

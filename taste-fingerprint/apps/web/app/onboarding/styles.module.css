@@ -130,6 +130,39 @@
   text-align: center;
 }
 
+.summaryStatus {
+  color: rgba(226, 232, 240, 0.85);
+  margin: 0;
+}
+
+.summaryError {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+}
+
+.summaryCopy {
+  background: rgba(30, 41, 59, 0.72);
+  border-radius: 20px;
+  padding: 1.75rem;
+  text-align: left;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.summaryCopy h3,
+.summaryCopy h4 {
+  margin: 0;
+  color: #cbd5f5;
+}
+
+.summaryCopy p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.9);
+}
+
 .vectorPreview {
   text-align: left;
   padding: 1.5rem;

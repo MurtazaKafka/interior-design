@@ -32,8 +32,13 @@ export const ThreeDViewer = ({ floorplanImage, selectedStyles }: ThreeDViewerPro
     camera.position.z = 5
     cameraRef.current = camera
 
-    // Initialize renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    // Initialize renderer with better context management
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true,
+      powerPreference: 'high-performance',
+      failIfMajorPerformanceCaveat: false
+    })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight)
     containerRef.current.appendChild(renderer.domElement)
     rendererRef.current = renderer
@@ -111,9 +116,35 @@ export const ThreeDViewer = ({ floorplanImage, selectedStyles }: ThreeDViewerPro
 
     return () => {
       window.removeEventListener('resize', handleResize)
-      if (rendererRef.current && containerRef.current) {
-        containerRef.current.removeChild(rendererRef.current.domElement)
+      
+      // Dispose controls
+      if (controlsRef.current) {
+        controlsRef.current.dispose()
+      }
+      
+      // Dispose scene objects
+      if (sceneRef.current) {
+        sceneRef.current.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            object.geometry?.dispose()
+            if (object.material) {
+              if (Array.isArray(object.material)) {
+                object.material.forEach(mat => mat.dispose())
+              } else {
+                object.material.dispose()
+              }
+            }
+          }
+        })
+      }
+      
+      // Dispose renderer and force context loss
+      if (rendererRef.current) {
         rendererRef.current.dispose()
+        rendererRef.current.forceContextLoss()
+        if (containerRef.current && rendererRef.current.domElement) {
+          containerRef.current.removeChild(rendererRef.current.domElement)
+        }
       }
     }
   }, [floorplanImage])

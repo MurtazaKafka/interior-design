@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,9 +8,15 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-playfair",
+});
+
 export const metadata: Metadata = {
-  title: "ArtSpace Interior Design | AI-Powered Room Transformation",
-  description: "Transform your space with AI-powered interior design. Upload your floorplan, choose your style, and get personalized 3D room designs instantly.",
+  title: "ArtSpace — Spatial Design Studio",
+  description: "Architecture as interface. Compose interiors through AI-guided curation and walk through your vision in 3D.",
 };
 
 export default function RootLayout({
@@ -21,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
         {children}
       </body>

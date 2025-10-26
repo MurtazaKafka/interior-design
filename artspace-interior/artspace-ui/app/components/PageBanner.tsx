@@ -8,10 +8,11 @@ export const PageBanner = () => (
         Compose Your Interior
       </h1>
     </div>
-    <div className="flex flex-col items-center gap-12">
-      <p className="max-w-2xl text-lg leading-relaxed text-[var(--foreground-subtle)]">
-        Upload architectural plans. Define atmosphere through visual references. 
-        Walk through rendered reality — where precision meets artistic vision.
+    <div className="flex flex-col items-center gap-10">
+      <p className="supporting-copy max-w-3xl text-lg text-[var(--foreground-subtle)]">
+        Upload architectural plans, curate mood references, and guide the process with your personal style.
+        Experience how <span className="text-[var(--accent)]">AI</span> transforms every intention into a polished
+        <span className="text-[var(--accent)]"> 3D</span> interior you can explore.
       </p>
       <div className="flex items-center justify-center gap-8 text-sm">
         <div className="flex flex-col items-center gap-3">

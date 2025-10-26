@@ -1,0 +1,3712 @@
+[
+  {
+    "id": "furn_001",
+    "name": "Furniture Item 1",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 1",
+    "image_url": "/furniture/furn_001.jpg",
+    "model_url": "/models/furniture/furn_001.glb",
+    "model_format": "gltf",
+    "price": 309,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_002",
+    "name": "Furniture Item 2",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 2",
+    "image_url": "/furniture/furn_002.jpg",
+    "model_url": "/models/furniture/furn_002.glb",
+    "model_format": "gltf",
+    "price": 319,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_003",
+    "name": "Furniture Item 3",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 3",
+    "image_url": "/furniture/furn_003.jpg",
+    "model_url": "/models/furniture/furn_003.glb",
+    "model_format": "gltf",
+    "price": 329,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_004",
+    "name": "Furniture Item 4",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 4",
+    "image_url": "/furniture/furn_004.jpg",
+    "model_url": "/models/furniture/furn_004.glb",
+    "model_format": "gltf",
+    "price": 339,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_005",
+    "name": "Furniture Item 5",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 5",
+    "image_url": "/furniture/furn_005.jpg",
+    "model_url": "/models/furniture/furn_005.glb",
+    "model_format": "gltf",
+    "price": 349,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_006",
+    "name": "Furniture Item 6",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 6",
+    "image_url": "/furniture/furn_006.jpg",
+    "model_url": "/models/furniture/furn_006.glb",
+    "model_format": "gltf",
+    "price": 359,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_007",
+    "name": "Furniture Item 7",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 7",
+    "image_url": "/furniture/furn_007.jpg",
+    "model_url": "/models/furniture/furn_007.glb",
+    "model_format": "gltf",
+    "price": 369,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_008",
+    "name": "Furniture Item 8",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 8",
+    "image_url": "/furniture/furn_008.jpg",
+    "model_url": "/models/furniture/furn_008.glb",
+    "model_format": "gltf",
+    "price": 379,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_009",
+    "name": "Furniture Item 9",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 9",
+    "image_url": "/furniture/furn_009.jpg",
+    "model_url": "/models/furniture/furn_009.glb",
+    "model_format": "gltf",
+    "price": 389,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_010",
+    "name": "Furniture Item 10",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 10",
+    "image_url": "/furniture/furn_010.jpg",
+    "model_url": "/models/furniture/furn_010.glb",
+    "model_format": "gltf",
+    "price": 399,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_011",
+    "name": "Furniture Item 11",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 11",
+    "image_url": "/furniture/furn_011.jpg",
+    "model_url": "/models/furniture/furn_011.glb",
+    "model_format": "gltf",
+    "price": 409,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_012",
+    "name": "Furniture Item 12",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 12",
+    "image_url": "/furniture/furn_012.jpg",
+    "model_url": "/models/furniture/furn_012.glb",
+    "model_format": "gltf",
+    "price": 419,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_013",
+    "name": "Furniture Item 13",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 13",
+    "image_url": "/furniture/furn_013.jpg",
+    "model_url": "/models/furniture/furn_013.glb",
+    "model_format": "gltf",
+    "price": 429,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_014",
+    "name": "Furniture Item 14",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 14",
+    "image_url": "/furniture/furn_014.jpg",
+    "model_url": "/models/furniture/furn_014.glb",
+    "model_format": "gltf",
+    "price": 439,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_015",
+    "name": "Furniture Item 15",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 15",
+    "image_url": "/furniture/furn_015.jpg",
+    "model_url": "/models/furniture/furn_015.glb",
+    "model_format": "gltf",
+    "price": 449,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_016",
+    "name": "Furniture Item 16",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 16",
+    "image_url": "/furniture/furn_016.jpg",
+    "model_url": "/models/furniture/furn_016.glb",
+    "model_format": "gltf",
+    "price": 459,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_017",
+    "name": "Furniture Item 17",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 17",
+    "image_url": "/furniture/furn_017.jpg",
+    "model_url": "/models/furniture/furn_017.glb",
+    "model_format": "gltf",
+    "price": 469,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_018",
+    "name": "Furniture Item 18",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 18",
+    "image_url": "/furniture/furn_018.jpg",
+    "model_url": "/models/furniture/furn_018.glb",
+    "model_format": "gltf",
+    "price": 479,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_019",
+    "name": "Furniture Item 19",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 19",
+    "image_url": "/furniture/furn_019.jpg",
+    "model_url": "/models/furniture/furn_019.glb",
+    "model_format": "gltf",
+    "price": 489,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_020",
+    "name": "Furniture Item 20",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 20",
+    "image_url": "/furniture/furn_020.jpg",
+    "model_url": "/models/furniture/furn_020.glb",
+    "model_format": "gltf",
+    "price": 499,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_021",
+    "name": "Furniture Item 21",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 21",
+    "image_url": "/furniture/furn_021.jpg",
+    "model_url": "/models/furniture/furn_021.glb",
+    "model_format": "gltf",
+    "price": 509,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_022",
+    "name": "Furniture Item 22",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 22",
+    "image_url": "/furniture/furn_022.jpg",
+    "model_url": "/models/furniture/furn_022.glb",
+    "model_format": "gltf",
+    "price": 519,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_023",
+    "name": "Furniture Item 23",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 23",
+    "image_url": "/furniture/furn_023.jpg",
+    "model_url": "/models/furniture/furn_023.glb",
+    "model_format": "gltf",
+    "price": 529,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_024",
+    "name": "Furniture Item 24",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 24",
+    "image_url": "/furniture/furn_024.jpg",
+    "model_url": "/models/furniture/furn_024.glb",
+    "model_format": "gltf",
+    "price": 539,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_025",
+    "name": "Furniture Item 25",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 25",
+    "image_url": "/furniture/furn_025.jpg",
+    "model_url": "/models/furniture/furn_025.glb",
+    "model_format": "gltf",
+    "price": 549,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_026",
+    "name": "Furniture Item 26",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 26",
+    "image_url": "/furniture/furn_026.jpg",
+    "model_url": "/models/furniture/furn_026.glb",
+    "model_format": "gltf",
+    "price": 559,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_027",
+    "name": "Furniture Item 27",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 27",
+    "image_url": "/furniture/furn_027.jpg",
+    "model_url": "/models/furniture/furn_027.glb",
+    "model_format": "gltf",
+    "price": 569,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_028",
+    "name": "Furniture Item 28",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 28",
+    "image_url": "/furniture/furn_028.jpg",
+    "model_url": "/models/furniture/furn_028.glb",
+    "model_format": "gltf",
+    "price": 579,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_029",
+    "name": "Furniture Item 29",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 29",
+    "image_url": "/furniture/furn_029.jpg",
+    "model_url": "/models/furniture/furn_029.glb",
+    "model_format": "gltf",
+    "price": 589,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_030",
+    "name": "Furniture Item 30",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 30",
+    "image_url": "/furniture/furn_030.jpg",
+    "model_url": "/models/furniture/furn_030.glb",
+    "model_format": "gltf",
+    "price": 599,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_031",
+    "name": "Furniture Item 31",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 31",
+    "image_url": "/furniture/furn_031.jpg",
+    "model_url": "/models/furniture/furn_031.glb",
+    "model_format": "gltf",
+    "price": 609,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_032",
+    "name": "Furniture Item 32",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 32",
+    "image_url": "/furniture/furn_032.jpg",
+    "model_url": "/models/furniture/furn_032.glb",
+    "model_format": "gltf",
+    "price": 619,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_033",
+    "name": "Furniture Item 33",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 33",
+    "image_url": "/furniture/furn_033.jpg",
+    "model_url": "/models/furniture/furn_033.glb",
+    "model_format": "gltf",
+    "price": 629,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_034",
+    "name": "Furniture Item 34",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 34",
+    "image_url": "/furniture/furn_034.jpg",
+    "model_url": "/models/furniture/furn_034.glb",
+    "model_format": "gltf",
+    "price": 639,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_035",
+    "name": "Furniture Item 35",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 35",
+    "image_url": "/furniture/furn_035.jpg",
+    "model_url": "/models/furniture/furn_035.glb",
+    "model_format": "gltf",
+    "price": 649,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_036",
+    "name": "Furniture Item 36",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 36",
+    "image_url": "/furniture/furn_036.jpg",
+    "model_url": "/models/furniture/furn_036.glb",
+    "model_format": "gltf",
+    "price": 659,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_037",
+    "name": "Furniture Item 37",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 37",
+    "image_url": "/furniture/furn_037.jpg",
+    "model_url": "/models/furniture/furn_037.glb",
+    "model_format": "gltf",
+    "price": 669,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_038",
+    "name": "Furniture Item 38",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 38",
+    "image_url": "/furniture/furn_038.jpg",
+    "model_url": "/models/furniture/furn_038.glb",
+    "model_format": "gltf",
+    "price": 679,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_039",
+    "name": "Furniture Item 39",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 39",
+    "image_url": "/furniture/furn_039.jpg",
+    "model_url": "/models/furniture/furn_039.glb",
+    "model_format": "gltf",
+    "price": 689,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_040",
+    "name": "Furniture Item 40",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 40",
+    "image_url": "/furniture/furn_040.jpg",
+    "model_url": "/models/furniture/furn_040.glb",
+    "model_format": "gltf",
+    "price": 699,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_041",
+    "name": "Furniture Item 41",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 41",
+    "image_url": "/furniture/furn_041.jpg",
+    "model_url": "/models/furniture/furn_041.glb",
+    "model_format": "gltf",
+    "price": 709,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_042",
+    "name": "Furniture Item 42",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 42",
+    "image_url": "/furniture/furn_042.jpg",
+    "model_url": "/models/furniture/furn_042.glb",
+    "model_format": "gltf",
+    "price": 719,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_043",
+    "name": "Furniture Item 43",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 43",
+    "image_url": "/furniture/furn_043.jpg",
+    "model_url": "/models/furniture/furn_043.glb",
+    "model_format": "gltf",
+    "price": 729,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_044",
+    "name": "Furniture Item 44",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 44",
+    "image_url": "/furniture/furn_044.jpg",
+    "model_url": "/models/furniture/furn_044.glb",
+    "model_format": "gltf",
+    "price": 739,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_045",
+    "name": "Furniture Item 45",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 45",
+    "image_url": "/furniture/furn_045.jpg",
+    "model_url": "/models/furniture/furn_045.glb",
+    "model_format": "gltf",
+    "price": 749,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_046",
+    "name": "Furniture Item 46",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 46",
+    "image_url": "/furniture/furn_046.jpg",
+    "model_url": "/models/furniture/furn_046.glb",
+    "model_format": "gltf",
+    "price": 759,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_047",
+    "name": "Furniture Item 47",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 47",
+    "image_url": "/furniture/furn_047.jpg",
+    "model_url": "/models/furniture/furn_047.glb",
+    "model_format": "gltf",
+    "price": 769,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_048",
+    "name": "Furniture Item 48",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 48",
+    "image_url": "/furniture/furn_048.jpg",
+    "model_url": "/models/furniture/furn_048.glb",
+    "model_format": "gltf",
+    "price": 779,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_049",
+    "name": "Furniture Item 49",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 49",
+    "image_url": "/furniture/furn_049.jpg",
+    "model_url": "/models/furniture/furn_049.glb",
+    "model_format": "gltf",
+    "price": 789,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_050",
+    "name": "Furniture Item 50",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 50",
+    "image_url": "/furniture/furn_050.jpg",
+    "model_url": "/models/furniture/furn_050.glb",
+    "model_format": "gltf",
+    "price": 799,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_051",
+    "name": "Furniture Item 51",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 51",
+    "image_url": "/furniture/furn_051.jpg",
+    "model_url": "/models/furniture/furn_051.glb",
+    "model_format": "gltf",
+    "price": 809,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_052",
+    "name": "Furniture Item 52",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 52",
+    "image_url": "/furniture/furn_052.jpg",
+    "model_url": "/models/furniture/furn_052.glb",
+    "model_format": "gltf",
+    "price": 819,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_053",
+    "name": "Furniture Item 53",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 53",
+    "image_url": "/furniture/furn_053.jpg",
+    "model_url": "/models/furniture/furn_053.glb",
+    "model_format": "gltf",
+    "price": 829,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_054",
+    "name": "Furniture Item 54",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 54",
+    "image_url": "/furniture/furn_054.jpg",
+    "model_url": "/models/furniture/furn_054.glb",
+    "model_format": "gltf",
+    "price": 839,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_055",
+    "name": "Furniture Item 55",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 55",
+    "image_url": "/furniture/furn_055.jpg",
+    "model_url": "/models/furniture/furn_055.glb",
+    "model_format": "gltf",
+    "price": 849,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_056",
+    "name": "Furniture Item 56",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 56",
+    "image_url": "/furniture/furn_056.jpg",
+    "model_url": "/models/furniture/furn_056.glb",
+    "model_format": "gltf",
+    "price": 859,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_057",
+    "name": "Furniture Item 57",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 57",
+    "image_url": "/furniture/furn_057.jpg",
+    "model_url": "/models/furniture/furn_057.glb",
+    "model_format": "gltf",
+    "price": 869,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_058",
+    "name": "Furniture Item 58",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 58",
+    "image_url": "/furniture/furn_058.jpg",
+    "model_url": "/models/furniture/furn_058.glb",
+    "model_format": "gltf",
+    "price": 879,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_059",
+    "name": "Furniture Item 59",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 59",
+    "image_url": "/furniture/furn_059.jpg",
+    "model_url": "/models/furniture/furn_059.glb",
+    "model_format": "gltf",
+    "price": 889,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_060",
+    "name": "Furniture Item 60",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 60",
+    "image_url": "/furniture/furn_060.jpg",
+    "model_url": "/models/furniture/furn_060.glb",
+    "model_format": "gltf",
+    "price": 899,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_061",
+    "name": "Furniture Item 61",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 61",
+    "image_url": "/furniture/furn_061.jpg",
+    "model_url": "/models/furniture/furn_061.glb",
+    "model_format": "gltf",
+    "price": 909,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_062",
+    "name": "Furniture Item 62",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 62",
+    "image_url": "/furniture/furn_062.jpg",
+    "model_url": "/models/furniture/furn_062.glb",
+    "model_format": "gltf",
+    "price": 919,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_063",
+    "name": "Furniture Item 63",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 63",
+    "image_url": "/furniture/furn_063.jpg",
+    "model_url": "/models/furniture/furn_063.glb",
+    "model_format": "gltf",
+    "price": 929,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_064",
+    "name": "Furniture Item 64",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 64",
+    "image_url": "/furniture/furn_064.jpg",
+    "model_url": "/models/furniture/furn_064.glb",
+    "model_format": "gltf",
+    "price": 939,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_065",
+    "name": "Furniture Item 65",
+    "category": "furniture",
+    "subcategory": "desk",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 65",
+    "image_url": "/furniture/furn_065.jpg",
+    "model_url": "/models/furniture/furn_065.glb",
+    "model_format": "gltf",
+    "price": 949,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_066",
+    "name": "Furniture Item 66",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brown",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 66",
+    "image_url": "/furniture/furn_066.jpg",
+    "model_url": "/models/furniture/furn_066.glb",
+    "model_format": "gltf",
+    "price": 959,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_067",
+    "name": "Furniture Item 67",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": [
+      "mid-century"
+    ],
+    "colors": "white",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 67",
+    "image_url": "/furniture/furn_067.jpg",
+    "model_url": "/models/furniture/furn_067.glb",
+    "model_format": "gltf",
+    "price": 969,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_068",
+    "name": "Furniture Item 68",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": [
+      "scandinavian"
+    ],
+    "colors": "black",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 68",
+    "image_url": "/furniture/furn_068.jpg",
+    "model_url": "/models/furniture/furn_068.glb",
+    "model_format": "gltf",
+    "price": 979,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_069",
+    "name": "Furniture Item 69",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "natural",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 69",
+    "image_url": "/furniture/furn_069.jpg",
+    "model_url": "/models/furniture/furn_069.glb",
+    "model_format": "gltf",
+    "price": 989,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "furn_070",
+    "name": "Furniture Item 70",
+    "category": "furniture",
+    "subcategory": "bed",
+    "styleTags": [
+      "bohemian"
+    ],
+    "colors": "gray",
+    "materials": [
+      "wood",
+      "metal",
+      "fabric"
+    ],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Quality furniture piece 70",
+    "image_url": "/furniture/furn_070.jpg",
+    "model_url": "/models/furniture/furn_070.glb",
+    "model_format": "gltf",
+    "price": 999,
+    "tags": [
+      "furniture"
+    ]
+  },
+  {
+    "id": "light_001",
+    "name": "Lighting Fixture 1",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 1",
+    "image_url": "/lighting/light_001.jpg",
+    "model_url": "/models/lighting/light_001.glb",
+    "model_format": "gltf",
+    "price": 157,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_002",
+    "name": "Lighting Fixture 2",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 2",
+    "image_url": "/lighting/light_002.jpg",
+    "model_url": "/models/lighting/light_002.glb",
+    "model_format": "gltf",
+    "price": 165,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_003",
+    "name": "Lighting Fixture 3",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 3",
+    "image_url": "/lighting/light_003.jpg",
+    "model_url": "/models/lighting/light_003.glb",
+    "model_format": "gltf",
+    "price": 173,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_004",
+    "name": "Lighting Fixture 4",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 4",
+    "image_url": "/lighting/light_004.jpg",
+    "model_url": "/models/lighting/light_004.glb",
+    "model_format": "gltf",
+    "price": 181,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_005",
+    "name": "Lighting Fixture 5",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 5",
+    "image_url": "/lighting/light_005.jpg",
+    "model_url": "/models/lighting/light_005.glb",
+    "model_format": "gltf",
+    "price": 189,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_006",
+    "name": "Lighting Fixture 6",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 6",
+    "image_url": "/lighting/light_006.jpg",
+    "model_url": "/models/lighting/light_006.glb",
+    "model_format": "gltf",
+    "price": 197,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_007",
+    "name": "Lighting Fixture 7",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 7",
+    "image_url": "/lighting/light_007.jpg",
+    "model_url": "/models/lighting/light_007.glb",
+    "model_format": "gltf",
+    "price": 205,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_008",
+    "name": "Lighting Fixture 8",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 8",
+    "image_url": "/lighting/light_008.jpg",
+    "model_url": "/models/lighting/light_008.glb",
+    "model_format": "gltf",
+    "price": 213,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_009",
+    "name": "Lighting Fixture 9",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 9",
+    "image_url": "/lighting/light_009.jpg",
+    "model_url": "/models/lighting/light_009.glb",
+    "model_format": "gltf",
+    "price": 221,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_010",
+    "name": "Lighting Fixture 10",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 10",
+    "image_url": "/lighting/light_010.jpg",
+    "model_url": "/models/lighting/light_010.glb",
+    "model_format": "gltf",
+    "price": 229,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_011",
+    "name": "Lighting Fixture 11",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 11",
+    "image_url": "/lighting/light_011.jpg",
+    "model_url": "/models/lighting/light_011.glb",
+    "model_format": "gltf",
+    "price": 237,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_012",
+    "name": "Lighting Fixture 12",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 12",
+    "image_url": "/lighting/light_012.jpg",
+    "model_url": "/models/lighting/light_012.glb",
+    "model_format": "gltf",
+    "price": 245,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_013",
+    "name": "Lighting Fixture 13",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 13",
+    "image_url": "/lighting/light_013.jpg",
+    "model_url": "/models/lighting/light_013.glb",
+    "model_format": "gltf",
+    "price": 253,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_014",
+    "name": "Lighting Fixture 14",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 14",
+    "image_url": "/lighting/light_014.jpg",
+    "model_url": "/models/lighting/light_014.glb",
+    "model_format": "gltf",
+    "price": 261,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_015",
+    "name": "Lighting Fixture 15",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 15",
+    "image_url": "/lighting/light_015.jpg",
+    "model_url": "/models/lighting/light_015.glb",
+    "model_format": "gltf",
+    "price": 269,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_016",
+    "name": "Lighting Fixture 16",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 16",
+    "image_url": "/lighting/light_016.jpg",
+    "model_url": "/models/lighting/light_016.glb",
+    "model_format": "gltf",
+    "price": 277,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_017",
+    "name": "Lighting Fixture 17",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 17",
+    "image_url": "/lighting/light_017.jpg",
+    "model_url": "/models/lighting/light_017.glb",
+    "model_format": "gltf",
+    "price": 285,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_018",
+    "name": "Lighting Fixture 18",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 18",
+    "image_url": "/lighting/light_018.jpg",
+    "model_url": "/models/lighting/light_018.glb",
+    "model_format": "gltf",
+    "price": 293,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_019",
+    "name": "Lighting Fixture 19",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 19",
+    "image_url": "/lighting/light_019.jpg",
+    "model_url": "/models/lighting/light_019.glb",
+    "model_format": "gltf",
+    "price": 301,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_020",
+    "name": "Lighting Fixture 20",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 20",
+    "image_url": "/lighting/light_020.jpg",
+    "model_url": "/models/lighting/light_020.glb",
+    "model_format": "gltf",
+    "price": 309,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_021",
+    "name": "Lighting Fixture 21",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 21",
+    "image_url": "/lighting/light_021.jpg",
+    "model_url": "/models/lighting/light_021.glb",
+    "model_format": "gltf",
+    "price": 317,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_022",
+    "name": "Lighting Fixture 22",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 22",
+    "image_url": "/lighting/light_022.jpg",
+    "model_url": "/models/lighting/light_022.glb",
+    "model_format": "gltf",
+    "price": 325,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_023",
+    "name": "Lighting Fixture 23",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 23",
+    "image_url": "/lighting/light_023.jpg",
+    "model_url": "/models/lighting/light_023.glb",
+    "model_format": "gltf",
+    "price": 333,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_024",
+    "name": "Lighting Fixture 24",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 24",
+    "image_url": "/lighting/light_024.jpg",
+    "model_url": "/models/lighting/light_024.glb",
+    "model_format": "gltf",
+    "price": 341,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_025",
+    "name": "Lighting Fixture 25",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 25",
+    "image_url": "/lighting/light_025.jpg",
+    "model_url": "/models/lighting/light_025.glb",
+    "model_format": "gltf",
+    "price": 349,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_026",
+    "name": "Lighting Fixture 26",
+    "category": "lighting",
+    "subcategory": "table_lamp",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 26",
+    "image_url": "/lighting/light_026.jpg",
+    "model_url": "/models/lighting/light_026.glb",
+    "model_format": "gltf",
+    "price": 357,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_027",
+    "name": "Lighting Fixture 27",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": [
+      "contemporary"
+    ],
+    "colors": "white",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 27",
+    "image_url": "/lighting/light_027.jpg",
+    "model_url": "/models/lighting/light_027.glb",
+    "model_format": "gltf",
+    "price": 365,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_028",
+    "name": "Lighting Fixture 28",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "brass",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 28",
+    "image_url": "/lighting/light_028.jpg",
+    "model_url": "/models/lighting/light_028.glb",
+    "model_format": "gltf",
+    "price": 373,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_029",
+    "name": "Lighting Fixture 29",
+    "category": "lighting",
+    "subcategory": "sconce",
+    "styleTags": [
+      "industrial"
+    ],
+    "colors": "black",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 29",
+    "image_url": "/lighting/light_029.jpg",
+    "model_url": "/models/lighting/light_029.glb",
+    "model_format": "gltf",
+    "price": 381,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "light_030",
+    "name": "Lighting Fixture 30",
+    "category": "lighting",
+    "subcategory": "floor_lamp",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "chrome",
+    "materials": [
+      "metal",
+      "glass"
+    ],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Elegant lighting solution 30",
+    "image_url": "/lighting/light_030.jpg",
+    "model_url": "/models/lighting/light_030.glb",
+    "model_format": "gltf",
+    "price": 389,
+    "tags": [
+      "lighting"
+    ]
+  },
+  {
+    "id": "art_001",
+    "name": "Artwork 1",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 1",
+    "image_url": "/paintings/art_001.jpg",
+    "model_url": "/models/paintings/art_001.glb",
+    "model_format": "gltf",
+    "price": 204,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_002",
+    "name": "Artwork 2",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 2",
+    "image_url": "/paintings/art_002.jpg",
+    "model_url": "/models/paintings/art_002.glb",
+    "model_format": "gltf",
+    "price": 209,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_003",
+    "name": "Artwork 3",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 3",
+    "image_url": "/paintings/art_003.jpg",
+    "model_url": "/models/paintings/art_003.glb",
+    "model_format": "gltf",
+    "price": 214,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_004",
+    "name": "Artwork 4",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 4",
+    "image_url": "/paintings/art_004.jpg",
+    "model_url": "/models/paintings/art_004.glb",
+    "model_format": "gltf",
+    "price": 219,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_005",
+    "name": "Artwork 5",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 5",
+    "image_url": "/paintings/art_005.jpg",
+    "model_url": "/models/paintings/art_005.glb",
+    "model_format": "gltf",
+    "price": 224,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_006",
+    "name": "Artwork 6",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 6",
+    "image_url": "/paintings/art_006.jpg",
+    "model_url": "/models/paintings/art_006.glb",
+    "model_format": "gltf",
+    "price": 229,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_007",
+    "name": "Artwork 7",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 7",
+    "image_url": "/paintings/art_007.jpg",
+    "model_url": "/models/paintings/art_007.glb",
+    "model_format": "gltf",
+    "price": 234,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_008",
+    "name": "Artwork 8",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 8",
+    "image_url": "/paintings/art_008.jpg",
+    "model_url": "/models/paintings/art_008.glb",
+    "model_format": "gltf",
+    "price": 239,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_009",
+    "name": "Artwork 9",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 9",
+    "image_url": "/paintings/art_009.jpg",
+    "model_url": "/models/paintings/art_009.glb",
+    "model_format": "gltf",
+    "price": 244,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_010",
+    "name": "Artwork 10",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 10",
+    "image_url": "/paintings/art_010.jpg",
+    "model_url": "/models/paintings/art_010.glb",
+    "model_format": "gltf",
+    "price": 249,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_011",
+    "name": "Artwork 11",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 11",
+    "image_url": "/paintings/art_011.jpg",
+    "model_url": "/models/paintings/art_011.glb",
+    "model_format": "gltf",
+    "price": 254,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_012",
+    "name": "Artwork 12",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 12",
+    "image_url": "/paintings/art_012.jpg",
+    "model_url": "/models/paintings/art_012.glb",
+    "model_format": "gltf",
+    "price": 259,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_013",
+    "name": "Artwork 13",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 13",
+    "image_url": "/paintings/art_013.jpg",
+    "model_url": "/models/paintings/art_013.glb",
+    "model_format": "gltf",
+    "price": 264,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_014",
+    "name": "Artwork 14",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 14",
+    "image_url": "/paintings/art_014.jpg",
+    "model_url": "/models/paintings/art_014.glb",
+    "model_format": "gltf",
+    "price": 269,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_015",
+    "name": "Artwork 15",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 15",
+    "image_url": "/paintings/art_015.jpg",
+    "model_url": "/models/paintings/art_015.glb",
+    "model_format": "gltf",
+    "price": 274,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_016",
+    "name": "Artwork 16",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 16",
+    "image_url": "/paintings/art_016.jpg",
+    "model_url": "/models/paintings/art_016.glb",
+    "model_format": "gltf",
+    "price": 279,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_017",
+    "name": "Artwork 17",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 17",
+    "image_url": "/paintings/art_017.jpg",
+    "model_url": "/models/paintings/art_017.glb",
+    "model_format": "gltf",
+    "price": 284,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_018",
+    "name": "Artwork 18",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 18",
+    "image_url": "/paintings/art_018.jpg",
+    "model_url": "/models/paintings/art_018.glb",
+    "model_format": "gltf",
+    "price": 289,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_019",
+    "name": "Artwork 19",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 19",
+    "image_url": "/paintings/art_019.jpg",
+    "model_url": "/models/paintings/art_019.glb",
+    "model_format": "gltf",
+    "price": 294,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_020",
+    "name": "Artwork 20",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 20",
+    "image_url": "/paintings/art_020.jpg",
+    "model_url": "/models/paintings/art_020.glb",
+    "model_format": "gltf",
+    "price": 299,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_021",
+    "name": "Artwork 21",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 21",
+    "image_url": "/paintings/art_021.jpg",
+    "model_url": "/models/paintings/art_021.glb",
+    "model_format": "gltf",
+    "price": 304,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_022",
+    "name": "Artwork 22",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 22",
+    "image_url": "/paintings/art_022.jpg",
+    "model_url": "/models/paintings/art_022.glb",
+    "model_format": "gltf",
+    "price": 309,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_023",
+    "name": "Artwork 23",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 23",
+    "image_url": "/paintings/art_023.jpg",
+    "model_url": "/models/paintings/art_023.glb",
+    "model_format": "gltf",
+    "price": 314,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_024",
+    "name": "Artwork 24",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 24",
+    "image_url": "/paintings/art_024.jpg",
+    "model_url": "/models/paintings/art_024.glb",
+    "model_format": "gltf",
+    "price": 319,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_025",
+    "name": "Artwork 25",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 25",
+    "image_url": "/paintings/art_025.jpg",
+    "model_url": "/models/paintings/art_025.glb",
+    "model_format": "gltf",
+    "price": 324,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_026",
+    "name": "Artwork 26",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "landscape"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 26",
+    "image_url": "/paintings/art_026.jpg",
+    "model_url": "/models/paintings/art_026.glb",
+    "model_format": "gltf",
+    "price": 329,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_027",
+    "name": "Artwork 27",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "modern"
+    ],
+    "colors": "black",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 27",
+    "image_url": "/paintings/art_027.jpg",
+    "model_url": "/models/paintings/art_027.glb",
+    "model_format": "gltf",
+    "price": 334,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_028",
+    "name": "Artwork 28",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "traditional"
+    ],
+    "colors": "multicolor",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 28",
+    "image_url": "/paintings/art_028.jpg",
+    "model_url": "/models/paintings/art_028.glb",
+    "model_format": "gltf",
+    "price": 339,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_029",
+    "name": "Artwork 29",
+    "category": "painting",
+    "subcategory": "framed",
+    "styleTags": [
+      "botanical"
+    ],
+    "colors": "blue",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 29",
+    "image_url": "/paintings/art_029.jpg",
+    "model_url": "/models/paintings/art_029.glb",
+    "model_format": "gltf",
+    "price": 344,
+    "tags": [
+      "art"
+    ]
+  },
+  {
+    "id": "art_030",
+    "name": "Artwork 30",
+    "category": "painting",
+    "subcategory": "canvas",
+    "styleTags": [
+      "abstract"
+    ],
+    "colors": "green",
+    "materials": [
+      "canvas",
+      "frame"
+    ],
+    "dimensions": {
+      "width": 36,
+      "depth": 2,
+      "height": 48,
+      "unit": "inches"
+    },
+    "description": "Beautiful artwork 30",
+    "image_url": "/paintings/art_030.jpg",
+    "model_url": "/models/paintings/art_030.glb",
+    "model_format": "gltf",
+    "price": 349,
+    "tags": [
+      "art"
+    ]
+  }
+]

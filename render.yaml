@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: taste-fingerprint-api
+    env: python
+    plan: starter
+    region: oregon
+    rootDir: taste-fingerprint
+    buildCommand: pip install --upgrade pip && pip install -r apps/serve/requirements.txt
+    startCommand: PYTHONPATH=. uvicorn apps.serve.main:app --host 0.0.0.0 --port 8000
+    pythonVersion: 3.12
+    envVars:
+      - key: CHROMA_API_KEY
+        sync: false
+      - key: CHROMA_TENANT
+        sync: false
+      - key: CHROMA_DATABASE
+        value: taste-fingerprint
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: SKETCHFAB_TOKEN
+        sync: false
+      - key: CORS_ALLOW_ORIGINS
+        value: https://artki.tech,https://www.artki.tech

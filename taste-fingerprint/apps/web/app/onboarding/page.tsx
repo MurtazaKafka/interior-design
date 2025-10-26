@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
@@ -74,6 +74,9 @@ export default function OnboardingPage() {
   });
   const [recommendations, setRecommendations] = useState<ProductRecommendation[] | null>(null);
 
+  const summaryRef = useRef<TasteSummaryResponse | null>(taste.summary);
+  summaryRef.current = taste.summary;
+
   const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
   const progress = useMemo(() => taste.comparisons / TARGET_COMPARISONS, [taste.comparisons]);
   const completed = taste.comparisons >= TARGET_COMPARISONS;
@@ -91,7 +94,7 @@ export default function OnboardingPage() {
   }, []);
 
 useEffect(() => {
-  if (!completed || !taste.vector || taste.summary) {
+  if (!completed || !taste.vector || summaryRef.current) {
     return;
   }
 
@@ -148,7 +151,7 @@ useEffect(() => {
   return () => {
     cancelled = true;
   };
-}, [completed, taste.vector, taste.summary, userId]);
+}, [completed, taste.vector, userId]);
 
   const replenishPairs = useCallback(() => {
     setPairs((prevPairs) => {
@@ -225,17 +228,34 @@ useEffect(() => {
     return currentPair;
   }, [currentPair, replenishPairs, taste.history]);
 
-  const parsedSummary = useMemo(() => {
-    if (!taste.summary) return null;
-    if (taste.summary.summary && Object.keys(taste.summary.summary).length > 0) {
-      return taste.summary.summary;
-    }
-    const coerced = coerceTasteSummary(taste.summary.raw_summary);
-    if (coerced && Object.keys(coerced).length > 0) {
-      return coerced;
-    }
+const parsedSummary = useMemo(() => {
+  if (!taste.summary) return null;
+
+  const summary = taste.summary.summary && Object.keys(taste.summary.summary).length > 0
+    ? taste.summary.summary
+    : coerceTasteSummary(taste.summary.raw_summary);
+
+  if (!summary || Object.keys(summary).length === 0) {
     return null;
-  }, [taste.summary]);
+  }
+
+  const name = String(summary.name ?? taste.summary.user_id ?? 'Inspiration').trim();
+  const imageUrl = String(summary.image_url ?? summary.hero_image ?? '').trim();
+  const palette = Array.isArray(summary.palette_colors)
+    ? summary.palette_colors
+    : Array.isArray(summary.palette)
+    ? summary.palette
+    : null;
+
+  return {
+    ...summary,
+    _display: {
+      name: name.length > 0 ? name : null,
+      imageUrl: imageUrl.length > 0 ? imageUrl : null,
+      palette,
+    },
+  } as Record<string, any>;
+}, [taste.summary]);
 
   return (
     <main className={styles.container}>

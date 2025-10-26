@@ -159,7 +159,8 @@ def _merge_scores(candidates: list[dict[str, Any]], claude_scores: dict[str, dic
     for item in candidates:
         item_id = item["id"]
         cosine = item.get("cosine_similarity", 0.0)
-        meta = item.get("metadata", {})
+        raw_meta = item.get("metadata", {})
+        meta = raw_meta if isinstance(raw_meta, dict) else {}
         claude_entry = claude_scores.get(item_id)
         claude_score = claude_entry.get("score") if claude_entry else None
         if claude_score is not None:

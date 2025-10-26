@@ -36,11 +36,30 @@ export interface TasteSummaryResponse {
   top_artworks: Array<{
     id: string;
     similarity: number | null;
-  metadata: Record<string, unknown>;
+    metadata: Record<string, unknown>;
   }>;
   aggregates: Record<string, string[]>;
   summary?: Record<string, string>;
   raw_summary?: string;
+}
+
+export interface ProductRecommendation {
+  id: string;
+  score: number;
+  cosine_similarity: number;
+  claude_score: number | null;
+  metadata: Record<string, unknown>;
+}
+
+export interface ProductRecommendationRequest {
+  user_id: string;
+  limit?: number;
+  candidate_pool?: number;
+}
+
+export interface ProductRecommendationResponse {
+  user_id: string;
+  items: ProductRecommendation[];
 }
 
 function stripCodeFence(text: string): string {
@@ -130,4 +149,20 @@ export async function postTasteSummary(payload: TasteSummaryRequest): Promise<Ta
     }
   }
   return data;
+}
+
+export async function postProductRecommendations(
+  payload: ProductRecommendationRequest,
+): Promise<ProductRecommendationResponse> {
+  const res = await fetch(`${API_BASE}/products/recommend`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`Product recommend failed: ${res.status}`);
+  }
+  return res.json();
 }

@@ -8,8 +8,10 @@ import {
   fetchArtworks,
   postTasteUpdate,
   postTasteSummary,
+  postProductRecommendations,
   Artwork,
   TasteSummaryResponse,
+  ProductRecommendation,
   coerceTasteSummary,
 } from '../../lib/api';
 import styles from './styles.module.css';
@@ -28,6 +30,8 @@ interface TasteState {
   summary: TasteSummaryResponse | null;
   summaryLoading: boolean;
   summaryError: string | null;
+  recsLoading: boolean;
+  recsError: string | null;
 }
 
 const TARGET_COMPARISONS = 12;
@@ -65,7 +69,10 @@ export default function OnboardingPage() {
     summary: null,
     summaryLoading: false,
     summaryError: null,
+    recsLoading: false,
+    recsError: null,
   });
+  const [recommendations, setRecommendations] = useState<ProductRecommendation[] | null>(null);
 
   const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
   const progress = useMemo(() => taste.comparisons / TARGET_COMPARISONS, [taste.comparisons]);
@@ -83,39 +90,72 @@ export default function OnboardingPage() {
       });
   }, []);
 
-  useEffect(() => {
-    if (!completed || !taste.vector || taste.summary || taste.summaryLoading) {
-      return;
+useEffect(() => {
+  if (!completed || !taste.vector || taste.summary) {
+    return;
+  }
+
+  let cancelled = false;
+
+  const run = async () => {
+    setRecommendations(null);
+    setTaste((prev) => ({
+      ...prev,
+      summaryLoading: true,
+      summaryError: null,
+      recsLoading: false,
+      recsError: null,
+    }));
+
+    try {
+      const summaryRes = await postTasteSummary({ user_id: userId, top_k: 6, vector_preview: 12 });
+      if (cancelled) return;
+      const summaryPayload =
+        summaryRes.summary || coerceTasteSummary(summaryRes.raw_summary) || undefined;
+      setTaste((prev) => ({
+        ...prev,
+        summary: summaryPayload ? { ...summaryRes, summary: summaryPayload } : summaryRes,
+        summaryLoading: false,
+        summaryError: summaryPayload ? null : 'We could not parse your style brief yet.',
+        recsLoading: true,
+        recsError: null,
+      }));
+
+      try {
+        const recsRes = await postProductRecommendations({ user_id: userId, limit: 9, candidate_pool: 32 });
+        if (cancelled) return;
+        setRecommendations(recsRes.items ?? []);
+        setTaste((prev) => ({ ...prev, recsLoading: false }));
+      } catch (recsErr) {
+        console.error(recsErr);
+        if (cancelled) return;
+        setTaste((prev) => ({ ...prev, recsLoading: false, recsError: 'Could not fetch furniture matches yet.' }));
+      }
+    } catch (err) {
+      console.error(err);
+      if (cancelled) return;
+      setTaste((prev) => ({
+        ...prev,
+        summaryLoading: false,
+        summaryError: 'Could not summarize your taste yet.',
+        recsLoading: false,
+      }));
     }
-    let cancelled = false;
-    setTaste((prev) => ({ ...prev, summaryLoading: true, summaryError: null }));
-    postTasteSummary({ user_id: userId, top_k: 6, vector_preview: 12 })
-      .then((response) => {
-        if (cancelled) return;
-        const summary =
-          response.summary || coerceTasteSummary(response.raw_summary) || undefined;
-        setTaste((prev) => ({
-          ...prev,
-          summary: summary ? { ...response, summary } : response,
-          summaryLoading: false,
-          summaryError: summary ? null : 'We could not parse your style brief yet.',
-        }));
-      })
-      .catch((error) => {
-        console.error(error);
-        if (cancelled) return;
-        setTaste((prev) => ({ ...prev, summaryLoading: false, summaryError: 'Could not summarize your taste yet.' }));
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [completed, taste.vector, taste.summary, userId]);
+  };
+
+  run();
+
+  return () => {
+    cancelled = true;
+  };
+}, [completed, taste.vector, taste.summary, userId]);
 
   const replenishPairs = useCallback(() => {
     setPairs((prevPairs) => {
       const next = pickRandomPairs(artworks);
       return [...prevPairs, ...next];
     });
+    console.log('Replenished pairs');
   }, [artworks]);
 
   const handleChoice = useCallback(
@@ -170,7 +210,10 @@ export default function OnboardingPage() {
       summary: null,
       summaryLoading: false,
       summaryError: null,
+      recsLoading: false,
+      recsError: null,
     });
+    setRecommendations(null);
   }, [artworks]);
 
   const pairForRender = useMemo(() => {
@@ -256,6 +299,59 @@ export default function OnboardingPage() {
               <p className={styles.summaryStatus}>Your brief is queued—hang tight.</p>
             )
           )}
+          <section className={styles.recommendations}>
+            <h3>Furniture we love for you</h3>
+            {taste.recsLoading && <p className={styles.summaryStatus}>Finding pieces that match…</p>}
+            {taste.recsError && <p className={styles.summaryError}>{taste.recsError}</p>}
+            {recommendations && recommendations.length > 0 && (
+              <ul className={styles.recommendationGrid}>
+                {recommendations.map((item) => (
+                  <li key={item.id} className={styles.recommendationCard}>
+                    <article>
+                      <header>
+                        <h4>{String(item.metadata?.name ?? 'Untitled piece')}</h4>
+                        {item.metadata?.brand && <span>{String(item.metadata.brand)}</span>}
+                      </header>
+                      <dl>
+                        <div>
+                          <dt>Score</dt>
+                          <dd>{item.score.toFixed(2)}</dd>
+                        </div>
+                        <div>
+                          <dt>Cosine</dt>
+                          <dd>{item.cosine_similarity.toFixed(2)}</dd>
+                        </div>
+                        {typeof item.claude_score === 'number' && (
+                          <div>
+                            <dt>Claude</dt>
+                            <dd>{item.claude_score.toFixed(2)}</dd>
+                          </div>
+                        )}
+                      </dl>
+                      {Array.isArray(item.metadata?.style_tags) && item.metadata.style_tags.length > 0 && (
+                        <p className={styles.tagLine}>
+                          {item.metadata.style_tags.slice(0, 3).map((tag) => String(tag)).join(' · ')}
+                        </p>
+                      )}
+                      {item.metadata?.buy_url && (
+                        <a
+                          className={styles.buyLink}
+                          href={String(item.metadata.buy_url)}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          View product
+                        </a>
+                      )}
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {recommendations && recommendations.length === 0 && !taste.recsLoading && !taste.recsError && (
+              <p className={styles.summaryStatus}>We’ll have tailored pieces for you shortly.</p>
+            )}
+          </section>
           <button className={styles.primaryButton} onClick={restart}>
             Restart picks
           </button>

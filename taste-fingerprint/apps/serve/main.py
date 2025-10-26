@@ -13,7 +13,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from apps.serve.services.claude import ClaudeSettingsError, summarize_taste
+from apps.serve.services.claude import ClaudeSettingsError, summarize_taste, recommend_products
 
 
 logger = logging.getLogger(__name__)
@@ -47,6 +47,7 @@ client = chromadb.CloudClient(
 
 artworks = client.get_or_create_collection("artworks", metadata={"hnsw:space": "cosine"})
 users = client.get_or_create_collection("users", metadata={"hnsw:space": "cosine"})
+products = client.get_or_create_collection("products", metadata={"hnsw:space": "cosine"})
 
 
 class Artwork(BaseModel):
@@ -73,12 +74,34 @@ class TasteSummaryRequest(BaseModel):
     vector_preview: int = 12
 
 
+class ProductRecommendationRequest(BaseModel):
+    user_id: str
+    limit: int = 12
+    candidate_pool: int = 32
+
+
+class ProductRecommendation(BaseModel):
+    id: str
+    score: float
+    cosine_similarity: float
+    claude_score: float | None
+    metadata: dict[str, Any]
+
+
+class ProductRecommendationResponse(BaseModel):
+    user_id: str
+    items: list[ProductRecommendation]
+
+
 def _parse_metadata(meta: Dict[str, Any]) -> Dict[str, Any]:
     array_fields = {
         "style_tags",
         "palette_keywords",
         "material_inspirations",
         "mood_keywords",
+        "materials",
+        "colors",
+        "roomTypes",
     }
     parsed: Dict[str, Any] = {}
     for key, value in meta.items():
@@ -94,6 +117,12 @@ def _parse_metadata(meta: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 parsed[key] = value
         else:
+            if key == "price" and isinstance(value, str):
+                try:
+                    parsed[key] = float(value)
+                    continue
+                except ValueError:
+                    pass
             parsed[key] = value
     return parsed
 
@@ -123,6 +152,36 @@ def _first_list(value: Any) -> list[Any]:
             except TypeError:
                 pass
     return seq
+
+
+def _merge_scores(candidates: list[dict[str, Any]], claude_scores: dict[str, dict[str, Any]], *, alpha: float = 0.7) -> list[ProductRecommendation]:
+    merged: list[ProductRecommendation] = []
+    for item in candidates:
+        item_id = item["id"]
+        cosine = item.get("cosine_similarity", 0.0)
+        meta = item.get("metadata", {})
+        claude_entry = claude_scores.get(item_id)
+        claude_score = claude_entry.get("score") if claude_entry else None
+        if claude_score is not None:
+            try:
+                claude_score = float(claude_score)
+            except (TypeError, ValueError):
+                claude_score = None
+        if claude_score is None:
+            final_score = cosine
+        else:
+            final_score = alpha * cosine + (1 - alpha) * claude_score
+        merged.append(
+            ProductRecommendation(
+                id=item_id,
+                score=float(final_score),
+                cosine_similarity=float(cosine),
+                claude_score=claude_score,
+                metadata=meta,
+            )
+        )
+    merged.sort(key=lambda r: r.score, reverse=True)
+    return merged
 
 
 @app.get("/artworks/list")
@@ -298,7 +357,7 @@ def taste_summarize(payload: TasteSummaryRequest) -> dict[str, Any]:
     summary = claude_response.get("parsed") or {}
     raw_summary = claude_response.get("raw_text")
 
-    return {
+    response = {
         "user_id": payload.user_id,
         "model": ANTHROPIC_MODEL,
         "vector_preview": vector_preview,
@@ -311,3 +370,153 @@ def taste_summarize(payload: TasteSummaryRequest) -> dict[str, Any]:
             "usage": claude_response.get("usage"),
         },
     }
+
+    # Store summary in user metadata for downstream recommendation context
+    try:
+        users.upsert(
+            ids=[payload.user_id],
+            embeddings=[user_vec.tolist()],
+            metadatas=[{"taste_summary": summary, "raw_taste_summary": raw_summary}],
+        )
+    except Exception:  # pragma: no cover
+        logger.info("Failed to cache taste summary metadata for user %s", payload.user_id)
+
+    return response
+
+
+@app.post("/products/recommend", response_model=ProductRecommendationResponse)
+def recommend_products_endpoint(payload: ProductRecommendationRequest) -> ProductRecommendationResponse:
+    logger.info(
+        "recommend_products requested", extra={
+            "user_id": payload.user_id,
+            "limit": payload.limit,
+            "candidate_pool": payload.candidate_pool,
+        }
+    )
+    user_vec = _get_user_vector(payload.user_id)
+
+    candidates = _query_products_by_vector(user_vec, payload.candidate_pool)
+    if not candidates:
+        raise HTTPException(status_code=404, detail="No product candidates found")
+
+    # Optional: reuse cached taste summary if available
+    try:
+        summary_res = users.get(ids=[payload.user_id], include=["metadatas"])
+        metas = _ensure_sequence(summary_res.get("metadatas"))
+        taste_summary = None
+        for meta in metas:
+            if isinstance(meta, dict) and meta.get("taste_summary"):
+                taste_summary = meta["taste_summary"]
+                break
+    except chromadb.errors.InvalidCollectionException:
+        taste_summary = None
+
+    system_prompt, user_payload = _build_claude_payload(payload.user_id, user_vec, taste_summary, candidates)
+
+    try:
+        claude_res = recommend_products(
+            system_prompt=system_prompt,
+            user_content=user_payload,
+            model=ANTHROPIC_MODEL,
+            max_tokens=800,
+        )
+    except ClaudeSettingsError as exc:
+        logger.error("Claude recommendation missing settings", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    except Exception as exc:  # pragma: no cover
+        logger.exception("Claude recommendation failed for user %s", payload.user_id)
+        raise HTTPException(status_code=502, detail="Claude recommendation failed") from exc
+
+    parsed = claude_res.get("parsed") or {}
+    recs = parsed.get("recommendations") if isinstance(parsed, dict) else None
+    claude_scores: dict[str, dict[str, Any]] = {}
+    if isinstance(recs, list):
+        for entry in recs:
+            if isinstance(entry, dict) and entry.get("id"):
+                claude_scores[entry["id"]] = entry
+
+    merged = _merge_scores(candidates, claude_scores)
+    limited = merged[: max(1, payload.limit)]
+
+    logger.info(
+        "recommend_products returning", extra={
+            "user_id": payload.user_id,
+            "returned": len(limited),
+            "claude_scored": len(claude_scores),
+        }
+    )
+
+    return ProductRecommendationResponse(user_id=payload.user_id, items=limited)
+
+
+def _get_user_vector(user_id: str) -> np.ndarray:
+    try:
+        user_res = users.get(ids=[user_id], include=["embeddings", "metadatas"])
+    except chromadb.errors.InvalidCollectionException as exc:
+        raise HTTPException(status_code=404, detail="User collection not initialized") from exc
+
+    embeddings_raw = _ensure_sequence(user_res.get("embeddings"))
+    if len(embeddings_raw) == 0:
+        raise HTTPException(status_code=404, detail="User taste vector not found")
+
+    return np.array(embeddings_raw[0], dtype="float32")
+
+
+def _query_products_by_vector(user_vec: np.ndarray, candidate_pool: int) -> list[dict[str, Any]]:
+    pool = max(candidate_pool, 1)
+    res = products.query(
+        query_embeddings=[user_vec.tolist()],
+        n_results=pool,
+        include=["metadatas", "distances"],
+    )
+
+    ids = _first_list(res.get("ids"))
+    metas = _first_list(res.get("metadatas"))
+    distances = _first_list(res.get("distances"))
+
+    candidates: list[dict[str, Any]] = []
+    for idx, meta, dist in zip(ids, metas, distances):
+        if meta is None:
+            continue
+        metadata = _parse_metadata(meta) if isinstance(meta, dict) else {}
+        cosine = float(1 - dist) if dist is not None else 0.0
+        candidates.append({
+            "id": idx,
+            "cosine_similarity": cosine,
+            "metadata": metadata,
+        })
+    return candidates
+
+
+def _build_claude_payload(user_id: str, user_vec: np.ndarray, taste_summary: dict[str, Any] | None, candidates: list[dict[str, Any]]) -> tuple[str, str]:
+    preview = user_vec[:12].tolist()
+    system_prompt = (
+        "You are an interior design critic. Score each candidate product between 0 and 1 "
+        "based on how well it fits the user's taste summary and vector preview. "
+        "Return JSON with the shape: {\"recommendations\": [{\"id\": string, \"score\": number, \"reason\": string}]}. "
+        "Score should reflect stylistic fit, materials, and room applicability. Only return JSON."
+    )
+
+    payload = {
+        "user_id": user_id,
+        "vector_preview": preview,
+        "taste_summary": taste_summary or {},
+        "candidates": [],
+    }
+
+    for item in candidates:
+        meta = item.get("metadata", {})
+        payload["candidates"].append({
+            "id": item.get("id"),
+            "cosine_similarity": item.get("cosine_similarity", 0.0),
+            "name": meta.get("name"),
+            "brand": meta.get("brand"),
+            "category": meta.get("category"),
+            "materials": meta.get("materials"),
+            "colors": meta.get("colors"),
+            "style_tags": meta.get("style_tags"),
+            "roomTypes": meta.get("roomTypes"),
+            "description": meta.get("description"),
+        })
+
+    return system_prompt, json.dumps(payload, indent=2)

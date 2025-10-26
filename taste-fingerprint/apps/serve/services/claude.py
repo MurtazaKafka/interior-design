@@ -72,5 +72,55 @@ def summarize_taste(prompt: str, *, model: str, max_tokens: int = 1_024) -> Dict
     return data
 
 
-__all__ = ["summarize_taste", "ClaudeSettingsError"]
+def recommend_products(
+    *,
+    system_prompt: str,
+    user_content: str,
+    model: str,
+    max_tokens: int = 1_024,
+    temperature: float = 0.3,
+) -> Dict[str, Any]:
+    client = _client()
+    response = client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_content}],
+        temperature=temperature,
+    )
+
+    usage_payload = response.usage.model_dump() if hasattr(response.usage, "model_dump") else response.usage
+    data: Dict[str, Any] = {
+        "id": response.id,
+        "usage": usage_payload,
+    }
+
+    text_blocks = []
+    for block in response.content:
+        if getattr(block, "type", None) == "text":
+            text_blocks.append(getattr(block, "text", ""))
+
+    combined_text = "".join(text_blocks).strip()
+    if combined_text.startswith("```"):
+        fence_lines = combined_text.splitlines()
+        if fence_lines:
+            fence_lines = fence_lines[1:]
+        while fence_lines and fence_lines[-1].strip().startswith("```"):
+            fence_lines.pop()
+        combined_text = "\n".join(fence_lines).strip()
+    data["raw_text"] = combined_text
+    if combined_text:
+        try:
+            data["parsed"] = json.loads(combined_text)
+        except json.JSONDecodeError:
+            data["parsed"] = None
+            logger.warning("Claude recommendation response not valid JSON: %s", combined_text)
+    else:
+        data["parsed"] = None
+        logger.warning("Claude returned empty content for product recommendation request")
+
+    return data
+
+
+__all__ = ["summarize_taste", "recommend_products", "ClaudeSettingsError"]
 

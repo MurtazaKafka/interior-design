@@ -70,8 +70,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1.4 }}
           >
-            Design spaces from{' '}
-            <span className="italic text-[var(--accent)]">art</span>
+            Compose spaces through{' '}
+            <span className="italic text-[var(--accent)]">intention</span>
           </motion.h1>
           
           <motion.p 

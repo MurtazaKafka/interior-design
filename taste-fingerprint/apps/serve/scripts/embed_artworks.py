@@ -51,14 +51,19 @@ def main() -> None:
 
         ids.append(entry["id"])
         embeddings.append(vec.tolist())
-        metadatas.append(
-            {
-                "title": entry.get("title", ""),
-                "artist": entry.get("artist", ""),
-                "museum": entry.get("museum", ""),
-                "image_url": entry.get("image_url", ""),
-            }
-        )
+        metadata: dict[str, str] = {
+            "title": entry.get("title", ""),
+            "artist": entry.get("artist", ""),
+            "museum": entry.get("museum", ""),
+            "image_url": entry.get("image_url", ""),
+        }
+
+        for key in ("style_tags", "palette_keywords", "material_inspirations", "mood_keywords"):
+            value = entry.get(key)
+            if value:
+                metadata[key] = json.dumps(value)
+
+        metadatas.append(metadata)
 
     existing = collection.get(limit=300)
     existing_ids = existing.get("ids") or []

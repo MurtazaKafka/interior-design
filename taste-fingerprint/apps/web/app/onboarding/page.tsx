@@ -4,7 +4,14 @@ import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { fetchArtworks, postTasteUpdate, Artwork } from '../../lib/api';
+import {
+  fetchArtworks,
+  postTasteUpdate,
+  postTasteSummary,
+  Artwork,
+  TasteSummaryResponse,
+  coerceTasteSummary,
+} from '../../lib/api';
 import styles from './styles.module.css';
 
 interface ChoicePair {
@@ -18,6 +25,9 @@ interface TasteState {
   loading: boolean;
   error: string | null;
   history: Array<{ win: string; lose: string }>;
+  summary: TasteSummaryResponse | null;
+  summaryLoading: boolean;
+  summaryError: string | null;
 }
 
 const TARGET_COMPARISONS = 12;
@@ -52,6 +62,9 @@ export default function OnboardingPage() {
     loading: false,
     error: null,
     history: [],
+    summary: null,
+    summaryLoading: false,
+    summaryError: null,
   });
 
   const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
@@ -69,6 +82,34 @@ export default function OnboardingPage() {
         setTaste((prev) => ({ ...prev, error: 'Failed to load artworks. Please retry.' }));
       });
   }, []);
+
+  useEffect(() => {
+    if (!completed || !taste.vector || taste.summary || taste.summaryLoading) {
+      return;
+    }
+    let cancelled = false;
+    setTaste((prev) => ({ ...prev, summaryLoading: true, summaryError: null }));
+    postTasteSummary({ user_id: userId, top_k: 6, vector_preview: 12 })
+      .then((response) => {
+        if (cancelled) return;
+        const summary =
+          response.summary || coerceTasteSummary(response.raw_summary) || undefined;
+        setTaste((prev) => ({
+          ...prev,
+          summary: summary ? { ...response, summary } : response,
+          summaryLoading: false,
+          summaryError: summary ? null : 'We could not parse your style brief yet.',
+        }));
+      })
+      .catch((error) => {
+        console.error(error);
+        if (cancelled) return;
+        setTaste((prev) => ({ ...prev, summaryLoading: false, summaryError: 'Could not summarize your taste yet.' }));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [completed, taste.vector, taste.summary, userId]);
 
   const replenishPairs = useCallback(() => {
     setPairs((prevPairs) => {
@@ -99,6 +140,9 @@ export default function OnboardingPage() {
             loading: false,
             error: null,
             history: updatedHistory,
+            summary: prev.summary,
+            summaryLoading: prev.summaryLoading,
+            summaryError: null,
           };
         });
       } catch (err) {
@@ -117,7 +161,16 @@ export default function OnboardingPage() {
 
   const restart = useCallback(() => {
     setPairs(pickRandomPairs(artworks));
-    setTaste({ vector: null, comparisons: 0, loading: false, error: null, history: [] });
+    setTaste({
+      vector: null,
+      comparisons: 0,
+      loading: false,
+      error: null,
+      history: [],
+      summary: null,
+      summaryLoading: false,
+      summaryError: null,
+    });
   }, [artworks]);
 
   const pairForRender = useMemo(() => {
@@ -128,6 +181,18 @@ export default function OnboardingPage() {
     }
     return currentPair;
   }, [currentPair, replenishPairs, taste.history]);
+
+  const parsedSummary = useMemo(() => {
+    if (!taste.summary) return null;
+    if (taste.summary.summary && Object.keys(taste.summary.summary).length > 0) {
+      return taste.summary.summary;
+    }
+    const coerced = coerceTasteSummary(taste.summary.raw_summary);
+    if (coerced && Object.keys(coerced).length > 0) {
+      return coerced;
+    }
+    return null;
+  }, [taste.summary]);
 
   return (
     <main className={styles.container}>
@@ -156,6 +221,41 @@ export default function OnboardingPage() {
             {JSON.stringify(taste.vector?.slice(0, 12), null, 2)}
             {taste.vector && taste.vector.length > 12 ? '\n…' : ''}
           </pre>
+          {taste.summaryLoading && <p className={styles.summaryStatus}>Generating your style brief…</p>}
+          {taste.summaryError && <p className={styles.summaryError}>{taste.summaryError}</p>}
+          {parsedSummary ? (
+            <div className={styles.summaryCopy}>
+              <h3>How we describe your vibe</h3>
+              <p>{parsedSummary.concise}</p>
+              <h4>For our planner</h4>
+              <p>{parsedSummary.planner_brief}</p>
+              <details className={styles.summaryDetails}>
+                <summary>See full brief</summary>
+                <div className={styles.summaryGrid}>
+                  <div>
+                    <h5>Palette</h5>
+                    <p>{parsedSummary.palette_summary}</p>
+                  </div>
+                  <div>
+                    <h5>Style</h5>
+                    <p>{parsedSummary.style_summary}</p>
+                  </div>
+                  <div>
+                    <h5>Materials</h5>
+                    <p>{parsedSummary.material_summary}</p>
+                  </div>
+                  <div>
+                    <h5>Mood</h5>
+                    <p>{parsedSummary.mood_summary}</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+          ) : (
+            taste.summary && !taste.summaryLoading && !taste.summaryError && (
+              <p className={styles.summaryStatus}>Your brief is queued—hang tight.</p>
+            )
+          )}
           <button className={styles.primaryButton} onClick={restart}>
             Restart picks
           </button>

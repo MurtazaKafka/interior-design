@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import * as THREE from 'three'
 
 type FrameProps = {
@@ -100,11 +100,69 @@ type ZoomSceneProps = {
 }
 
 export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
+  const [hasWebGL, setHasWebGL] = useState<boolean | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Check if WebGL is available
+    try {
+      const canvas = document.createElement('canvas')
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+      
+      if (!gl) {
+        console.warn('WebGL context could not be created')
+        setHasWebGL(false)
+        setError('WebGL is not supported in your browser')
+      } else {
+        console.log('WebGL is available and ready')
+        setHasWebGL(true)
+      }
+    } catch (e) {
+      console.error('WebGL detection error:', e)
+      setHasWebGL(false)
+      setError('WebGL is disabled or unavailable')
+    }
+  }, [])
+
+  // Show loading state while checking WebGL
+  if (hasWebGL === null) {
+    return (
+      <div className="flex items-center justify-center h-full w-full bg-[#faf9f7]">
+        <div className="text-center">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-[#c9a56a] border-r-transparent"></div>
+          <p className="mt-4 text-sm text-[#6b6764]">Loading 3D scene...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Fallback UI when WebGL is not available
+  if (hasWebGL === false) {
+    return (
+      <div className="flex items-center justify-center h-full w-full bg-[#faf9f7]">
+        <div className="max-w-md text-center p-8">
+          <div className="mb-6">
+            <svg className="w-20 h-20 mx-auto text-[#c9a56a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 className="serif text-2xl text-[#2a2826] mb-3">3D Scene Unavailable</h3>
+          <p className="text-sm text-[#6b6764] leading-relaxed mb-4">
+            {error || 'WebGL is required to display the 3D artwork.'}
+          </p>
+          <p className="text-xs text-[#6b6764] leading-relaxed">
+            Please enable hardware acceleration in your browser settings or try refreshing the page.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Canvas
       camera={{ position: [0, 0, 8], fov: 45 }}
       gl={{ 
-        antialias: false, // Disable antialiasing to reduce GPU load
+        antialias: false,
         alpha: true,
         powerPreference: 'high-performance',
         failIfMajorPerformanceCaveat: false,
@@ -112,8 +170,24 @@ export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
         stencil: false,
         depth: true
       }}
-      dpr={[1, 1.5]} // Limit pixel ratio
-      style={{ background: 'transparent' }}
+      dpr={[1, 1.5]}
+      style={{ 
+        width: '100%',
+        height: '100%',
+        background: 'transparent'
+      }}
+      onCreated={({ gl, scene, camera }) => {
+        // Successfully created WebGL context
+        console.log('✅ WebGL Canvas created successfully')
+        console.log('Camera position:', camera.position)
+        console.log('Scene children:', scene.children.length)
+      }}
+      onError={(error) => {
+        // Handle Canvas creation errors
+        console.error('❌ Canvas creation error:', error)
+        setHasWebGL(false)
+        setError('Failed to initialize 3D graphics')
+      }}
     >
       {/* Lighting - Gallery setup */}
       <ambientLight intensity={0.5} color="#faf9f7" />

@@ -99,52 +99,53 @@ export const StyleQuiz = ({ onComplete }: StyleQuizProps) => {
 
   return (
     <div className="flex h-full w-full flex-col">
-      <SectionCard className="flex flex-1 flex-col gap-8">
-        <div className="text-center">
-          <h2 className="mb-3 text-3xl font-bold">Choose Your Style</h2>
-          <p className="text-lg text-[var(--foreground-subtle)]">
-            Select the style that resonates with your vision ({currentSet + 1} of {styleOptions.length})
+      <div className="shadow-museum mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 rounded-lg bg-[var(--surface)] p-10">
+        <div className="border-b border-[var(--border)] pb-6 text-center">
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-[var(--accent)]">Act II</p>
+          <h2 className="serif mb-4 text-4xl leading-tight tracking-[-0.01em]">Direct Your Vision</h2>
+          <p className="text-lg leading-relaxed text-[var(--foreground-subtle)]">
+            Select visual references that orchestrate light, surface, and composition ({currentSet + 1} of {styleOptions.length})
           </p>
         </div>
 
-        <div className={`flex-1 grid grid-cols-3 gap-8 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`grid flex-1 grid-cols-3 gap-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
           {styleOptions[currentSet].map(style => (
             <button
               key={style.id}
               onClick={() => handleStyleSelect(style.id)}
-              className="group relative overflow-hidden rounded-xl border-2 border-[var(--border)] bg-white p-2 transition-all hover:border-[var(--accent)] hover:shadow-xl"
+              className="group relative overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface)] transition-all hover:border-[var(--accent)] hover:shadow-museum"
             >
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
-                <div className="absolute inset-0 bg-black/15 opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 <NextImage
                   src={style.image}
                   alt={style.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="p-4 text-left">
-                <h3 className="mb-1 text-xl font-semibold">{style.title}</h3>
-                <p className="text-sm text-[var(--foreground-subtle)]">{style.description}</p>
+              <div className="p-5 text-left">
+                <h3 className="serif mb-2 text-xl leading-tight">{style.title}</h3>
+                <p className="text-sm leading-relaxed text-[var(--foreground-subtle)]">{style.description}</p>
               </div>
-              <div className="absolute right-4 top-4 rounded-full bg-white p-2 text-[var(--accent)] opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+              <div className="absolute right-4 top-4 rounded-full bg-[var(--surface)]/90 p-2 text-[var(--accent)] opacity-0 shadow-md backdrop-blur-sm transition-opacity group-hover:opacity-100">
                 <ChevronRight className="h-5 w-5" />
               </div>
             </button>
           ))}
         </div>
 
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center gap-2">
           {styleOptions.map((_, index) => (
             <div
               key={index}
-              className={`h-2 w-10 rounded-full transition-colors ${
-                index === currentSet ? 'bg-[var(--accent)]' : 'bg-[var(--border)]'
+              className={`h-1.5 rounded-full transition-all ${
+                index === currentSet ? 'w-12 bg-[var(--accent)]' : 'w-8 bg-[var(--border)]'
               }`}
             />
           ))}
         </div>
-      </SectionCard>
+      </div>
     </div>
   )
 }

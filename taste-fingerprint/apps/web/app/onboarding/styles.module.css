@@ -229,6 +229,108 @@
   object-fit: cover;
 }
 
+.productList {
+  background: rgba(15, 23, 42, 0.78);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.productList h4 {
+  margin: 0;
+  color: #cbd5f5;
+  font-size: 1.25rem;
+}
+
+.productList ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.productList li {
+  background: rgba(30, 41, 59, 0.82);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+.productList article {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.productList header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.productList h5 {
+  margin: 0;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+}
+
+.productList header span {
+  color: rgba(148, 163, 184, 0.85);
+  font-size: 0.9rem;
+}
+
+.productImageWrap {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(226, 232, 240, 0.12);
+}
+
+.productImageWrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.productList p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.85);
+  line-height: 1.5;
+}
+
+.productList footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.productList footer span {
+  color: #cbd5f5;
+  font-weight: 600;
+}
+
+.productList footer a {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22d3ee, #6366f1);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.productList footer a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.35);
+}
+
 .recommendationGrid {
   list-style: none;
   display: grid;

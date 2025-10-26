@@ -22,7 +22,6 @@ from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-
 from openai import OpenAI
 
 from apps.serve.services.claude import (
@@ -120,9 +119,23 @@ class ProductRecommendationResponse(BaseModel):
     items: list[ProductRecommendation]
 
 
+class RenderProduct(BaseModel):
+    id: str
+    name: str | None = None
+    brand: str | None = None
+    category: str | None = None
+    price: float | None = None
+    price_display: str | None = None
+    image_url: str | None = None
+    purchase_url: str | None = None
+    asin: str | None = None
+    description: str | None = None
+
+
 class RenderRoomResponse(BaseModel):
     user_id: str
     image_url: str
+    products: list[RenderProduct]
 
 
 def _parse_metadata(meta: Dict[str, Any]) -> Dict[str, Any]:
@@ -321,6 +334,7 @@ def _normalize_image_reference(value: str) -> Optional[str]:
 
 def _compose_prompt_payload(user_id: str, vector: np.ndarray, items: list[ProductRecommendation], *, taste_summary: Optional[dict[str, Any]], raw_summary: Optional[str]) -> dict[str, Any]:
     furniture = []
+    detailed_products: list[dict[str, Any]] = []
     for entry in items[:5]:
         meta = entry.metadata or {}
         furniture.append({
@@ -334,6 +348,23 @@ def _compose_prompt_payload(user_id: str, vector: np.ndarray, items: list[Produc
             "roomTypes": meta.get("roomTypes"),
             "description": meta.get("description"),
         })
+        asin = meta.get("asin") or meta.get("parent_asin")
+        purchase_url = meta.get("url") or meta.get("store_url") or meta.get("seller_url")
+        if not purchase_url and isinstance(asin, str) and asin.strip():
+            purchase_url = f"https://www.amazon.com/dp/{asin.strip()}"
+
+        detailed_products.append({
+            "id": entry.id,
+            "name": meta.get("name"),
+            "brand": meta.get("brand"),
+            "category": meta.get("category"),
+            "price": meta.get("final_price") or meta.get("price"),
+            "price_display": meta.get("price_display") or meta.get("final_price_display"),
+            "image_url": _normalize_image_reference(str(meta.get("image_url"))) if meta.get("image_url") else None,
+            "purchase_url": purchase_url,
+            "asin": asin,
+            "description": meta.get("description"),
+        })
 
     return {
         "user_id": user_id,
@@ -341,6 +372,7 @@ def _compose_prompt_payload(user_id: str, vector: np.ndarray, items: list[Produc
         "taste_summary": taste_summary,
         "raw_taste_summary": raw_summary,
         "furniture": furniture,
+        "products": detailed_products,
     }
 
 
@@ -407,6 +439,14 @@ def _build_local_image_prompt(context: Dict[str, Any]) -> str:
         prompt_parts.append(f"Reference summary: {raw_summary}.")
     if furniture_text:
         prompt_parts.append("Key furniture pieces to include:\n" + furniture_text)
+
+    prompt_parts.append(
+        "We should keep the room's dimension, aspect ratio, and orientation as close to the original as possible."
+    )
+    
+    prompt_parts.append(
+        "Reference product photos are provided with this request. Match the shape, materials, and detailing of each referenced item when placing them in the room."
+    )
 
     prompt_parts.append("Ensure furniture placement respects spatial logic, avoids clipping, and keeps proportions realistic.")
 
@@ -506,11 +546,46 @@ async def render_room(
         def _call_image_edit() -> Any:
             with ExitStack() as stack:
                 room_file = stack.enter_context(open(room_path, "rb"))
-                return openai_client.images.edit(
-                    model=OPENAI_IMAGE_MODEL,
-                    image=room_file,
-                    prompt=prompt_text,
+                product_files = []
+                for item in top_recs:
+                    image_path = item.metadata.get("image_url") if item.metadata else None
+                    if not image_path:
+                        continue
+                    parsed = urlparse(str(image_path))
+                    if parsed.scheme in {"http", "https"}:
+                        # Remote URL; rely on prompt description
+                        continue
+                    local_path = (ROOT_DIR / "apps/web/public").joinpath(parsed.path.lstrip("/")) if parsed.path else None
+                    if local_path and local_path.exists():
+                        product_files.append(stack.enter_context(open(local_path, "rb")))
+
+                image_inputs = [room_file] + product_files
+
+                logger.info(
+                    "Calling OpenAI image edit",
+                    extra={
+                        "user_id": user_id,
+                        "reference_count": len(image_inputs),
+                        "product_ids": [item.id for item in top_recs],
+                    },
                 )
+
+                try:
+                    return openai_client.images.edit(
+                        model=OPENAI_IMAGE_MODEL,
+                        image=image_inputs,
+                        prompt=prompt_text,
+                    )
+                except Exception:
+                    logger.exception(
+                        "OpenAI image edit request failed",
+                        extra={
+                            "user_id": user_id,
+                            "reference_count": len(image_inputs),
+                            "product_ids": [item.id for item in top_recs],
+                        },
+                    )
+                    raise
 
         openai_res = await loop.run_in_executor(None, _call_image_edit)
         try:
@@ -525,7 +600,15 @@ async def render_room(
         image_bytes = base64.b64decode(image_b64)
         output_path = _save_generated_image(user_id, image_bytes)
 
-        return RenderRoomResponse(user_id=user_id, image_url=f"/generated/{output_path.name}")
+        product_payload = []
+        for product in prompt_context.get("products", [])[:12]:
+            product_payload.append(RenderProduct(**product))
+
+        return RenderRoomResponse(
+            user_id=user_id,
+            image_url=f"/generated/{output_path.name}",
+            products=product_payload,
+        )
     finally:
         _cleanup_files([room_path])
 

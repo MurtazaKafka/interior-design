@@ -280,8 +280,7 @@ useEffect(() => {
         taste.summary?.raw_summary ?? null,
       );
       console.log('Room render response', response);
-      setRender({ status: 'complete', error: null, result: response });
-      setRecommendations(null);
+    setRender({ status: 'complete', error: null, result: response });
     } catch (err) {
       console.error('Room render failed', err);
       setRender((prev) => ({ status: 'error', error: 'We could not stage your room yet. Please retry.', result: prev.result }));
@@ -311,10 +310,10 @@ useEffect(() => {
         <section className={styles.summary}>
           <h2>Fingerprint Ready</h2>
           <p>Your vector is ready for furnishing recommendations.</p>
-          <pre className={styles.vectorPreview}>
+          {/* <pre className={styles.vectorPreview}>
             {JSON.stringify(taste.vector?.slice(0, 12), null, 2)}
             {taste.vector && taste.vector.length > 12 ? '\n…' : ''}
-          </pre>
+          </pre> */}
           {taste.summaryLoading && <p className={styles.summaryStatus}>Generating your style brief…</p>}
           {taste.summaryError && <p className={styles.summaryError}>{taste.summaryError}</p>}
           {parsedSummary ? (
@@ -386,6 +385,41 @@ useEffect(() => {
                       className={styles.renderedImage}
                     />
                   </div>
+                )}
+                {render.result?.products && render.result.products.length > 0 && (
+                  <section className={styles.productList}>
+                    <h4>Shop the look</h4>
+                    <ul>
+                      {render.result.products.map((product) => (
+                        <li key={product.id}>
+                          <article>
+                            <header>
+                              <h5>{product.name ?? 'Recommended item'}</h5>
+                              {product.brand && <span>{product.brand}</span>}
+                            </header>
+                            {product.image_url && (
+                              <div className={styles.productImageWrap}>
+                                <img
+                                  src={product.image_url.startsWith('http') ? product.image_url : `${API_BASE}${product.image_url}`}
+                                  alt={product.name ?? 'Recommended item'}
+                                  loading="lazy"
+                                />
+                              </div>
+                            )}
+                            {product.description && <p>{product.description}</p>}
+                            <footer>
+                              {product.price_display && <span>{product.price_display}</span>}
+                              {product.purchase_url && (
+                                <a href={product.purchase_url} target="_blank" rel="noreferrer">
+                                  View on Amazon
+                                </a>
+                              )}
+                            </footer>
+                          </article>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 )}
               </>
             )}

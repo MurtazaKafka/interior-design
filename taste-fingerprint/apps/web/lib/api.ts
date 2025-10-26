@@ -65,6 +65,18 @@ export interface ProductRecommendationResponse {
 export interface RoomRenderResponse {
   user_id: string;
   image_url: string;
+  products: Array<{
+    id: string;
+    name: string | null;
+    brand: string | null;
+    category: string | null;
+    price: number | null;
+    price_display: string | null;
+    image_url: string | null;
+    purchase_url: string | null;
+    asin: string | null;
+    description: string | null;
+  }>;
 }
 
 function stripCodeFence(text: string): string {

@@ -76,3 +76,6 @@ chroma_data/
 # SQLite databases
 *.sqlite3
 
+# Generated assets
+taste-fingerprint/apps/serve/generated/
+

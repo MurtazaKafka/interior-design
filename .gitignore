@@ -76,3 +76,7 @@ chroma_data/
 # SQLite databases
 *.sqlite3
 
+# Generated 3D assets and downloads
+artspace-interior/artspace-ui/assets/generated/
+*.crdownload
+

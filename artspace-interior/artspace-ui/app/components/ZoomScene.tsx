@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
 type FrameProps = {
@@ -10,10 +10,9 @@ type FrameProps = {
 
 function Frame({ scrollProgress }: FrameProps) {
   const frameRef = useRef<THREE.Group>(null)
-  const cameraRef = useRef<THREE.PerspectiveCamera>(null)
 
   // Update camera position based on scroll
-  useFrame(({ camera }) => {
+  useFrame(({ camera }: { camera: THREE.Camera }) => {
     if (camera instanceof THREE.PerspectiveCamera) {
       // Smooth zoom from Z=8 to Z=0.8 (entering the frame)
       const targetZ = 8 - scrollProgress * 7.2
@@ -28,7 +27,7 @@ function Frame({ scrollProgress }: FrameProps) {
   })
 
   // Subtle floating animation
-  useFrame(({ clock }) => {
+  useFrame(({ clock }: { clock: THREE.Clock }) => {
     if (frameRef.current) {
       frameRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.05
     }
@@ -100,32 +99,50 @@ type ZoomSceneProps = {
 }
 
 export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
-  const [hasWebGL, setHasWebGL] = useState<boolean | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [runtimeError, setRuntimeError] = useState<string | null>(null)
+  const [webGLStatus, setWebGLStatus] = useState<{ hasWebGL: boolean | null; message: string | null }>({
+    hasWebGL: null,
+    message: null,
+  })
 
   useEffect(() => {
-    // Check if WebGL is available
+    if (typeof window === 'undefined') return
+    let cancelled = false
+    const updateStatus = (payload: { hasWebGL: boolean | null; message: string | null }) => {
+      if (!cancelled) {
+        setWebGLStatus(payload)
+      }
+    }
+
     try {
       const canvas = document.createElement('canvas')
-      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-      
+      const gl =
+        canvas.getContext('webgl2') ||
+        canvas.getContext('webgl') ||
+        canvas.getContext('experimental-webgl')
+
       if (!gl) {
         console.warn('WebGL context could not be created')
-        setHasWebGL(false)
-        setError('WebGL is not supported in your browser')
-      } else {
-        console.log('WebGL is available and ready')
-        setHasWebGL(true)
+        queueMicrotask(() => updateStatus({ hasWebGL: false, message: 'WebGL is not supported in your browser' }))
+        return
       }
-    } catch (e) {
-      console.error('WebGL detection error:', e)
-      setHasWebGL(false)
-      setError('WebGL is disabled or unavailable')
+
+      console.log('WebGL is available and ready')
+      queueMicrotask(() => updateStatus({ hasWebGL: true, message: null }))
+    } catch (error) {
+      console.error('WebGL detection error:', error)
+      queueMicrotask(() => updateStatus({ hasWebGL: false, message: 'WebGL is disabled or unavailable' }))
+    }
+    return () => {
+      cancelled = true
     }
   }, [])
 
+  const hasWebGL = runtimeError ? false : webGLStatus.hasWebGL
+  const errorMessage = runtimeError ?? webGLStatus.message
+
   // Show loading state while checking WebGL
-  if (hasWebGL === null) {
+  if (hasWebGL === null && !runtimeError) {
     return (
       <div className="flex items-center justify-center h-full w-full bg-[#faf9f7]">
         <div className="text-center">
@@ -137,7 +154,7 @@ export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
   }
 
   // Fallback UI when WebGL is not available
-  if (hasWebGL === false) {
+  if (hasWebGL === false || runtimeError) {
     return (
       <div className="flex items-center justify-center h-full w-full bg-[#faf9f7]">
         <div className="max-w-md text-center p-8">
@@ -148,7 +165,7 @@ export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
           </div>
           <h3 className="serif text-2xl text-[#2a2826] mb-3">3D Scene Unavailable</h3>
           <p className="text-sm text-[#6b6764] leading-relaxed mb-4">
-            {error || 'WebGL is required to display the 3D artwork.'}
+            {errorMessage || 'WebGL is required to display the 3D artwork.'}
           </p>
           <p className="text-xs text-[#6b6764] leading-relaxed">
             Please enable hardware acceleration in your browser settings or try refreshing the page.
@@ -176,17 +193,16 @@ export function ZoomScene({ scrollProgress }: ZoomSceneProps) {
         height: '100%',
         background: 'transparent'
       }}
-      onCreated={({ gl, scene, camera }) => {
+      onCreated={({ scene, camera }: { scene: THREE.Scene; camera: THREE.PerspectiveCamera }) => {
         // Successfully created WebGL context
         console.log('✅ WebGL Canvas created successfully')
         console.log('Camera position:', camera.position)
         console.log('Scene children:', scene.children.length)
       }}
-      onError={(error) => {
+      onError={(error: Error) => {
         // Handle Canvas creation errors
         console.error('❌ Canvas creation error:', error)
-        setHasWebGL(false)
-        setError('Failed to initialize 3D graphics')
+        setRuntimeError('Failed to initialize 3D graphics')
       }}
     >
       {/* Lighting - Gallery setup */}

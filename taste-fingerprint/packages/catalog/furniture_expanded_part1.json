@@ -1,0 +1,423 @@
+[
+  {
+    "id": "furn_sofa_modern_001",
+    "name": "Oslo Modern Sectional Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["modern", "minimalist", "scandinavian"],
+    "colors": ["gray", "charcoal"],
+    "materials": ["fabric", "wood"],
+    "dimensions": {
+      "width": 96,
+      "depth": 60,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Contemporary L-shaped sectional with clean lines and neutral tones. Perfect for modern living rooms.",
+    "image_url": "/furniture/sofa_modern_001.jpg",
+    "model_url": "/models/furniture/sofa_modern_001.glb",
+    "model_format": "gltf",
+    "price": 1299,
+    "tags": ["seating", "large", "corner"]
+  },
+  {
+    "id": "furn_sofa_modern_002",
+    "name": "Copenhagen Loveseat",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["scandinavian", "minimalist", "contemporary"],
+    "colors": ["beige", "cream", "natural"],
+    "materials": ["linen", "oak"],
+    "dimensions": {
+      "width": 60,
+      "depth": 36,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Compact two-seater with Scandinavian design principles. Light fabric and oak legs.",
+    "image_url": "/furniture/sofa_modern_002.jpg",
+    "model_url": "/models/furniture/sofa_modern_002.glb",
+    "model_format": "gltf",
+    "price": 899,
+    "tags": ["seating", "compact", "two-seater"]
+  },
+  {
+    "id": "furn_sofa_midcentury_001",
+    "name": "Mad Men Tufted Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["mid-century", "retro", "vintage"],
+    "colors": ["tan", "leather", "brown"],
+    "materials": ["leather", "walnut"],
+    "dimensions": {
+      "width": 84,
+      "depth": 36,
+      "height": 34,
+      "unit": "inches"
+    },
+    "description": "Classic mid-century modern sofa with button tufting and tapered walnut legs.",
+    "image_url": "/furniture/sofa_midcentury_001.jpg",
+    "model_url": "/models/furniture/sofa_midcentury_001.glb",
+    "model_format": "gltf",
+    "price": 1499,
+    "tags": ["seating", "leather", "vintage"]
+  },
+  {
+    "id": "furn_sofa_midcentury_002",
+    "name": "Atomic Age Settee",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["mid-century", "retro", "danish"],
+    "colors": ["orange", "teak", "vibrant"],
+    "materials": ["velvet", "teak"],
+    "dimensions": {
+      "width": 72,
+      "depth": 32,
+      "height": 30,
+      "unit": "inches"
+    },
+    "description": "Vibrant orange velvet settee with iconic teak frame. Pure 1960s style.",
+    "image_url": "/furniture/sofa_midcentury_002.jpg",
+    "model_url": "/models/furniture/sofa_midcentury_002.glb",
+    "model_format": "gltf",
+    "price": 1299,
+    "tags": ["seating", "colorful", "statement"]
+  },
+  {
+    "id": "furn_sofa_industrial_001",
+    "name": "Brooklyn Loft Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["industrial", "urban", "modern"],
+    "colors": ["charcoal", "black", "steel"],
+    "materials": ["leather", "metal"],
+    "dimensions": {
+      "width": 90,
+      "depth": 38,
+      "height": 30,
+      "unit": "inches"
+    },
+    "description": "Raw leather sofa with exposed metal frame. Perfect for loft spaces.",
+    "image_url": "/furniture/sofa_industrial_001.jpg",
+    "model_url": "/models/furniture/sofa_industrial_001.glb",
+    "model_format": "gltf",
+    "price": 1699,
+    "tags": ["seating", "leather", "metal"]
+  },
+  {
+    "id": "furn_sofa_boho_001",
+    "name": "Marrakech Daybed Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["bohemian", "eclectic", "global"],
+    "colors": ["rust", "terracotta", "cream"],
+    "materials": ["cotton", "rattan"],
+    "dimensions": {
+      "width": 78,
+      "depth": 40,
+      "height": 28,
+      "unit": "inches"
+    },
+    "description": "Low-profile daybed with woven rattan base and layered cushions.",
+    "image_url": "/furniture/sofa_boho_001.jpg",
+    "model_url": "/models/furniture/sofa_boho_001.glb",
+    "model_format": "gltf",
+    "price": 1099,
+    "tags": ["seating", "bohemian", "daybed"]
+  },
+  {
+    "id": "furn_sofa_classic_001",
+    "name": "Chesterfield Leather Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["traditional", "classic", "english"],
+    "colors": ["burgundy", "brown", "dark"],
+    "materials": ["leather", "mahogany"],
+    "dimensions": {
+      "width": 84,
+      "depth": 38,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "Iconic deep-buttoned leather Chesterfield with rolled arms.",
+    "image_url": "/furniture/sofa_classic_001.jpg",
+    "model_url": "/models/furniture/sofa_classic_001.glb",
+    "model_format": "gltf",
+    "price": 2299,
+    "tags": ["seating", "luxury", "traditional"]
+  },
+  {
+    "id": "furn_sofa_coastal_001",
+    "name": "Hamptons Slipcovered Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["coastal", "beach", "casual"],
+    "colors": ["white", "ivory", "light"],
+    "materials": ["cotton", "linen"],
+    "dimensions": {
+      "width": 88,
+      "depth": 40,
+      "height": 34,
+      "unit": "inches"
+    },
+    "description": "Relaxed slipcover sofa in white linen. Perfect for coastal homes.",
+    "image_url": "/furniture/sofa_coastal_001.jpg",
+    "model_url": "/models/furniture/sofa_coastal_001.glb",
+    "model_format": "gltf",
+    "price": 1399,
+    "tags": ["seating", "casual", "white"]
+  },
+  {
+    "id": "furn_sofa_glam_001",
+    "name": "Hollywood Regency Velvet Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["glam", "art-deco", "luxe"],
+    "colors": ["emerald", "green", "gold"],
+    "materials": ["velvet", "brass"],
+    "dimensions": {
+      "width": 80,
+      "depth": 36,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Luxurious emerald velvet with brass legs. Statement glamour piece.",
+    "image_url": "/furniture/sofa_glam_001.jpg",
+    "model_url": "/models/furniture/sofa_glam_001.glb",
+    "model_format": "gltf",
+    "price": 1899,
+    "tags": ["seating", "luxury", "velvet"]
+  },
+  {
+    "id": "furn_sofa_minimalist_001",
+    "name": "Tokyo Modular Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["minimalist", "japanese", "zen"],
+    "colors": ["black", "gray", "monochrome"],
+    "materials": ["wool", "steel"],
+    "dimensions": {
+      "width": 92,
+      "depth": 36,
+      "height": 28,
+      "unit": "inches"
+    },
+    "description": "Ultra-minimalist modular design with low profile and clean geometry.",
+    "image_url": "/furniture/sofa_minimalist_001.jpg",
+    "model_url": "/models/furniture/sofa_minimalist_001.glb",
+    "model_format": "gltf",
+    "price": 1599,
+    "tags": ["seating", "modular", "minimal"]
+  },
+
+  {
+    "id": "furn_chair_accent_001",
+    "name": "Velvet Wingback Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["contemporary", "luxe", "glam"],
+    "colors": ["navy", "blue", "gold"],
+    "materials": ["velvet", "brass"],
+    "dimensions": {
+      "width": 30,
+      "depth": 32,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "Plush navy velvet accent chair with brass-capped legs.",
+    "image_url": "/furniture/chair_accent_001.jpg",
+    "model_url": "/models/furniture/chair_accent_001.glb",
+    "model_format": "gltf",
+    "price": 599,
+    "tags": ["seating", "accent", "velvet"]
+  },
+  {
+    "id": "furn_chair_accent_002",
+    "name": "Mid-Century Lounge Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["mid-century", "retro", "classic"],
+    "colors": ["cognac", "brown", "leather"],
+    "materials": ["leather", "walnut"],
+    "dimensions": {
+      "width": 32,
+      "depth": 33,
+      "height": 31,
+      "unit": "inches"
+    },
+    "description": "Iconic leather lounge chair with molded plywood frame.",
+    "image_url": "/furniture/chair_accent_002.jpg",
+    "model_url": "/models/furniture/chair_accent_002.glb",
+    "model_format": "gltf",
+    "price": 899,
+    "tags": ["seating", "lounge", "iconic"]
+  },
+  {
+    "id": "furn_chair_dining_001",
+    "name": "Nordic Dining Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["scandinavian", "minimalist", "nordic"],
+    "colors": ["white", "oak", "natural"],
+    "materials": ["wood", "fabric"],
+    "dimensions": {
+      "width": 20,
+      "depth": 22,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Clean-lined wooden dining chair with curved back support.",
+    "image_url": "/furniture/chair_dining_001.jpg",
+    "model_url": "/models/furniture/chair_dining_001.glb",
+    "model_format": "gltf",
+    "price": 249,
+    "tags": ["dining", "wood", "minimal"]
+  },
+  {
+    "id": "furn_chair_dining_002",
+    "name": "Industrial Metal Dining Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["industrial", "urban", "modern"],
+    "colors": ["black", "steel", "gray"],
+    "materials": ["metal", "steel"],
+    "dimensions": {
+      "width": 18,
+      "depth": 20,
+      "height": 33,
+      "unit": "inches"
+    },
+    "description": "Matte black metal chair with cross-back design.",
+    "image_url": "/furniture/chair_dining_002.jpg",
+    "model_url": "/models/furniture/chair_dining_002.glb",
+    "model_format": "gltf",
+    "price": 199,
+    "tags": ["dining", "metal", "industrial"]
+  },
+  {
+    "id": "furn_chair_office_001",
+    "name": "Executive Leather Office Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["modern", "professional", "ergonomic"],
+    "colors": ["black", "chrome"],
+    "materials": ["leather", "metal"],
+    "dimensions": {
+      "width": 26,
+      "depth": 26,
+      "height": 42,
+      "unit": "inches"
+    },
+    "description": "Ergonomic office chair with premium leather and adjustable height.",
+    "image_url": "/furniture/chair_office_001.jpg",
+    "model_url": "/models/furniture/chair_office_001.glb",
+    "model_format": "gltf",
+    "price": 499,
+    "tags": ["office", "ergonomic", "leather"]
+  },
+  {
+    "id": "furn_chair_lounge_001",
+    "name": "Barcelona Pavilion Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["modern", "bauhaus", "iconic"],
+    "colors": ["white", "chrome", "silver"],
+    "materials": ["leather", "steel"],
+    "dimensions": {
+      "width": 30,
+      "depth": 30,
+      "height": 30,
+      "unit": "inches"
+    },
+    "description": "Iconic modernist chair with tufted leather cushions and chrome frame.",
+    "image_url": "/furniture/chair_lounge_001.jpg",
+    "model_url": "/models/furniture/chair_lounge_001.glb",
+    "model_format": "gltf",
+    "price": 799,
+    "tags": ["lounge", "iconic", "modern"]
+  },
+  {
+    "id": "furn_chair_accent_003",
+    "name": "Peacock Rattan Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["bohemian", "global", "eclectic"],
+    "colors": ["natural", "tan", "woven"],
+    "materials": ["rattan", "wicker"],
+    "dimensions": {
+      "width": 40,
+      "depth": 36,
+      "height": 52,
+      "unit": "inches"
+    },
+    "description": "Dramatic peacock-style rattan chair with fan back.",
+    "image_url": "/furniture/chair_accent_003.jpg",
+    "model_url": "/models/furniture/chair_accent_003.glb",
+    "model_format": "gltf",
+    "price": 699,
+    "tags": ["accent", "rattan", "statement"]
+  },
+  {
+    "id": "furn_chair_accent_004",
+    "name": "Egg Pod Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["modern", "sculptural", "retro"],
+    "colors": ["orange", "white", "plastic"],
+    "materials": ["fiberglass", "cushion"],
+    "dimensions": {
+      "width": 34,
+      "depth": 32,
+      "height": 42,
+      "unit": "inches"
+    },
+    "description": "Iconic egg-shaped pod chair with swivel base.",
+    "image_url": "/furniture/chair_accent_004.jpg",
+    "model_url": "/models/furniture/chair_accent_004.glb",
+    "model_format": "gltf",
+    "price": 849,
+    "tags": ["accent", "pod", "iconic"]
+  },
+  {
+    "id": "furn_chair_dining_003",
+    "name": "Wishbone Dining Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["scandinavian", "mid-century", "organic"],
+    "colors": ["oak", "natural", "woven"],
+    "materials": ["wood", "cord"],
+    "dimensions": {
+      "width": 22,
+      "depth": 20,
+      "height": 29,
+      "unit": "inches"
+    },
+    "description": "Classic Y-back chair with woven cord seat.",
+    "image_url": "/furniture/chair_dining_003.jpg",
+    "model_url": "/models/furniture/chair_dining_003.glb",
+    "model_format": "gltf",
+    "price": 399,
+    "tags": ["dining", "wishbone", "classic"]
+  },
+  {
+    "id": "furn_chair_accent_005",
+    "name": "Bergère Armchair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["traditional", "french", "classic"],
+    "colors": ["cream", "gold", "ivory"],
+    "materials": ["linen", "wood"],
+    "dimensions": {
+      "width": 28,
+      "depth": 28,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "French-style upholstered armchair with exposed carved wood frame.",
+    "image_url": "/furniture/chair_accent_005.jpg",
+    "model_url": "/models/furniture/chair_accent_005.glb",
+    "model_format": "gltf",
+    "price": 749,
+    "tags": ["accent", "french", "upholstered"]
+  }
+]

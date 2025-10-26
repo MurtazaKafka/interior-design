@@ -1,0 +1,398 @@
+[
+  {
+    "id": "furn_sofa_modern_001",
+    "name": "Modern L-Shape Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["modern", "minimalist", "contemporary"],
+    "colors": ["gray", "charcoal"],
+    "dimensions": {
+      "width": 96,
+      "depth": 60,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Contemporary L-shaped sectional sofa with clean lines",
+    "image_url": "/furniture/sofa_modern_001.jpg",
+    "model_url": "/models/furniture/avocado.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_sofa_mid_century_001",
+    "name": "Mid-Century Tufted Sofa",
+    "category": "furniture",
+    "subcategory": "sofa",
+    "styleTags": ["mid-century", "retro", "vintage"],
+    "colors": ["tan", "leather", "brown"],
+    "dimensions": {
+      "width": 84,
+      "depth": 36,
+      "height": 34,
+      "unit": "inches"
+    },
+    "description": "Classic mid-century modern sofa with button tufting and tapered legs",
+    "image_url": "/furniture/sofa_mid_century_001.jpg",
+    "model_url": "/models/furniture/barramundi.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_chair_accent_001",
+    "name": "Velvet Accent Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["contemporary", "luxe", "glam"],
+    "colors": ["navy", "blue", "gold"],
+    "dimensions": {
+      "width": 30,
+      "depth": 32,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "Plush velvet accent chair with gold legs",
+    "image_url": "/furniture/chair_accent_001.jpg",
+    "model_url": "/models/furniture/boom.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_chair_dining_001",
+    "name": "Scandinavian Dining Chair",
+    "category": "furniture",
+    "subcategory": "chair",
+    "styleTags": ["scandinavian", "minimalist", "nordic"],
+    "colors": ["white", "oak", "natural"],
+    "dimensions": {
+      "width": 20,
+      "depth": 22,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Clean-lined wooden dining chair with natural finish",
+    "image_url": "/furniture/chair_dining_001.jpg",
+    "model_url": "/models/furniture/box.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_table_coffee_001",
+    "name": "Glass Coffee Table",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": ["modern", "contemporary", "minimalist"],
+    "colors": ["clear", "silver", "glass"],
+    "dimensions": {
+      "width": 48,
+      "depth": 24,
+      "height": 18,
+      "unit": "inches"
+    },
+    "description": "Rectangular glass coffee table with chrome base",
+    "image_url": "/furniture/table_coffee_001.jpg",
+    "model_url": "/models/furniture/cube.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_table_coffee_002",
+    "name": "Round Wooden Coffee Table",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": ["scandinavian", "natural", "organic"],
+    "colors": ["oak", "natural", "wood"],
+    "dimensions": {
+      "width": 36,
+      "depth": 36,
+      "height": 16,
+      "unit": "inches"
+    },
+    "description": "Round coffee table with solid oak top and splayed legs",
+    "image_url": "/furniture/table_coffee_002.jpg",
+    "model_url": "/models/furniture/suzanne.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_table_dining_001",
+    "name": "Extendable Dining Table",
+    "category": "furniture",
+    "subcategory": "table",
+    "styleTags": ["contemporary", "functional", "modern"],
+    "colors": ["walnut", "dark wood"],
+    "dimensions": {
+      "width": 72,
+      "depth": 40,
+      "height": 30,
+      "unit": "inches"
+    },
+    "description": "Modern extendable dining table seats 6-8",
+    "image_url": "/furniture/table_dining_001.jpg",
+    "model_url": "/models/furniture/toyCar.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_floor_001",
+    "name": "Arc Floor Lamp",
+    "category": "lighting",
+    "subcategory": "floor lamp",
+    "styleTags": ["modern", "dramatic", "sculptural"],
+    "colors": ["brass", "gold", "white"],
+    "dimensions": {
+      "width": 48,
+      "depth": 16,
+      "height": 82,
+      "unit": "inches"
+    },
+    "description": "Arched floor lamp with marble base and brass finish",
+    "image_url": "/furniture/light_floor_001.jpg",
+    "model_url": "/models/lighting/light_floor_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_floor_002",
+    "name": "Tripod Floor Lamp",
+    "category": "lighting",
+    "subcategory": "floor lamp",
+    "styleTags": ["mid-century", "scandinavian", "minimal"],
+    "colors": ["oak", "white", "natural"],
+    "dimensions": {
+      "width": 22,
+      "depth": 22,
+      "height": 65,
+      "unit": "inches"
+    },
+    "description": "Wooden tripod base with fabric drum shade",
+    "image_url": "/furniture/light_floor_002.jpg",
+    "model_url": "/models/lighting/light_floor_002.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_table_001",
+    "name": "Ceramic Table Lamp",
+    "category": "lighting",
+    "subcategory": "table lamp",
+    "styleTags": ["contemporary", "organic", "artisan"],
+    "colors": ["white", "cream", "ceramic"],
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "height": 24,
+      "unit": "inches"
+    },
+    "description": "Hand-crafted ceramic base with linen shade",
+    "image_url": "/furniture/light_table_001.jpg",
+    "model_url": "/models/lighting/light_table_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_pendant_001",
+    "name": "Globe Pendant Light",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": ["modern", "minimalist", "industrial"],
+    "colors": ["brass", "clear", "glass"],
+    "dimensions": {
+      "width": 12,
+      "depth": 12,
+      "height": 14,
+      "unit": "inches"
+    },
+    "description": "Clear glass globe with brass hardware",
+    "image_url": "/furniture/light_pendant_001.jpg",
+    "model_url": "/models/lighting/light_pendant_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_pendant_002",
+    "name": "Woven Rattan Pendant",
+    "category": "lighting",
+    "subcategory": "pendant",
+    "styleTags": ["bohemian", "natural", "coastal"],
+    "colors": ["natural", "rattan", "tan"],
+    "dimensions": {
+      "width": 18,
+      "depth": 18,
+      "height": 16,
+      "unit": "inches"
+    },
+    "description": "Hand-woven rattan pendant in natural finish",
+    "image_url": "/furniture/light_pendant_002.jpg",
+    "model_url": "/models/lighting/light_pendant_002.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "light_chandelier_001",
+    "name": "Modern Linear Chandelier",
+    "category": "lighting",
+    "subcategory": "chandelier",
+    "styleTags": ["contemporary", "geometric", "modern"],
+    "colors": ["black", "brass", "matte"],
+    "dimensions": {
+      "width": 36,
+      "depth": 6,
+      "height": 8,
+      "unit": "inches"
+    },
+    "description": "Linear chandelier with adjustable geometric arms",
+    "image_url": "/furniture/light_chandelier_001.jpg",
+    "model_url": "/models/lighting/light_chandelier_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "art_abstract_001",
+    "name": "Abstract Canvas - Neutrals",
+    "category": "painting",
+    "subcategory": "abstract",
+    "styleTags": ["abstract", "modern", "minimalist"],
+    "colors": ["beige", "tan", "white", "gold"],
+    "dimensions": {
+      "width": 48,
+      "depth": 2,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "Large abstract canvas with neutral earth tones and gold leaf accents",
+    "image_url": "/furniture/art_abstract_001.jpg",
+    "model_url": "/models/art/art_abstract_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "art_abstract_002",
+    "name": "Bold Color Block Canvas",
+    "category": "painting",
+    "subcategory": "abstract",
+    "styleTags": ["abstract", "contemporary", "bold"],
+    "colors": ["navy", "mustard", "rust", "cream"],
+    "dimensions": {
+      "width": 40,
+      "depth": 2,
+      "height": 60,
+      "unit": "inches"
+    },
+    "description": "Vertical abstract painting with bold color blocking",
+    "image_url": "/furniture/art_abstract_002.jpg",
+    "model_url": "/models/art/art_abstract_002.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "art_botanical_001",
+    "name": "Botanical Line Drawing",
+    "category": "painting",
+    "subcategory": "botanical",
+    "styleTags": ["minimalist", "botanical", "natural"],
+    "colors": ["black", "white", "line art"],
+    "dimensions": {
+      "width": 24,
+      "depth": 1,
+      "height": 36,
+      "unit": "inches"
+    },
+    "description": "Simple black line drawing of botanical leaves on white background",
+    "image_url": "/furniture/art_botanical_001.jpg",
+    "model_url": "/models/art/art_botanical_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "art_landscape_001",
+    "name": "Mountain Landscape Photo",
+    "category": "painting",
+    "subcategory": "landscape",
+    "styleTags": ["natural", "serene", "photography"],
+    "colors": ["blue", "green", "white"],
+    "dimensions": {
+      "width": 48,
+      "depth": 2,
+      "height": 32,
+      "unit": "inches"
+    },
+    "description": "Panoramic mountain landscape photograph in natural frame",
+    "image_url": "/furniture/art_landscape_001.jpg",
+    "model_url": "/models/art/art_landscape_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_bookshelf_001",
+    "name": "Ladder Bookshelf",
+    "category": "furniture",
+    "subcategory": "storage",
+    "styleTags": ["modern", "minimalist", "space-saving"],
+    "colors": ["white", "oak"],
+    "dimensions": {
+      "width": 24,
+      "depth": 16,
+      "height": 72,
+      "unit": "inches"
+    },
+    "description": "Five-tier leaning ladder bookshelf with oak frame",
+    "image_url": "/furniture/bookshelf_001.jpg",
+    "model_url": "/models/furniture/bookshelf_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_rug_001",
+    "name": "Geometric Area Rug",
+    "category": "furniture",
+    "subcategory": "rug",
+    "styleTags": ["modern", "geometric", "bold"],
+    "colors": ["black", "white", "gray"],
+    "dimensions": {
+      "width": 96,
+      "depth": 120,
+      "height": 0.5,
+      "unit": "inches"
+    },
+    "description": "8x10 modern geometric pattern area rug in monochrome",
+    "image_url": "/furniture/rug_001.jpg",
+    "model_url": "/models/furniture/rug_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_rug_002",
+    "name": "Persian Style Area Rug",
+    "category": "furniture",
+    "subcategory": "rug",
+    "styleTags": ["traditional", "ornate", "vintage"],
+    "colors": ["red", "navy", "cream"],
+    "dimensions": {
+      "width": 108,
+      "depth": 144,
+      "height": 0.5,
+      "unit": "inches"
+    },
+    "description": "9x12 traditional Persian-inspired area rug with medallion pattern",
+    "image_url": "/furniture/rug_002.jpg",
+    "model_url": "/models/furniture/rug_002.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_plant_001",
+    "name": "Fiddle Leaf Fig Tree",
+    "category": "furniture",
+    "subcategory": "plant",
+    "styleTags": ["natural", "organic", "greenery"],
+    "colors": ["green", "terracotta"],
+    "dimensions": {
+      "width": 18,
+      "depth": 18,
+      "height": 60,
+      "unit": "inches"
+    },
+    "description": "Large fiddle leaf fig in terracotta planter",
+    "image_url": "/furniture/plant_001.jpg",
+    "model_url": "/models/furniture/plant_001.glb",
+    "model_format": "gltf"
+  },
+  {
+    "id": "furn_cushion_001",
+    "name": "Velvet Throw Pillows",
+    "category": "furniture",
+    "subcategory": "decor",
+    "styleTags": ["luxe", "cozy", "textured"],
+    "colors": ["emerald", "green", "velvet"],
+    "dimensions": {
+      "width": 20,
+      "depth": 20,
+      "height": 6,
+      "unit": "inches"
+    },
+    "description": "Set of 2 velvet throw pillows in jewel tones",
+    "image_url": "/furniture/cushion_001.jpg",
+    "model_url": "/models/furniture/cushion_001.glb",
+    "model_format": "gltf"
+  }
+]

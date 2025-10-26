@@ -122,5 +122,68 @@ def recommend_products(
     return data
 
 
-__all__ = ["summarize_taste", "recommend_products", "ClaudeSettingsError"]
+def craft_room_edit_prompt(context: Dict[str, Any], *, model: str, max_tokens: int = 600, temperature: float = 0.2) -> Dict[str, Any]:
+    """Ask Claude to craft a single prompt string for OpenAI image edits."""
+
+    client = _client()
+    response = client.messages.create(
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        system=(
+            "You are an interior design prompt engineer. Given context about a user's taste summary, "
+            "room traits, and candidate furniture pieces, craft a single detailed text prompt suitable "
+            "for an image editing model that decorates a room photo. Return JSON with a single key "
+            "'prompt' whose value is the prompt string. The prompt should reference the furniture, "
+            "materials, palette, and styling cues explicitly. Keep it under 120 words."
+        ),
+        messages=[{"role": "user", "content": json.dumps(context, indent=2)}],
+    )
+
+    text_blocks = []
+    for block in response.content:
+        if getattr(block, "type", None) == "text":
+            text_blocks.append(getattr(block, "text", ""))
+
+    combined_text = "".join(text_blocks).strip()
+
+    def _strip_fence(text: str) -> str:
+        if not text.startswith("```"):
+            return text
+        fence_lines = text.splitlines()
+        if fence_lines and fence_lines[0].strip().startswith("```"):
+            fence_lines = fence_lines[1:]
+        while fence_lines and fence_lines[-1].strip().startswith("```"):
+            fence_lines.pop()
+        return "\n".join(fence_lines).strip()
+
+    combined_text = _strip_fence(combined_text)
+
+    result: Dict[str, Any] = {"raw_text": combined_text}
+    if not combined_text:
+        logger.warning("Claude returned empty content for room prompt request")
+        result["prompt"] = None
+        return result
+
+    try:
+        parsed = json.loads(combined_text)
+    except json.JSONDecodeError:
+        logger.warning("Claude prompt response not valid JSON: %s", combined_text)
+        result["prompt"] = combined_text
+        return result
+
+    prompt_value = parsed.get("prompt") if isinstance(parsed, dict) else None
+    if isinstance(prompt_value, str) and prompt_value.strip():
+        result["prompt"] = prompt_value.strip()
+    else:
+        logger.warning("Claude prompt JSON missing 'prompt' key, falling back to raw text")
+        result["prompt"] = combined_text
+    return result
+
+
+__all__ = [
+    "summarize_taste",
+    "recommend_products",
+    "ClaudeSettingsError",
+]
 

@@ -1,29 +1,51 @@
 from __future__ import annotations
 
+import asyncio
+import time
 from collections import Counter
 import logging
 import json
 import os
-from typing import Any, Dict, List
+import base64
+import tempfile
+import shutil
+from contextlib import ExitStack
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+from urllib.parse import urlparse
 
 import chromadb
+import httpx
 import numpy as np
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from apps.serve.services.claude import ClaudeSettingsError, summarize_taste, recommend_products
+from openai import OpenAI
+
+from apps.serve.services.claude import (
+    ClaudeSettingsError,
+    summarize_taste,
+    recommend_products,
+    craft_room_edit_prompt,
+)
 
 
 logger = logging.getLogger(__name__)
 
 load_dotenv()
 
+ROOT_DIR = Path(__file__).resolve().parents[2]
+PUBLIC_DIR = ROOT_DIR / "apps/web/public"
+
 CHROMA_API_KEY = os.getenv("CHROMA_API_KEY")
 CHROMA_TENANT = os.getenv("CHROMA_TENANT")
 CHROMA_DATABASE = os.getenv("CHROMA_DATABASE")
 ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-4-5-20250929")
+OPENAI_IMAGE_MODEL = os.getenv("OPENAI_IMAGE_MODEL", "gpt-image-1")
+GENERATED_ROOT = Path(os.getenv("GENERATED_IMAGE_DIR", Path(__file__).resolve().parent / "generated"))
 
 if not all([CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE]):
     raise RuntimeError("Missing Chroma Cloud configuration: set CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE")
@@ -48,6 +70,11 @@ client = chromadb.CloudClient(
 artworks = client.get_or_create_collection("artworks", metadata={"hnsw:space": "cosine"})
 users = client.get_or_create_collection("users", metadata={"hnsw:space": "cosine"})
 products = client.get_or_create_collection("products", metadata={"hnsw:space": "cosine"})
+
+openai_client = OpenAI()
+
+GENERATED_ROOT.mkdir(parents=True, exist_ok=True)
+app.mount("/generated", StaticFiles(directory=str(GENERATED_ROOT), html=False), name="generated")
 
 
 class Artwork(BaseModel):
@@ -91,6 +118,11 @@ class ProductRecommendation(BaseModel):
 class ProductRecommendationResponse(BaseModel):
     user_id: str
     items: list[ProductRecommendation]
+
+
+class RenderRoomResponse(BaseModel):
+    user_id: str
+    image_url: str
 
 
 def _parse_metadata(meta: Dict[str, Any]) -> Dict[str, Any]:
@@ -183,6 +215,319 @@ def _merge_scores(candidates: list[dict[str, Any]], claude_scores: dict[str, dic
         )
     merged.sort(key=lambda r: r.score, reverse=True)
     return merged
+
+
+async def _download_image(url: str) -> Path:
+    parsed = urlparse(url)
+    suffix = Path(parsed.path).suffix or ".png"
+    temp = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
+    temp_path = Path(temp.name)
+    temp.close()
+
+    if parsed.scheme in {"http", "https"}:
+        async with httpx.AsyncClient(timeout=30) as client:
+            response = await client.get(url)
+            response.raise_for_status()
+            temp_path.write_bytes(response.content)
+        return temp_path
+
+    if not parsed.scheme and url.startswith("/"):
+        local_path = PUBLIC_DIR / url.lstrip("/")
+        if not local_path.exists():
+            raise HTTPException(status_code=404, detail=f"Local image not found: {url}")
+        shutil.copyfile(local_path, temp_path)
+        return temp_path
+
+    raise HTTPException(status_code=400, detail=f"Unsupported image URL: {url}")
+
+
+def _cleanup_files(paths: List[Optional[Path]]) -> None:
+    for path in paths:
+        if path is None:
+            continue
+        try:
+            if path.exists():
+                path.unlink()
+        except OSError:
+            logger.warning("Failed to delete temp file %s", path)
+
+
+def _get_cached_taste_summary(user_id: str) -> tuple[Optional[dict[str, Any]], Optional[str]]:
+    try:
+        user_res = users.get(ids=[user_id], include=["metadatas"])
+    except chromadb.errors.InvalidCollectionException:
+        return None, None
+
+    metas = _ensure_sequence(user_res.get("metadatas"))
+    for meta in metas:
+        if isinstance(meta, dict):
+            summary = meta.get("taste_summary")
+            raw = meta.get("raw_taste_summary")
+            if summary or raw:
+                return summary, raw
+    return None, None
+
+
+def _select_product_image(meta: Dict[str, Any]) -> Optional[str]:
+    if not isinstance(meta, dict):
+        return None
+
+    candidates = [
+        meta.get("image_url"),
+        meta.get("hero_image"),
+        meta.get("primary_image"),
+    ]
+
+    for candidate in candidates:
+        if isinstance(candidate, str):
+            normalized = _normalize_image_reference(candidate)
+            if normalized:
+                return normalized
+
+    array_like_keys = ["image_urls", "images", "photos"]
+    for key in array_like_keys:
+        value = meta.get(key)
+        if isinstance(value, list):
+            for entry in value:
+                if isinstance(entry, str):
+                    normalized = _normalize_image_reference(entry)
+                    if normalized:
+                        return normalized
+        elif isinstance(value, str):
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    for entry in parsed:
+                        if isinstance(entry, str):
+                            normalized = _normalize_image_reference(entry)
+                            if normalized:
+                                return normalized
+            except json.JSONDecodeError:
+                normalized = _normalize_image_reference(value)
+                if normalized:
+                    return normalized
+
+    return None
+
+
+def _normalize_image_reference(value: str) -> Optional[str]:
+    candidate = value.strip()
+    if not candidate:
+        return None
+    if candidate.startswith("http://") or candidate.startswith("https://") or candidate.startswith("/"):
+        return candidate
+    return f"/{candidate}"
+
+
+def _compose_prompt_payload(user_id: str, vector: np.ndarray, items: list[ProductRecommendation], *, taste_summary: Optional[dict[str, Any]], raw_summary: Optional[str]) -> dict[str, Any]:
+    furniture = []
+    for entry in items[:5]:
+        meta = entry.metadata or {}
+        furniture.append({
+            "id": entry.id,
+            "name": meta.get("name"),
+            "brand": meta.get("brand"),
+            "category": meta.get("category"),
+            "materials": meta.get("materials"),
+            "colors": meta.get("colors"),
+            "style_tags": meta.get("style_tags"),
+            "roomTypes": meta.get("roomTypes"),
+            "description": meta.get("description"),
+        })
+
+    return {
+        "user_id": user_id,
+        "vector_preview": vector[:12].tolist(),
+        "taste_summary": taste_summary,
+        "raw_taste_summary": raw_summary,
+        "furniture": furniture,
+    }
+
+
+def _save_generated_image(user_id: str, image_bytes: bytes) -> Path:
+    target = GENERATED_ROOT / f"{user_id}.png"
+    target.write_bytes(image_bytes)
+    return target
+
+
+def _build_local_image_prompt(context: Dict[str, Any]) -> str:
+    summary = context.get("taste_summary") or {}
+    raw_summary = context.get("raw_taste_summary")
+    furniture = context.get("furniture") or []
+
+    concise = summary.get("concise") if isinstance(summary, dict) else None
+    palette = summary.get("palette_summary") if isinstance(summary, dict) else None
+    materials = summary.get("material_summary") if isinstance(summary, dict) else None
+    mood = summary.get("mood_summary") if isinstance(summary, dict) else None
+    style = summary.get("style_summary") if isinstance(summary, dict) else None
+
+    furniture_lines = []
+    for item in furniture:
+        if not isinstance(item, dict):
+            continue
+        name = item.get("name")
+        if not name:
+            continue
+        brand = item.get("brand")
+        category = item.get("category")
+        descriptors: list[str] = []
+        if brand:
+            descriptors.append(str(brand))
+        if category:
+            descriptors.append(str(category))
+        if item.get("materials"):
+            descriptors.append(f"materials: {item['materials']}")
+        if item.get("colors"):
+            descriptors.append(f"colors: {item['colors']}")
+        if item.get("style_tags"):
+            descriptors.append(f"style tags: {item['style_tags']}")
+        if item.get("description"):
+            descriptors.append(f"notes: {item['description']}")
+        descriptor_str = ", ".join(descriptors)
+        furniture_lines.append(f"- {name}{': ' + descriptor_str if descriptor_str else ''}")
+
+    furniture_text = "\n".join(furniture_lines)
+
+    prompt_parts = [
+        "Photorealistic interior rendering of the provided room fully furnished according to the user's taste.",
+        "Maintain architecture, lighting, and wall finishes while placing furniture seamlessly.",
+    ]
+
+    if concise:
+        prompt_parts.append(f"Overall vibe: {concise}.")
+    if style:
+        prompt_parts.append(f"Style emphasis: {style}.")
+    if palette:
+        prompt_parts.append(f"Color palette guidance: {palette}.")
+    if materials:
+        prompt_parts.append(f"Materials to highlight: {materials}.")
+    if mood:
+        prompt_parts.append(f"Mood cues: {mood}.")
+    if raw_summary and not concise:
+        prompt_parts.append(f"Reference summary: {raw_summary}.")
+    if furniture_text:
+        prompt_parts.append("Key furniture pieces to include:\n" + furniture_text)
+
+    prompt_parts.append("Ensure furniture placement respects spatial logic, avoids clipping, and keeps proportions realistic.")
+
+    return " ".join(prompt_parts)
+
+
+@app.post("/render/room", response_model=RenderRoomResponse)
+async def render_room(
+    user_id: str = Form(...),
+    room_image: UploadFile = File(...),
+    summary_json: str | None = Form(None),
+    raw_summary_form: str | None = Form(None),
+) -> RenderRoomResponse:
+    if not room_image.filename:
+        raise HTTPException(status_code=400, detail="Room image upload is required")
+
+    room_suffix = Path(room_image.filename).suffix or ".png"
+    room_temp = tempfile.NamedTemporaryFile(delete=False, suffix=room_suffix)
+    try:
+        room_bytes = await room_image.read()
+        room_temp.write(room_bytes)
+        room_temp.flush()
+    finally:
+        room_temp.close()
+        await room_image.close()
+
+    room_path = Path(room_temp.name)
+
+    try:
+        user_vec = _get_user_vector(user_id)
+        explicit_summary: Optional[dict[str, Any]] = None
+        if summary_json:
+            try:
+                parsed_summary = json.loads(summary_json)
+                if isinstance(parsed_summary, dict):
+                    explicit_summary = parsed_summary
+            except json.JSONDecodeError:
+                logger.warning("Failed to decode provided summary JSON for user %s", user_id)
+
+        taste_summary, raw_summary = _get_cached_taste_summary(user_id)
+        if explicit_summary is not None:
+            taste_summary = explicit_summary
+        if raw_summary_form:
+            raw_summary = raw_summary_form
+
+        if taste_summary is None and raw_summary is None:
+            raise HTTPException(status_code=400, detail="Taste summary missing. Complete onboarding first.")
+
+        if taste_summary is not None:
+            try:
+                taste_summary = json.loads(json.dumps(taste_summary))
+            except TypeError:
+                taste_summary = None
+
+        candidates = _query_products_by_vector(user_vec, candidate_pool=32)
+        if not candidates:
+            raise HTTPException(status_code=404, detail="No product candidates available")
+
+        system_prompt, user_payload = _build_claude_payload(user_id, user_vec, taste_summary, candidates)
+        loop = asyncio.get_running_loop()
+        claude_res = await loop.run_in_executor(
+            None,
+            lambda: recommend_products(
+                system_prompt=system_prompt,
+                user_content=user_payload,
+                model=ANTHROPIC_MODEL,
+                max_tokens=800,
+            ),
+        )
+
+        parsed = claude_res.get("parsed") or {}
+        recs = parsed.get("recommendations") if isinstance(parsed, dict) else None
+        claude_scores: dict[str, dict[str, Any]] = {}
+        if isinstance(recs, list):
+            for entry in recs:
+                if isinstance(entry, dict) and entry.get("id"):
+                    claude_scores[entry["id"]] = entry
+
+        merged = _merge_scores(candidates, claude_scores)
+        top_recs = merged[:5]
+        if not top_recs:
+            raise HTTPException(status_code=404, detail="No furniture recommendations ready yet")
+
+        prompt_context = _compose_prompt_payload(
+            user_id,
+            user_vec,
+            top_recs,
+            taste_summary=taste_summary,
+            raw_summary=raw_summary,
+        )
+        prompt_text = _build_local_image_prompt(prompt_context)
+        logger.info("Generated render prompt", extra={
+            "user_id": user_id,
+            "prompt_preview": prompt_text[:200],
+        })
+
+        def _call_image_edit() -> Any:
+            with ExitStack() as stack:
+                room_file = stack.enter_context(open(room_path, "rb"))
+                return openai_client.images.edit(
+                    model=OPENAI_IMAGE_MODEL,
+                    image=room_file,
+                    prompt=prompt_text,
+                )
+
+        openai_res = await loop.run_in_executor(None, _call_image_edit)
+        try:
+            image_b64 = openai_res.data[0].b64_json
+        except (AttributeError, IndexError, KeyError):
+            logger.error("OpenAI image edit failed", extra={
+                "user_id": user_id,
+                "prompt_preview": prompt_text[:200],
+            })
+            raise HTTPException(status_code=502, detail="OpenAI image edit did not return an image")
+
+        image_bytes = base64.b64decode(image_b64)
+        output_path = _save_generated_image(user_id, image_bytes)
+
+        return RenderRoomResponse(user_id=user_id, image_url=f"/generated/{output_path.name}")
+    finally:
+        _cleanup_files([room_path])
 
 
 @app.get("/artworks/list")
@@ -401,16 +746,7 @@ def recommend_products_endpoint(payload: ProductRecommendationRequest) -> Produc
         raise HTTPException(status_code=404, detail="No product candidates found")
 
     # Optional: reuse cached taste summary if available
-    try:
-        summary_res = users.get(ids=[payload.user_id], include=["metadatas"])
-        metas = _ensure_sequence(summary_res.get("metadatas"))
-        taste_summary = None
-        for meta in metas:
-            if isinstance(meta, dict) and meta.get("taste_summary"):
-                taste_summary = meta["taste_summary"]
-                break
-    except chromadb.errors.InvalidCollectionException:
-        taste_summary = None
+    taste_summary, _ = _get_cached_taste_summary(payload.user_id)
 
     system_prompt, user_payload = _build_claude_payload(payload.user_id, user_vec, taste_summary, candidates)
 

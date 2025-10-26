@@ -1,64 +1,5 @@
 [
   {
-    "id": "furn_bed_sweetcrispy-queen-bed-frame-heavy-duty-metal-pla_v01",
-    "name": "Sweetcrispy Queen Bed Frame - Heavy Duty Metal Platform Bed Frames Queen Size with Storage Space Under Frame, No Box Spring Needed, 14 Inches, Sturdy Steel Slat Support",
-    "brand": "Sweetcrispy",
-    "category": "bed",
-    "roomTypes": [
-      "bedroom"
-    ],
-    "price": 49.99,
-    "currency": "USD",
-    "buy_url": "https://www.amazon.com/dp/B0FHV8MSVT?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81zavOxVQSL._AC_SL1500_.jpg",
-    "dimensions_in": {
-      "w": 60.0,
-      "d": 80.0,
-      "h": 14.0
-    },
-    "materials": [
-      "stainless steel"
-    ],
-    "colors": [
-      "black"
-    ],
-    "style_tags": [
-      "stainless steel"
-    ],
-    "description": "About this item Stainless Steel Superior Load-bearing Capacity - Made of high-strength steel, our bed frame can support up to 1100 pounds without the need for a box spring. Whether it's for guest rooms, rentals, or your own bedroom, rest assured that you'll have a safe and stable sleep. Enhanced Stability - Crafted with quality materials and expert craftsmanship, our bed frame provides both comfort and durability. Th",
-    "scraped_at": "2025-10-26T07:31:37.637Z"
-  },
-  {
-    "id": "furn_chair_songmics-mazie-collection-43-inches-folding-stor_v01",
-    "name": "SONGMICS MAZIE Collection - 43 Inches Folding Storage Ottoman Bench, Ottoman Foot Rest, End of Bed Bench, Storage Chest, Load 660 lb, for Living Room, Bedroom, Entryway, Dark Gray ULSF77K",
-    "brand": "SONGMICS",
-    "category": "chair",
-    "roomTypes": [
-      "living",
-      "bedroom"
-    ],
-    "price": 39.99,
-    "currency": "USD",
-    "buy_url": "https://www.amazon.com/dp/B07JNFKYC3?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/810mT03Bl1L._AC_SL1500_.jpg",
-    "dimensions_in": {
-      "w": 43.0,
-      "d": 15.0,
-      "h": 15.0
-    },
-    "materials": [
-      "engineered wood"
-    ],
-    "colors": [
-      "dark gray"
-    ],
-    "style_tags": [
-      "ottoman bench"
-    ],
-    "description": "About this item \u3010QUICK ASSEMBLY, EASY FOLDAWAY\u3011This storage ottoman from the SONGMICS MAZIE Collection has a foldable design that allows quick setup in seconds by simply inserting the bottom panel. Easily fold and store it under the bed or in a closet when not in use \u3010AMPLE STORAGE\u3011Measuring 15\"D x 43\"W x 15\"H (38 x 110 x 38 cm), this storage bench offers a 35-gallon (131 L) volume. Its removable divider keeps your b",
-    "scraped_at": "2025-10-26T07:32:05.159Z"
-  },
-  {
     "id": "furn_table_fdw-4-piece-patio-furniture-set-black-outdoor-wi_v01",
     "name": "FDW | 4-Piece Patio Furniture Set | Black | Outdoor Wicker Furniture with Coffee Table | Modern Rattan Chairs Conversation Set | Outdoor Seating | Weather-Resistant | for Porch, Garden, Lawn",
     "brand": "FDW",
@@ -70,7 +11,7 @@
     "price": 129.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07NZNZXMV?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61hqWRdvH6L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_fdw-4-piece-patio-furniture-set-black-outdoor-wi_v01.jpg",
     "dimensions_in": {
       "w": 37.0,
       "d": 25.0,
@@ -100,7 +41,7 @@
     "price": 27.29,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B086X47D2T?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/41kbuXJG6PL._AC_SL1000_.jpg",
+    "image_url": "/products/furn_table_keter-city-30-gallon-resin-outdoor-storage-box-a_v01.jpg",
     "dimensions_in": {
       "w": 17.3,
       "d": 22.75,
@@ -134,7 +75,7 @@
     "price": 999.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CW9H27TS?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/813umLAuZvL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_serwall-outdoor-hdpe-dining-table-set-7-piece-ou_v01.jpg",
     "dimensions_in": {
       "w": 32.2,
       "d": 66.9,
@@ -166,7 +107,7 @@
     "price": 31.7,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DSKNJZYG?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71zA2QHCh0L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_dumos-mattress-toppers-memory-foam-full-2-inch-t_v01.jpg",
     "dimensions_in": {
       "w": 54.0,
       "d": 74.0,
@@ -195,7 +136,7 @@
     "price": 24.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B00BAGTNAQ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71YFOZ2k0XL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_chomchom-roller-pet-hair-remover-and-reusable-li_v01.jpg",
     "dimensions_in": {
       "w": 7.5,
       "d": 2.5,
@@ -228,7 +169,7 @@
     "price": 27.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0B3JJYJSS?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71VMU5ziIvL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_dekava-under-sink-organizer-2-pack-bathroom-cabi_v01.jpg",
     "dimensions_in": {
       "w": 8.0,
       "d": 15.0,
@@ -258,7 +199,7 @@
     "price": 9.98,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09472RY19?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81PkUm+dk6L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_chair_acstep-folding-step-stool-9-tall-kids-step-stool_v01.jpg",
     "dimensions_in": {
       "w": 1.6,
       "d": 13.0,
@@ -287,7 +228,7 @@
     "price": 699.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0D31PN8PV?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81eT-DeIrrL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_reclining-loveseat-massage-loveseat-recliner-sof_v01.jpg",
     "dimensions_in": {
       "w": 66.7,
       "d": 28.8,
@@ -320,7 +261,7 @@
     "price": 229.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0FLX5X841?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81YTzhY+2WL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_garveehome-75-in-tall-coffee-hutch-cabinet-large_v01.jpg",
     "dimensions_in": {
       "w": 43.9,
       "d": 16.5,
@@ -353,7 +294,7 @@
     "price": 47.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CTH25RZH?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71EKccyV8dL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_pesrae-floor-lamp-with-table-end-tables-with-cha_v01.jpg",
     "dimensions_in": {
       "w": 13.39,
       "d": 18.9,
@@ -384,7 +325,7 @@
     "price": 29.98,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BVFX154J?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71fsY72Q9WL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_floor-lamp-with-shelves-for-living-room-shelf-fl_v01.jpg",
     "dimensions_in": {
       "w": 10.3,
       "d": 10.3,
@@ -413,7 +354,7 @@
     "price": 39.9,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09F6PQM27?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61RXJrFmGrL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_oneon-furniture-movers-with-wheels-lifter-set-36_v01.jpg",
     "dimensions_in": {
       "w": 4.75,
       "d": 4.75,
@@ -442,7 +383,7 @@
     "price": 32.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DQL9PX4W?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71-84vKmjtL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_new-upgrade-furniture-sliders-furniture-movers-w_v01.jpg",
     "dimensions_in": {
       "w": 4.37,
       "d": 4.37,
@@ -472,7 +413,7 @@
     "price": 35.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B00LFIZ6OG?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/51NwS9lITVL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_amazon-basics-2-seater-deep-lounge-sofa-outdoor_v01.jpg",
     "dimensions_in": {
       "w": 54.0,
       "d": 38.0,
@@ -510,7 +451,7 @@
     "price": 15.19,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07H4DMLVH?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61auMpE6zFL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_huanuo-monitor-stand-monitor-stand-riser-3-heigh_v01.jpg",
     "dimensions_in": {
       "w": 9.25,
       "d": 14.57,
@@ -546,7 +487,7 @@
     "price": 35.97,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0B42B6NZF?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81+ZaLjkk6L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_thicken-sturdy-clear-shoe-storage-organizer-with_v01.jpg",
     "dimensions_in": {
       "w": 10.5,
       "d": 13.5,
@@ -577,7 +518,7 @@
     "price": 1849.83,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0916GFZ84?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81nPXcJPxPS._AC_SL1500_.jpg",
+    "image_url": "/products/furn_bed_roundhill-furniture-imerland-contemporary-white_v01.jpg",
     "dimensions_in": {
       "w": 80.12,
       "d": 90.5,
@@ -611,7 +552,7 @@
     "price": 35.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B08Z36X6B4?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71YNhyHG-IL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_sunmory-floor-lamp-with-shelves-modern-square-st_v01.jpg",
     "dimensions_in": {
       "w": 10.2,
       "d": 10.2,
@@ -643,7 +584,7 @@
     "price": 2449.96,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BRTBZ9CD?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81mQGYiL0JL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_roundhill-furniture-clelane-wood-bedroom-set-wit_v01.jpg",
     "dimensions_in": {
       "w": 80.5,
       "d": 87.0,
@@ -677,7 +618,7 @@
     "price": 489.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0C6Y5KF4Y?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81WkLrjcHtL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_bme-sideboard-georgina-solid-wood-2-doors-3-draw_v01.jpg",
     "dimensions_in": {
       "w": 61.0,
       "d": 16.0,
@@ -709,7 +650,7 @@
     "price": 32.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DKXN7XL4?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61qfPdJyQML._AC_SL1500_.jpg",
+    "image_url": "/products/furn_chair_wimarsbon-vanity-stool-with-storage-faux-fur-ott_v01.jpg",
     "dimensions_in": {
       "w": 13.0,
       "d": 13.0,
@@ -739,7 +680,7 @@
     "price": 9.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B099596F3B?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71YUh1Ig0cL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_der-rose-4-pack-fake-plants-mini-artificial-gree_v01.jpg",
     "dimensions_in": {
       "w": 2.56,
       "d": 2.56,
@@ -770,7 +711,7 @@
     "price": 18.98,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07QL7GGNF?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71Zggj29pAL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_spacekeeper-slim-rolling-storage-cart-4-tier-bat_v01.jpg",
     "dimensions_in": {
       "w": 15.3,
       "d": 4.9,
@@ -799,7 +740,7 @@
     "price": 19.98,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07D29P5Z1?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71GrAWYYDyL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_decor_xxxflower-plant-terrarium-with-wooden-stand-air_v01.jpg",
     "dimensions_in": {
       "w": 5.85,
       "d": 11.71,
@@ -834,7 +775,7 @@
     "price": 29.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CF9K1NJM?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/8110Qq9US-L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_white-vases-for-decor-heart-shaped-ceramic-vase_v01.jpg",
     "dimensions_in": {
       "w": 6.3,
       "d": 6.3,
@@ -863,7 +804,7 @@
     "price": 29.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0C7WH88W7?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/811ZeNw+9PL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_decor_snuggle-hollow-ceramic-vase-set-of-2-nordic-mode_v01.jpg",
     "dimensions_in": {
       "w": 10.0,
       "d": 12.7,
@@ -893,7 +834,7 @@
     "price": 14.24,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CDLXVVVZ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81GQD5oSGDL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_hanobe-candle-plate-holder-tray-round-wooden-dec_v01.jpg",
     "dimensions_in": {
       "w": 11.02,
       "d": 11.02,
@@ -927,7 +868,7 @@
     "price": 29.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09NC1VGTW?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/91Rbc9-Ts4L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_rustic-farmhouse-lantern-decor-set-of-2-stylish_v01.jpg",
     "dimensions_in": {
       "w": 6.97,
       "d": 6.97,
@@ -959,7 +900,7 @@
     "price": 19.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CD59K7PX?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61Kuew3I5GL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_velova-set-of-3-white-ceramic-vase-with-65-pcs-d_v01.jpg",
     "dimensions_in": {
       "w": 6.0,
       "d": 9.0,
@@ -989,7 +930,7 @@
     "price": 14.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BBH5ZDP4?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71xPtXlo4NL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_3-link-wood-knot-decor-hand-carved-coffee-table_v01.jpg",
     "dimensions_in": {
       "w": 5.12,
       "d": 5.12,
@@ -1019,7 +960,7 @@
     "price": 11.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BZ85F98Q?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/911QXgrv0TL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_der-rose-fake-plants-4-packs-artificial-plants-s_v01.jpg",
     "dimensions_in": {
       "w": 5.9,
       "d": 3.14,
@@ -1050,7 +991,7 @@
     "price": 23.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07VKJKFN2?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71X-tWosqML._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_der-rose-3-pack-mini-potted-fake-plants-artifici_v01.jpg",
     "dimensions_in": {
       "w": 9.0,
       "d": 9.0,
@@ -1084,7 +1025,7 @@
     "price": 23.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BWJRJYS7?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71isRGBoSdL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_marycele-candle-warmer-lamp-with-timer-dimmer-ch_v01.jpg",
     "dimensions_in": {
       "w": 5.3,
       "d": 5.3,
@@ -1120,7 +1061,7 @@
     "price": 25.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B092843CHY?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/7150eO9vSzL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_maxvolador-solar-powered-address-sign-house-numb_v01.jpg",
     "dimensions_in": {
       "w": 9.92,
       "d": 5.91,
@@ -1154,7 +1095,7 @@
     "price": 16.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0FFKQ9YYN?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71y48c8IalL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_halloween-haunted-house-decorations-black-spooky_v01.jpg",
     "dimensions_in": {
       "w": 7.75,
       "d": 4.0,
@@ -1184,7 +1125,7 @@
     "price": 19.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09F6JW2BD?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81EtmoxppOL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_storage_spacelead-slim-storage-cart-4-tier-bathroom-orga_v01.jpg",
     "dimensions_in": {
       "w": 4.9,
       "d": 15.3,
@@ -1218,7 +1159,7 @@
     "price": 116.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0D2R4RPBS?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81UR5EQ5K2L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_yeshomy-farmhouse-tv-stand-for-televisions-up-to_v01.jpg",
     "dimensions_in": {
       "w": 15.5,
       "d": 58.0,
@@ -1249,7 +1190,7 @@
     "price": 17.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B08P752RXQ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71JWSG2UGjL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_chair_delxo-folding-step-stool-13-inch-non-slip-foldab_v01.jpg",
     "dimensions_in": {
       "w": 14.0,
       "d": 11.0,
@@ -1279,7 +1220,7 @@
     "price": 104.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DS661869?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71Ef0iLVApL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_dog-crate-furniture-wooden-dog-house-with-chargi_v01.jpg",
     "dimensions_in": {
       "w": 24.5,
       "d": 30.0,
@@ -1315,7 +1256,7 @@
     "price": 9.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0F58W874P?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81pJrBz5bTL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_halloween-tabletop-decoration-wooden-lighted-hau_v01.jpg",
     "dimensions_in": {
       "w": 1.97,
       "d": 8.27,
@@ -1346,7 +1287,7 @@
     "price": 9.98,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B071JB9SC8?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71axKN6EluL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_chair_utopia-home-folding-step-stool-with-handle-pack_v01.jpg",
     "dimensions_in": {
       "w": 11.3,
       "d": 8.5,
@@ -1375,7 +1316,7 @@
     "price": 39.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BDLGZCTY?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61E5+Tg-R9L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_eheyciga-orthopedic-dog-beds-for-extra-large-dog_v01.jpg",
     "dimensions_in": {
       "w": 13.37,
       "d": 17.31,
@@ -1405,7 +1346,7 @@
     "price": 344.58,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09TBDWLGJ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71T-Y0SwN4L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_chair_crosley-furniture-holbrook-hall-tree-with-shoe-r_v01.jpg",
     "dimensions_in": {
       "w": 18.0,
       "d": 38.0,
@@ -1435,7 +1376,7 @@
     "price": 9.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0BHR69GHK?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81mFRdxKcGL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_der-rose-4-pack-small-fake-plants-mini-artificia_v01.jpg",
     "dimensions_in": {
       "w": 2.56,
       "d": 2.56,
@@ -1468,7 +1409,7 @@
     "price": 19.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07Z5NQPDS?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/41M4oGNowVL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_modern-floor-lamp-simple-design-with-white-shade_v01.jpg",
     "dimensions_in": {
       "w": 7.87,
       "d": 10.24,
@@ -1499,7 +1440,7 @@
     "price": 28.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0C4Y1RZTR?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/815VS8qIWxL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_solar-garden-statues-outdoor-decor-fairy-moon-fi_v01.jpg",
     "dimensions_in": {
       "w": 7.95,
       "d": 11.1,
@@ -1529,7 +1470,7 @@
     "price": 32.79,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CDVXHG67?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71qeBuEXhFL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_flameless-led-candles-with-timer-9-pc-flickering_v01.jpg",
     "dimensions_in": {
       "w": 2.3,
       "d": 2.3,
@@ -1559,7 +1500,7 @@
     "price": 23.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07YJN8WR8?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/41uADWg8XGL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_sofa_easy-going-heavy-duty-2-seater-outdoor-loveseat_v01.jpg",
     "dimensions_in": {
       "w": 32.5,
       "d": 58.0,
@@ -1593,7 +1534,7 @@
     "price": 9.38,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B09V7XC4VV?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71-V-N2TpoL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_der-rose-set-of-6-succulents-plants-artificial-i_v01.jpg",
     "dimensions_in": {
       "w": 2.3,
       "d": 2.3,
@@ -1626,7 +1567,7 @@
     "price": 8.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CL52R135?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71dw1-QTmuL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_120pcs-new-home-confetti-house-and-key-shaped-pa_v01.jpg",
     "dimensions_in": {
       "w": 1.0,
       "d": 2.0,
@@ -1659,7 +1600,7 @@
     "price": 79.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0FDG8VZJZ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81QfrODDoHL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_addlon-200ft-permanent-outdoor-lights-rgb-ic-sma_v01.jpg",
     "dimensions_in": {
       "w": 11.38,
       "d": 13.78,
@@ -1690,7 +1631,7 @@
     "price": 15.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0C7HK4WGV?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/61qnkv4er1L._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_halloween-decorations-indoor-haunted-house-light_v01.jpg",
     "dimensions_in": {
       "w": 2.0,
       "d": 10.6,
@@ -1720,7 +1661,7 @@
     "price": 17.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0FJRZD181?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81TI4atrMNL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_chunful-5-pcs-gingerbread-christmas-table-decora_v01.jpg",
     "dimensions_in": {
       "w": 5.91,
       "d": 5.91,
@@ -1750,7 +1691,7 @@
     "price": 15.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0FGJ1YJ4P?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81Ethzlx4GL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_christmas-gingerbread-house-tabletop-decorations_v01.jpg",
     "dimensions_in": {
       "w": 5.91,
       "d": 11.81,
@@ -1780,7 +1721,7 @@
     "price": 25.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DSKY7LJ4?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/81Gtew+oVYL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_table_valery-madelyn-halloween-decorations-lighted-hal_v01.jpg",
     "dimensions_in": {
       "w": 5.51,
       "d": 3.15,
@@ -1810,7 +1751,7 @@
     "price": 9.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0DB8FMZ3X?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/617ilFedPgL._AC_SL1301_.jpg",
+    "image_url": "/products/furn_table_halloween-decorations-indoor-4-pcs-halloween-tab_v01.jpg",
     "dimensions_in": {
       "w": 12.0,
       "d": 12.0,
@@ -1840,7 +1781,7 @@
     "price": 37.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0F9BCJ6T1?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/91WrJYqWbaL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_joyin-halloween-spider-web-and-59-giant-light-up_v01.jpg",
     "dimensions_in": {
       "w": 43.0,
       "d": 26.0,
@@ -1871,7 +1812,7 @@
     "price": 72.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B0CLFR6JLZ?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/91jjgvudPCL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_solar-spotlights-outdoor-63-led-3-lighting-modes_v01.jpg",
     "dimensions_in": {
       "w": 4.4,
       "d": 4.0,
@@ -1902,7 +1843,7 @@
     "price": 9.99,
     "currency": "USD",
     "buy_url": "https://www.amazon.com/dp/B07W726LD5?th=1&psc=1",
-    "image_url": "https://m.media-amazon.com/images/I/71aI0wTAkkL._AC_SL1500_.jpg",
+    "image_url": "/products/furn_lamp_brightown-accessory-cord-with-led-bulb-6ft-cord_v01.jpg",
     "dimensions_in": {
       "w": 3.98,
       "d": 5.98,

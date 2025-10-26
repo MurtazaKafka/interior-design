@@ -36,7 +36,8 @@ if not all([CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE]):
         "Missing Chroma Cloud configuration: set CHROMA_API_KEY, CHROMA_TENANT, CHROMA_DATABASE"
     )
 
-PRODUCTS_JSON = ROOT_DIR / "packages/catalog/products_clean.json"
+PRODUCTS_JSON = ROOT_DIR / "packages/catalog/products_unique.json"
+PUBLIC_DIR = ROOT_DIR / "apps/web/public"
 CACHE_DIR = ROOT_DIR / "apps/serve/.cache/product_images"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -54,15 +55,26 @@ def _cache_path(url: str) -> Path:
 
 
 def _load_image(url: str, timeout: float = 10.0) -> Image.Image:
-    cache_file = _cache_path(url)
-    if cache_file.exists():
-        data = cache_file.read_bytes()
-    else:
-        resp = requests.get(url, timeout=timeout)
-        resp.raise_for_status()
-        data = resp.content
-        cache_file.write_bytes(data)
-    return Image.open(BytesIO(data)).convert("RGB")
+    parsed = requests.utils.urlparse(url)
+
+    if parsed.scheme in ("http", "https"):
+        cache_file = _cache_path(url)
+        if cache_file.exists():
+            data = cache_file.read_bytes()
+        else:
+            resp = requests.get(url, timeout=timeout)
+            resp.raise_for_status()
+            data = resp.content
+            cache_file.write_bytes(data)
+        return Image.open(BytesIO(data)).convert("RGB")
+
+    if not parsed.scheme and url.startswith("/"):
+        local_path = PUBLIC_DIR / url.lstrip("/")
+        if not local_path.exists():
+            raise FileNotFoundError(f"Local image not found: {local_path}")
+        return Image.open(local_path).convert("RGB")
+
+    raise ValueError(f"Unsupported image URL: {url}")
 
 
 def _prepare_metadata(entry: dict[str, Any]) -> dict[str, str]:

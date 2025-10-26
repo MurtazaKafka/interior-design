@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? 'http://localhost:8000';
+export const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? 'http://localhost:8000';
 
 export interface Artwork {
   id: string;
@@ -60,6 +60,11 @@ export interface ProductRecommendationRequest {
 export interface ProductRecommendationResponse {
   user_id: string;
   items: ProductRecommendation[];
+}
+
+export interface RoomRenderResponse {
+  user_id: string;
+  image_url: string;
 }
 
 function stripCodeFence(text: string): string {
@@ -164,5 +169,33 @@ export async function postProductRecommendations(
   if (!res.ok) {
     throw new Error(`Product recommend failed: ${res.status}`);
   }
+  return res.json();
+}
+
+export async function postRoomRender(
+  userId: string,
+  roomImage: File,
+  summary?: Record<string, unknown> | null,
+  rawSummary?: string | null,
+): Promise<RoomRenderResponse> {
+  const formData = new FormData();
+  formData.append('user_id', userId);
+  formData.append('room_image', roomImage);
+  if (summary) {
+    formData.append('summary_json', JSON.stringify(summary));
+  }
+  if (rawSummary) {
+    formData.append('raw_summary_form', rawSummary);
+  }
+
+  const res = await fetch(`${API_BASE}/render/room`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error(`Room render failed: ${res.status}`);
+  }
+
   return res.json();
 }

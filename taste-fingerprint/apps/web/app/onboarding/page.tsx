@@ -2,16 +2,18 @@
 
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { ChangeEvent } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import {
+  API_BASE,
   fetchArtworks,
   postTasteUpdate,
   postTasteSummary,
-  postProductRecommendations,
+  postRoomRender,
   Artwork,
   TasteSummaryResponse,
-  ProductRecommendation,
+  RoomRenderResponse,
   coerceTasteSummary,
 } from '../../lib/api';
 import styles from './styles.module.css';
@@ -30,8 +32,12 @@ interface TasteState {
   summary: TasteSummaryResponse | null;
   summaryLoading: boolean;
   summaryError: string | null;
-  recsLoading: boolean;
-  recsError: string | null;
+}
+
+interface RenderState {
+  status: 'idle' | 'rendering' | 'complete' | 'error';
+  error: string | null;
+  result: RoomRenderResponse | null;
 }
 
 const TARGET_COMPARISONS = 12;
@@ -69,13 +75,11 @@ export default function OnboardingPage() {
     summary: null,
     summaryLoading: false,
     summaryError: null,
-    recsLoading: false,
-    recsError: null,
   });
-  const [recommendations, setRecommendations] = useState<ProductRecommendation[] | null>(null);
-
-  const summaryRef = useRef<TasteSummaryResponse | null>(taste.summary);
-  summaryRef.current = taste.summary;
+  const [roomFile, setRoomFile] = useState<File | null>(null);
+  const [render, setRender] = useState<RenderState>({ status: 'idle', error: null, result: null });
+  const renderInputRef = useRef<HTMLInputElement | null>(null);
+  const summaryRequested = useRef(false);
 
   const currentPair = useMemo(() => pairs[taste.comparisons] ?? null, [pairs, taste.comparisons]);
   const progress = useMemo(() => taste.comparisons / TARGET_COMPARISONS, [taste.comparisons]);
@@ -93,21 +97,26 @@ export default function OnboardingPage() {
       });
   }, []);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') return;
+    console.log('Render state', render);
+  }, [render]);
+
 useEffect(() => {
-  if (!completed || !taste.vector || summaryRef.current) {
+  if (!completed || !taste.vector || summaryRequested.current) {
     return;
   }
+
+  summaryRequested.current = true;
 
   let cancelled = false;
 
   const run = async () => {
-    setRecommendations(null);
+    setRender({ status: 'idle', error: null, result: null });
     setTaste((prev) => ({
       ...prev,
       summaryLoading: true,
       summaryError: null,
-      recsLoading: false,
-      recsError: null,
     }));
 
     try {
@@ -120,28 +129,15 @@ useEffect(() => {
         summary: summaryPayload ? { ...summaryRes, summary: summaryPayload } : summaryRes,
         summaryLoading: false,
         summaryError: summaryPayload ? null : 'We could not parse your style brief yet.',
-        recsLoading: true,
-        recsError: null,
       }));
-
-      try {
-        const recsRes = await postProductRecommendations({ user_id: userId, limit: 9, candidate_pool: 32 });
-        if (cancelled) return;
-        setRecommendations(recsRes.items ?? []);
-        setTaste((prev) => ({ ...prev, recsLoading: false }));
-      } catch (recsErr) {
-        console.error(recsErr);
-        if (cancelled) return;
-        setTaste((prev) => ({ ...prev, recsLoading: false, recsError: 'Could not fetch furniture matches yet.' }));
-      }
     } catch (err) {
       console.error(err);
       if (cancelled) return;
+      summaryRequested.current = false;
       setTaste((prev) => ({
         ...prev,
         summaryLoading: false,
         summaryError: 'Could not summarize your taste yet.',
-        recsLoading: false,
       }));
     }
   };
@@ -213,10 +209,10 @@ useEffect(() => {
       summary: null,
       summaryLoading: false,
       summaryError: null,
-      recsLoading: false,
-      recsError: null,
     });
-    setRecommendations(null);
+    setRoomFile(null);
+    setRender({ status: 'idle', error: null, result: null });
+    summaryRequested.current = false;
   }, [artworks]);
 
   const pairForRender = useMemo(() => {
@@ -228,34 +224,69 @@ useEffect(() => {
     return currentPair;
   }, [currentPair, replenishPairs, taste.history]);
 
-const parsedSummary = useMemo(() => {
-  if (!taste.summary) return null;
+  const parsedSummary = useMemo(() => {
+    if (!taste.summary) return null;
 
-  const summary = taste.summary.summary && Object.keys(taste.summary.summary).length > 0
-    ? taste.summary.summary
-    : coerceTasteSummary(taste.summary.raw_summary);
+    const summary = taste.summary.summary && Object.keys(taste.summary.summary).length > 0
+      ? taste.summary.summary
+      : coerceTasteSummary(taste.summary.raw_summary);
 
-  if (!summary || Object.keys(summary).length === 0) {
-    return null;
-  }
+    if (!summary || Object.keys(summary).length === 0) {
+      return null;
+    }
 
-  const name = String(summary.name ?? taste.summary.user_id ?? 'Inspiration').trim();
-  const imageUrl = String(summary.image_url ?? summary.hero_image ?? '').trim();
-  const palette = Array.isArray(summary.palette_colors)
-    ? summary.palette_colors
-    : Array.isArray(summary.palette)
-    ? summary.palette
-    : null;
+    const name = String(summary.name ?? taste.summary.user_id ?? 'Inspiration').trim();
+    const imageUrl = String(summary.image_url ?? summary.hero_image ?? '').trim();
+    const palette = Array.isArray(summary.palette_colors)
+      ? summary.palette_colors
+      : Array.isArray(summary.palette)
+      ? summary.palette
+      : null;
 
-  return {
-    ...summary,
-    _display: {
-      name: name.length > 0 ? name : null,
-      imageUrl: imageUrl.length > 0 ? imageUrl : null,
-      palette,
-    },
-  } as Record<string, any>;
-}, [taste.summary]);
+    return {
+      ...summary,
+      _display: {
+        name: name.length > 0 ? name : null,
+        imageUrl: imageUrl.length > 0 ? imageUrl : null,
+        palette,
+      },
+    } as Record<string, any>;
+  }, [taste.summary]);
+
+  const handleRoomFileChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+    setRoomFile(file);
+    setRender((prev) => ({ status: 'idle', error: null, result: prev.result }));
+  }, []);
+
+  const handleRenderRoom = useCallback(async () => {
+    if (!roomFile) {
+      setRender((prev) => ({ status: 'error', error: 'Please upload a room photo first.', result: prev.result }));
+      return;
+    }
+
+    if (!taste.summary || taste.summaryLoading) {
+      setRender((prev) => ({ status: 'error', error: 'Your style brief is still loading. Try again in a moment.', result: prev.result }));
+      return;
+    }
+
+    setRender((prev) => ({ status: 'rendering', error: null, result: prev.result }));
+
+    try {
+      const response = await postRoomRender(
+        userId,
+        roomFile,
+        taste.summary?.summary ?? coerceTasteSummary(taste.summary?.raw_summary),
+        taste.summary?.raw_summary ?? null,
+      );
+      console.log('Room render response', response);
+      setRender({ status: 'complete', error: null, result: response });
+      setRecommendations(null);
+    } catch (err) {
+      console.error('Room render failed', err);
+      setRender((prev) => ({ status: 'error', error: 'We could not stage your room yet. Please retry.', result: prev.result }));
+    }
+  }, [roomFile, taste.summary, taste.summaryLoading, userId]);
 
   return (
     <main className={styles.container}>
@@ -319,57 +350,44 @@ const parsedSummary = useMemo(() => {
               <p className={styles.summaryStatus}>Your brief is queued—hang tight.</p>
             )
           )}
-          <section className={styles.recommendations}>
-            <h3>Furniture we love for you</h3>
-            {taste.recsLoading && <p className={styles.summaryStatus}>Finding pieces that match…</p>}
-            {taste.recsError && <p className={styles.summaryError}>{taste.recsError}</p>}
-            {recommendations && recommendations.length > 0 && (
-              <ul className={styles.recommendationGrid}>
-                {recommendations.map((item) => (
-                  <li key={item.id} className={styles.recommendationCard}>
-                    <article>
-                      <header>
-                        <h4>{String(item.metadata?.name ?? 'Untitled piece')}</h4>
-                        {item.metadata?.brand && <span>{String(item.metadata.brand)}</span>}
-                      </header>
-                      <dl>
-                        <div>
-                          <dt>Score</dt>
-                          <dd>{item.score.toFixed(2)}</dd>
-                        </div>
-                        <div>
-                          <dt>Cosine</dt>
-                          <dd>{item.cosine_similarity.toFixed(2)}</dd>
-                        </div>
-                        {typeof item.claude_score === 'number' && (
-                          <div>
-                            <dt>Claude</dt>
-                            <dd>{item.claude_score.toFixed(2)}</dd>
-                          </div>
-                        )}
-                      </dl>
-                      {Array.isArray(item.metadata?.style_tags) && item.metadata.style_tags.length > 0 && (
-                        <p className={styles.tagLine}>
-                          {item.metadata.style_tags.slice(0, 3).map((tag) => String(tag)).join(' · ')}
-                        </p>
-                      )}
-                      {item.metadata?.buy_url && (
-                        <a
-                          className={styles.buyLink}
-                          href={String(item.metadata.buy_url)}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          View product
-                        </a>
-                      )}
-                    </article>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {recommendations && recommendations.length === 0 && !taste.recsLoading && !taste.recsError && (
-              <p className={styles.summaryStatus}>We’ll have tailored pieces for you shortly.</p>
+          <section className={styles.renderSection}>
+            <h3>Stage Your Room</h3>
+            {taste.summaryLoading ? (
+              <p className={styles.summaryStatus}>Your brief is nearly ready—hang tight.</p>
+            ) : !parsedSummary ? (
+              <p className={styles.summaryStatus}>We’re still assembling your room brief. Try again soon.</p>
+            ) : (
+              <>
+                <p>Upload a photo of your space and we’ll furnish it with your personalized picks.</p>
+                <div className={styles.renderControls}>
+                  <input
+                    ref={renderInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleRoomFileChange}
+                  />
+                  <button
+                    className={styles.primaryButton}
+                    onClick={handleRenderRoom}
+                    disabled={render.status === 'rendering'}
+                  >
+                    {render.status === 'rendering' ? 'Staging room…' : 'Generate render'}
+                  </button>
+                </div>
+                {render.error && <p className={styles.summaryError}>{render.error}</p>}
+                {render.status === 'rendering' && !render.error && (
+                  <p className={styles.summaryStatus}>Composing your furnished room…</p>
+                )}
+                {render.result && (
+                  <div className={styles.renderOutput}>
+                    <img
+                      src={`${API_BASE}${render.result.image_url}`}
+                      alt="Rendered furnished room"
+                      className={styles.renderedImage}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </section>
           <button className={styles.primaryButton} onClick={restart}>
@@ -411,6 +429,8 @@ function ArtworkCard({ artwork, onSelect, disabled }: ArtworkCardProps) {
           alt={`${artwork.title} by ${artwork.artist}`}
           fill
           sizes="(max-width: 768px) 100vw, 45vw"
+          className={styles.artworkImage}
+          unoptimized
         />
       </div>
       <div className={styles.cardMeta}>

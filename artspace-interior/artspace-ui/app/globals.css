@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Global overflow and layout fixes */
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  overflow: hidden;
+}
+
 :root {
   --background: #faf9f7;
   --surface: #ffffff;
